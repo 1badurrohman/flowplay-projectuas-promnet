@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --color-canvas: #f4f6f3;
+  --color-cloud: #f0f2ef;
+  --color-white: #ffffff;
+  --color-ink: #17211d;
+  --color-ink-soft: #26332d;
+  --color-muted: #6f7974;
+  --color-line: #dfe5e1;
+  --color-primary: #6657e8;
+  --color-primary-dark: #5142d4;
+  --color-lime: #c9f45a;
+  --color-sky: #bfe6f5;
+  --color-peach: #ffc9a9;
+  --color-lavender: #d8d0fa;
+  --color-mint: #d8f5e3;
+  --color-success: #23824c;
+  --color-orange: #ee7e3e;
+  --shadow-panel: 0 24px 70px rgba(23, 33, 29, 0.1);
+  --shadow-card: 0 14px 32px rgba(102, 87, 232, 0.12);
+  --shadow-button: 0 10px 20px rgba(102, 87, 232, 0.2);
+  --shadow-logo: 0 8px 18px rgba(201, 244, 90, 0.2);
+  --shadow-celebrate: 0 0 0 14px rgba(201, 244, 90, 0.2), 0 0 0 28px rgba(201, 244, 90, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.bg-profile-pattern {
+  background-image:
+    radial-gradient(circle at 15% 60%, rgba(201, 244, 90, 0.2) 0 10%, transparent 10.3%),
+    radial-gradient(circle at 85% 20%, rgba(102, 87, 232, 0.5) 0 14%, transparent 14.3%),
+    linear-gradient(135deg, transparent 45%, rgba(255, 255, 255, 0.04) 45% 55%, transparent 55%);
+  background-size: auto, auto, 48px 48px;
+}
+
+::selection {
+  color: var(--color-white);
+  background: var(--color-primary);
+}
