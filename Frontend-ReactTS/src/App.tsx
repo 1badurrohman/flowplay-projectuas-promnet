@@ -31,7 +31,9 @@ type IconName =
   | "spark"
   | "star"
   | "target"
-  | "trophy";
+  | "trophy"
+  | "game"
+  | "flow";
 
 function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   const paths: Record<IconName, ReactNode> = {
@@ -51,6 +53,8 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
     star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />,
     target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></>,
     trophy: <><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z" /><path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6" /></>,
+    game: <><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M6 12h4m-2-2v4M15 11h.01M18 13h.01" /></>,
+    flow: <><rect x="3" y="3" width="6" height="6" rx="1" /><rect x="15" y="15" width="6" height="6" rx="1" /><path d="M6 9v3a3 3 0 0 0 3 3h3" /></>,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -59,14 +63,14 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   );
 }
 
-function Logo({ light = false }: { light?: boolean }) {
+function Logo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid size-10 rotate-3 place-items-center rounded-xl bg-lime text-ink shadow-logo">
+      <div className="grid size-10 rotate-3 place-items-center rounded-xl bg-orange-500 text-white shadow-md">
         <Icon name="play" size={22} />
       </div>
-      <div className={`font-display text-xl font-extrabold tracking-tight ${light ? "text-white" : "text-ink"}`}>
-        Flow<span className="text-primary">Play</span>
+      <div className="font-display text-2xl font-extrabold tracking-tight text-stone-900">
+        Flow<span className="text-orange-500">Play</span>
       </div>
     </div>
   );
@@ -74,24 +78,27 @@ function Logo({ light = false }: { light?: boolean }) {
 
 function Button({ children, onClick, variant = "primary", className = "", type = "button", disabled = false }: { children: ReactNode; onClick?: () => void; variant?: "primary" | "dark" | "light" | "outline" | "ghost"; className?: string; type?: "button" | "submit"; disabled?: boolean }) {
   const styles = {
-    primary: "bg-primary text-white shadow-button hover:bg-primary-dark",
-    dark: "bg-ink text-white shadow-button hover:bg-ink-soft",
-    light: "bg-white text-ink hover:bg-cloud",
-    outline: "border border-line bg-white text-ink hover:border-primary hover:text-primary",
-    ghost: "bg-transparent text-muted hover:bg-cloud hover:text-ink",
+    primary: "bg-orange-500 text-white shadow-lg shadow-orange-500/25 hover:bg-orange-600",
+    dark: "bg-stone-900 text-white shadow-md hover:bg-stone-800",
+    light: "bg-white text-stone-900 hover:bg-stone-100",
+    outline: "border border-stone-200 bg-white text-stone-900 hover:border-orange-500 hover:text-orange-500",
+    ghost: "bg-transparent text-stone-500 hover:bg-stone-100 hover:text-stone-900",
   };
   return (
-    <button type={type} disabled={disabled} onClick={onClick} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 font-bold transition-all active:translate-y-0.5 ${disabled ? "opacity-50 cursor-not-allowed bg-line text-muted" : styles[variant]} ${className}`}>
+    <button type={type} disabled={disabled} onClick={onClick} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-6 font-bold transition-all active:translate-y-0.5 ${disabled ? "opacity-50 cursor-not-allowed bg-stone-200 text-stone-400" : styles[variant]} ${className}`}>
       {children}
     </button>
   );
 }
 
-function Field({ label, placeholder, type = "text", value, onChange }: { label: string; placeholder: string; type?: string; value?: string; onChange?: (value: string) => void }) {
+function Field({ label, placeholder, type = "text", value, onChange, icon }: { label: string; placeholder: string; type?: string; value?: string; onChange?: (value: string) => void; icon?: IconName }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-bold text-ink">{label}</span>
-      <input required type={type} value={value} onChange={(event) => onChange?.(event.target.value)} placeholder={placeholder} className="h-13 w-full rounded-2xl border border-line bg-cloud/50 px-4 text-sm text-ink outline-none transition focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10" />
+      <span className="mb-2 block text-sm font-bold text-stone-800">{label}</span>
+      <div className="relative flex items-center">
+        {icon && <span className="absolute left-4 text-stone-400"><Icon name={icon} size={18} /></span>}
+        <input required type={type} value={value} onChange={(event) => onChange?.(event.target.value)} placeholder={placeholder} className={`h-13 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm text-stone-900 outline-none transition focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 ${icon ? "pl-11" : ""}`} />
+      </div>
     </label>
   );
 }
@@ -100,12 +107,12 @@ function NotificationToast({ badgeName, onClose }: { badgeName: string | null; o
   if (!badgeName) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-4 rounded-2xl bg-ink p-4 text-white shadow-panel animate-bounce">
-      <div className="grid size-12 place-items-center rounded-xl bg-lime text-ink font-extrabold">
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-4 rounded-2xl bg-stone-900 p-4 text-white shadow-2xl animate-bounce">
+      <div className="grid size-12 place-items-center rounded-xl bg-orange-500 text-white font-extrabold">
         <Icon name="award" size={26} />
       </div>
       <div>
-        <div className="text-xs font-bold text-lime">BADGE BARU DIDAPATKAN!</div>
+        <div className="text-xs font-bold text-orange-400">BADGE BARU DIDAPATKAN!</div>
         <div className="font-display font-extrabold text-white text-base">{badgeName}</div>
       </div>
       <button onClick={onClose} className="ml-2 text-white/50 hover:text-white"><Icon name="close" size={18} /></button>
@@ -115,31 +122,61 @@ function NotificationToast({ badgeName, onClose }: { badgeName: string | null; o
 
 function AuthLayout({ children, screen, setScreen }: { children: ReactNode; screen: Screen; setScreen: (s: Screen) => void }) {
   return (
-    <main className="min-h-screen bg-canvas p-4 md:p-6">
-      <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-6xl overflow-hidden rounded-[2rem] bg-white shadow-panel md:min-h-[calc(100vh-3rem)] md:grid-cols-[1fr_0.9fr]">
-        <section className="relative hidden overflow-hidden bg-ink p-12 text-white md:flex md:flex-col md:justify-between">
-          <div className="absolute -right-24 -top-24 size-80 rounded-full bg-primary/30 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 size-72 rounded-full bg-lime/20 blur-3xl" />
-          <Logo light />
-          <div className="relative max-w-lg">
-            <div className="mb-7 flex items-center gap-2 text-sm font-bold text-lime"><Icon name="spark" /> BELAJAR DENGAN CARA BARU</div>
-            <div className="font-display text-5xl font-extrabold leading-tight tracking-tight">Logika jadi lebih mudah saat kamu memainkannya.</div>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-white/65">Susun alur, pecahkan tantangan, dan lihat kemampuan berpikir komputasionalmu berkembang.</p>
+    <main className="min-h-screen bg-gradient-to-br from-orange-50/60 via-amber-50/30 to-stone-100 p-4 md:p-8 flex items-center justify-center">
+      <div className="mx-auto grid w-full max-w-7xl overflow-hidden rounded-[2.5rem] bg-white shadow-2xl border border-stone-100 lg:grid-cols-[1.1fr_0.9fr]">
+        
+        {/* SISI KIRI (HERO SECTION SESUAI REFERENSI TANPA TEKS TERSEBUT) */}
+        <section className="relative flex flex-col justify-between p-8 md:p-14 bg-gradient-to-b from-transparent via-orange-50/20 to-stone-50/50">
+          <Logo />
+          
+          <div className="my-auto py-8">
+            <div className="inline-flex items-center gap-2 rounded-full bg-orange-100/80 px-4 py-1.5 text-xs font-extrabold text-orange-600 mb-6 shadow-sm">
+              <Icon name="spark" size={15} /> Belajar Pemrograman Jadi Lebih Seru!
+            </div>
+            
+            <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-stone-900 md:text-5xl lg:text-6xl">
+              Logika jadi lebih mudah saat kamu <span className="text-orange-500 underline decoration-orange-300 decoration-wavy underline-offset-8">memainkannya.</span>
+            </h1>
+
+            {/* 4 KOTAK FITUR KECIL DI BAWAH */}
+            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
+                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2"><Icon name="book" size={20} /></div>
+                <span className="text-xs font-bold text-stone-800">Materi Terstruktur</span>
+              </div>
+              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
+                <div className="grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-600 mb-2"><Icon name="flow" size={20} /></div>
+                <span className="text-xs font-bold text-stone-800">Simulasi Alur</span>
+              </div>
+              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
+                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2"><Icon name="game" size={20} /></div>
+                <span className="text-xs font-bold text-stone-800">Gamifikasi</span>
+              </div>
+              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
+                <div className="grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-600 mb-2"><Icon name="spark" size={20} /></div>
+                <span className="text-xs font-bold text-stone-800">Poin XP</span>
+              </div>
+            </div>
           </div>
-          <div className="relative text-sm font-bold text-white/45">ALGORITMA • FLOWCHART • LOGIKA</div>
+
+          <div className="flex items-center gap-3 text-xs font-bold text-stone-400 pt-6 border-t border-stone-100">
+            <span>Belajar</span> • <span>Berlatih</span> • <span className="text-orange-500">Naik Level 🚀</span>
+          </div>
         </section>
-        <section className="flex items-center justify-center p-6 sm:p-10 lg:p-16">
+
+        {/* SISI KANAN (FORM KARTU UTAMA) */}
+        <section className="flex items-center justify-center p-8 md:p-14 bg-white border-t lg:border-t-0 lg:border-l border-stone-100">
           <div className="w-full max-w-md">
-            <div className="mb-10 flex justify-center md:hidden"><Logo /></div>
             {children}
-            <div className="mt-8 text-center text-sm text-muted">
+            <div className="mt-8 text-center text-sm text-stone-500">
               {screen === "register" ? "Sudah punya akun?" : "Belum punya akun?"}
-              <button className="ml-1 font-extrabold text-primary" onClick={() => setScreen(screen === "register" ? "login" : "register")}>
+              <button className="ml-1 font-extrabold text-orange-500 hover:underline" onClick={() => setScreen(screen === "register" ? "login" : "register")}>
                 {screen === "register" ? "Masuk di sini" : "Daftar sekarang"}
               </button>
             </div>
           </div>
         </section>
+
       </div>
     </main>
   );
@@ -147,12 +184,13 @@ function AuthLayout({ children, screen, setScreen }: { children: ReactNode; scre
 
 function Register({ setScreen, userName, setUserName, onRegister }: { setScreen: (s: Screen) => void; userName: string; setUserName: (name: string) => void; onRegister: (fullName: string, username: string, password: string) => Promise<void> }) {
   const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userName.trim() || !fullName.trim() || !password) {
+    if (!userName.trim() || !fullName.trim() || !email.trim() || !password) {
       alert("Semua kolom harus diisi!");
       return;
     }
@@ -171,14 +209,22 @@ function Register({ setScreen, userName, setUserName, onRegister }: { setScreen:
   return (
     <AuthLayout screen="register" setScreen={setScreen}>
       <div className="mb-8">
-        <div className="mb-2 font-display text-3xl font-extrabold tracking-tight text-ink">Mulai petualanganmu</div>
-        <p className="text-sm leading-relaxed text-muted">Buat akun untuk menyimpan progres dan pencapaian belajarmu.</p>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600">
+            <Icon name="profile" size={24} />
+          </div>
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">Mulai petualanganmu</h2>
+        </div>
+        <p className="text-sm leading-relaxed text-stone-500">Buat akun untuk menyimpan progres dan pencapaian belajarmu.</p>
       </div>
       <form className="space-y-4" onSubmit={handleRegister}>
-        <Field label="Nama lengkap" placeholder="Masukkan nama lengkap" value={fullName} onChange={setFullName} />
-        <Field label="Username" placeholder="Pilih username unik" value={userName} onChange={setUserName} />
-        <Field label="Password" placeholder="Minimal 8 karakter" type="password" value={password} onChange={setPassword} />
-        <Button type="submit" disabled={submitting} className="mt-2 w-full">{submitting ? "Mendaftarkan..." : "Daftar Sekarang"} {!submitting && <Icon name="chevron" />}</Button>
+        <Field label="Nama lengkap" placeholder="Masukkan nama lengkap" value={fullName} onChange={setFullName} icon="profile" />
+        <Field label="Email" placeholder="Masukkan alamat email" type="email" value={email} onChange={setEmail} icon="profile" />
+        <Field label="Username" placeholder="Pilih username unik" value={userName} onChange={setUserName} icon="profile" />
+        <Field label="Password" placeholder="Minimal 8 karakter" type="password" value={password} onChange={setPassword} icon="lock" />
+        <Button type="submit" disabled={submitting} className="mt-4 w-full">
+          {submitting ? "Mendaftarkan..." : "Daftar Sekarang"} {!submitting && <Icon name="chevron" />}
+        </Button>
       </form>
     </AuthLayout>
   );
@@ -204,16 +250,23 @@ function Login({ setScreen, userName, setUserName, onLogin }: { setScreen: (s: S
   return (
     <AuthLayout screen="login" setScreen={setScreen}>
       <div className="mb-8">
-        <div className="mb-2 font-display text-3xl font-extrabold tracking-tight text-ink">Selamat datang kembali</div>
-        <p className="text-sm leading-relaxed text-muted">Lanjutkan perjalanan belajarmu yang sempat tertunda.</p>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600">
+            <Icon name="profile" size={24} />
+          </div>
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">Selamat datang kembali</h2>
+        </div>
+        <p className="text-sm leading-relaxed text-stone-500">Lanjutkan perjalanan belajarmu yang sempat tertunda.</p>
       </div>
       <form className="space-y-5" onSubmit={handleLogin}>
-        <Field label="Username" placeholder="Masukkan username" value={userName} onChange={setUserName} />
+        <Field label="Username" placeholder="Masukkan username" value={userName} onChange={setUserName} icon="profile" />
         <div>
-          <Field label="Password" placeholder="Masukkan password" type="password" value={password} onChange={setPassword} />
-          <button type="button" onClick={() => window.alert("Tautan reset password telah dikirim.")} className="mt-2 block w-full text-right text-xs font-bold text-primary">Lupa password?</button>
+          <Field label="Password" placeholder="Masukkan password" type="password" value={password} onChange={setPassword} icon="lock" />
+          <button type="button" onClick={() => window.alert("Tautan reset password telah dikirim.")} className="mt-2 block w-full text-right text-xs font-bold text-orange-500 hover:underline">Lupa password?</button>
         </div>
-        <Button type="submit" disabled={submitting} className="w-full">{submitting ? "Menghubungkan..." : "Masuk ke FlowPlay"} {!submitting && <Icon name="chevron" />}</Button>
+        <Button type="submit" disabled={submitting} className="w-full">
+          {submitting ? "Menghubungkan..." : "Masuk ke FlowPlay"} {!submitting && <Icon name="chevron" />}
+        </Button>
       </form>
     </AuthLayout>
   );
@@ -234,26 +287,26 @@ function getInitials(name: string) {
 
 function AppShell({ children, active, setScreen, userName }: { children: ReactNode; active: Screen; setScreen: (s: Screen) => void; userName: string }) {
   return (
-    <div className="min-h-screen bg-canvas">
-      <header className="sticky top-0 z-20 border-b border-line/70 bg-canvas/90 backdrop-blur-xl">
+    <div className="min-h-screen bg-stone-50">
+      <header className="sticky top-0 z-20 border-b border-stone-200/70 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
           <Logo />
           <nav className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
-              <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${active === item.screen ? "bg-white text-primary shadow-sm" : "text-muted hover:text-ink"}`}>
+              <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${active === item.screen ? "bg-orange-50 text-orange-600 shadow-sm" : "text-stone-500 hover:text-stone-900"}`}>
                 <Icon name={item.icon} size={18} /> {item.label}
               </button>
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <button aria-label="Buka profil" onClick={() => setScreen("profile")} className="grid size-10 place-items-center rounded-full bg-primary text-xs font-extrabold text-white">{getInitials(userName)}</button>
+            <button aria-label="Buka profil" onClick={() => setScreen("profile")} className="grid size-10 place-items-center rounded-full bg-orange-500 text-xs font-extrabold text-white shadow-sm">{getInitials(userName)}</button>
           </div>
         </div>
       </header>
       {children}
-      <nav className="fixed bottom-3 left-1/2 z-30 flex w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-around rounded-2xl border border-line bg-white/95 p-2 shadow-panel backdrop-blur md:hidden">
+      <nav className="fixed bottom-3 left-1/2 z-30 flex w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-around rounded-2xl border border-stone-200 bg-white/95 p-2 shadow-xl backdrop-blur md:hidden">
         {navItems.map((item) => (
-          <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[10px] font-bold ${active === item.screen ? "bg-primary/10 text-primary" : "text-muted"}`}>
+          <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[10px] font-bold ${active === item.screen ? "bg-orange-50 text-orange-600" : "text-stone-400"}`}>
             <Icon name={item.icon} size={19} />{item.label}
           </button>
         ))}
@@ -263,7 +316,7 @@ function AppShell({ children, active, setScreen, userName }: { children: ReactNo
 }
 
 function ProgressBar({ value, dark = false }: { value: number; dark?: boolean }) {
-  return <div className={`h-2.5 overflow-hidden rounded-full ${dark ? "bg-white/15" : "bg-line"}`}><div className="h-full rounded-full bg-lime" style={{ width: `${value}%` }} /></div>;
+  return <div className={`h-2.5 overflow-hidden rounded-full ${dark ? "bg-white/20" : "bg-stone-200"}`}><div className="h-full rounded-full bg-orange-500" style={{ width: `${value}%` }} /></div>;
 }
 
 function Dashboard({ setScreen, userName, xp, completedLessons }: { setScreen: (s: Screen) => void; userName: string; xp: number; completedLessons: number }) {
@@ -281,32 +334,32 @@ function Dashboard({ setScreen, userName, xp, completedLessons }: { setScreen: (
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8 lg:pt-11">
         <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <div className="text-sm font-bold text-primary">{todayFormatted}</div>
-            <div className="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Halo, {userName}!</div>
-            <p className="mt-2 text-muted">Siap belajar konsep algoritma hari ini?</p>
+            <div className="text-sm font-bold text-orange-500">{todayFormatted}</div>
+            <div className="mt-2 font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">Halo, {userName}!</div>
+            <p className="mt-2 text-stone-500">Siap belajar konsep algoritma hari ini?</p>
           </div>
           <div className="flex gap-3">
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm"><div className="text-xs font-bold text-muted">LEVEL</div><div className="mt-1 flex items-center gap-2 font-extrabold text-ink"><span className="grid size-6 place-items-center rounded-lg bg-sky text-xs">{completedLessons >= 3 ? 2 : 1}</span> Pemula</div></div>
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm"><div className="text-xs font-bold text-muted">TOTAL XP</div><div className="mt-1 flex items-center gap-2 font-extrabold text-ink"><Icon name="spark" size={17} /><span className="text-primary">{xp}</span> XP</div></div>
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">LEVEL</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><span className="grid size-6 place-items-center rounded-lg bg-orange-100 text-orange-600 text-xs">{completedLessons >= 3 ? 2 : 1}</span> Pemula</div></div>
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">TOTAL XP</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><Icon name="spark" size={17} /><span className="text-orange-500">{xp}</span> XP</div></div>
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.55fr_0.8fr]">
-          <section className="relative overflow-hidden rounded-[2rem] bg-ink p-7 text-white shadow-panel sm:p-9">
+          <section className="relative overflow-hidden rounded-[2rem] bg-stone-900 p-7 text-white shadow-xl sm:p-9">
             <div className="relative max-w-lg">
-              <span className="inline-flex rounded-full bg-lime px-3 py-1 text-xs font-extrabold text-ink">MODUL BACAAN</span>
+              <span className="inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-extrabold text-white">MODUL BACAAN</span>
               <div className="mt-5 font-display text-3xl font-extrabold leading-tight">Pelajari Materi Algoritma</div>
-              <p className="mt-3 text-sm leading-relaxed text-white/65">Pahami penjelasan terstruktur lengkap dengan ilustrasi diagram alur interaktif.</p>
+              <p className="mt-3 text-sm leading-relaxed text-stone-400">Pahami penjelasan terstruktur lengkap dengan ilustrasi diagram alur interaktif.</p>
               <div className="mt-7 max-w-sm"><div className="mb-2 flex justify-between text-xs font-bold"><span>Progress Materi</span><span>{percent}%</span></div><ProgressBar value={percent} dark /></div>
               <Button variant="light" className="mt-7" onClick={() => setScreen("materi")}><Icon name="book" size={18} /> Baca Materi</Button>
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-primary p-7 text-white shadow-panel flex flex-col justify-between">
+          <section className="rounded-[2rem] bg-orange-500 p-7 text-white shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-start justify-between"><div className="grid size-12 place-items-center rounded-2xl bg-white/15"><Icon name="trophy" size={26} /></div><span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">+150 XP</span></div>
               <div className="mt-8 font-display text-2xl font-extrabold">Pusat Latihan</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/75">Uji kemampuan logikamu dengan menyusun flowchart atau menjawab kuis evaluasi.</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/90">Uji kemampuan logikamu dengan menyusun flowchart atau menjawab kuis evaluasi.</p>
             </div>
             <Button variant="light" className="mt-6 w-full" onClick={() => setScreen("latihan-hub")}>Mulai Latihan <Icon name="chevron" /></Button>
           </section>
@@ -316,7 +369,6 @@ function Dashboard({ setScreen, userName, xp, completedLessons }: { setScreen: (
   );
 }
 
-// STRUKTUR MATERI DENGAN PERTANYAAN KHUSUS UNTUK TIAP SUB-BAB
 const lessonsData = [
   {
     n: "01",
@@ -329,12 +381,12 @@ const lessonsData = [
         title: "1. Pengertian Algoritma",
         content: (
           <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-muted">
+            <p className="text-sm leading-relaxed text-stone-600">
               Algoritma adalah deretan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk memecahkan suatu masalah atau menyelesaikan suatu tugas tertentu. Dalam dunia ilmu komputer, algoritma adalah cetak biru (*blueprint*) sebelum program komputer ditulis.
             </p>
-            <div className="bg-cloud/60 p-4 rounded-2xl border border-line text-xs space-y-1">
-              <span className="font-extrabold text-primary block">Analogi Sederhana:</span>
-              <p className="text-muted">Resep membuat mi instan adalah algoritma di dunia nyata. Jika langkah-langkahnya diacak, hasilnya tidak akan sempurna.</p>
+            <div className="bg-orange-50/60 p-4 rounded-2xl border border-orange-100 text-xs space-y-1">
+              <span className="font-extrabold text-orange-600 block">Analogi Sederhana:</span>
+              <p className="text-stone-600">Resep membuat mi instan adalah algoritma di dunia nyata. Jika langkah-langkahnya diacak, hasilnya tidak akan sempurna.</p>
             </div>
           </div>
         ),
@@ -349,9 +401,9 @@ const lessonsData = [
         id: "1.2",
         title: "2. Ciri-Ciri Algoritma yang Baik",
         content: (
-          <div className="bg-cloud/60 p-5 rounded-2xl border border-line space-y-2 text-sm">
-            <strong className="text-primary block font-extrabold">Ciri Utama Menurut Donald Knuth:</strong>
-            <ul className="list-disc list-inside text-muted space-y-1">
+          <div className="bg-orange-50/60 p-5 rounded-2xl border border-orange-100 space-y-2 text-sm">
+            <strong className="text-orange-600 block font-extrabold">Ciri Utama Menurut Donald Knuth:</strong>
+            <ul className="list-disc list-inside text-stone-600 space-y-1">
               <li><strong>Finiteness (Keterbatasan):</strong> Harus berhenti setelah melakukan sejumlah langkah terbatas.</li>
               <li><strong>Definiteness (Kepastian):</strong> Setiap langkah harus didefinisikan secara jelas tanpa ambiguitas.</li>
               <li><strong>Input (Masukan):</strong> Memiliki nol atau lebih masukan data untuk diproses.</li>
@@ -371,10 +423,10 @@ const lessonsData = [
         title: "3. Diagram Alur Pemrosesan Data",
         content: (
           <div>
-            <p className="text-sm text-muted mb-3">Setiap algoritma menerima input, memprosesnya, dan menghasilkan output:</p>
-            <div className="rounded-3xl bg-ink p-6 text-white shadow-md flex justify-center overflow-x-auto">
+            <p className="text-sm text-stone-600 mb-3">Setiap algoritma menerima input, memprosesnya, dan menghasilkan output:</p>
+            <div className="rounded-3xl bg-stone-900 p-6 text-white shadow-md flex justify-center overflow-x-auto">
               <svg width="100%" height="140" viewBox="0 0 600 140" className="min-w-[480px] max-w-xl">
-                <rect x="20" y="40" width="140" height="60" rx="15" fill="#3B82F6" />
+                <rect x="20" y="40" width="140" height="60" rx="15" fill="#F97316" />
                 <text x="90" y="75" fill="#FFF" textAnchor="middle" fontWeight="bold" fontSize="14">INPUT (Bahan)</text>
                 <line x1="160" y1="70" x2="220" y2="70" stroke="#FFF" strokeWidth="3" />
 
@@ -382,7 +434,7 @@ const lessonsData = [
                 <text x="300" y="75" fill="#FFF" textAnchor="middle" fontWeight="bold" fontSize="14">PROSES (Logika)</text>
                 <line x1="370" y1="70" x2="430" y2="70" stroke="#FFF" strokeWidth="3" />
 
-                <rect x="440" y="40" width="140" height="60" rx="15" fill="#F59E0B" />
+                <rect x="440" y="40" width="140" height="60" rx="15" fill="#3B82F6" />
                 <text x="510" y="75" fill="#FFF" textAnchor="middle" fontWeight="bold" fontSize="14">OUTPUT (Hasil)</text>
               </svg>
             </div>
@@ -407,7 +459,7 @@ const lessonsData = [
         id: "2.1",
         title: "1. Konsep Diagram Alur",
         content: (
-          <p className="text-sm leading-relaxed text-muted">
+          <p className="text-sm leading-relaxed text-stone-600">
             Flowchart menggambarkan alur eksekusi logika menggunakan simbol-simbol grafik standar yang disepakati secara internasional oleh standar ANSI/ISO.
           </p>
         ),
@@ -423,55 +475,55 @@ const lessonsData = [
         title: "2. Simbol-Simbol Geometri Baku",
         content: (
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="border border-line rounded-2xl p-4 bg-cloud/30 flex items-center gap-4">
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50 flex items-center gap-4">
               <div className="w-24 shrink-0 text-center">
                 <svg width="80" height="40" viewBox="0 0 100 50">
-                  <rect x="5" y="10" width="90" height="30" rx="15" fill="#84CC16" stroke="#4D7C0F" strokeWidth="2" />
+                  <rect x="5" y="10" width="90" height="30" rx="15" fill="#FED7AA" stroke="#C2410C" strokeWidth="2" />
                   <text x="50" y="30" fill="#000" fontSize="10" textAnchor="middle" fontWeight="bold">Start / End</text>
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-primary block text-sm">Terminator (Kapsul/Oval)</span>
-                <span className="text-xs text-muted">Menandai awal (*Start*) atau akhir (*End*) dari alur program.</span>
+                <span className="font-bold text-orange-600 block text-sm">Terminator (Kapsul/Oval)</span>
+                <span className="text-xs text-stone-500">Menandai awal atau akhir dari alur program.</span>
               </div>
             </div>
 
-            <div className="border border-line rounded-2xl p-4 bg-cloud/30 flex items-center gap-4">
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50 flex items-center gap-4">
               <div className="w-24 shrink-0 text-center">
                 <svg width="80" height="40" viewBox="0 0 100 50">
-                  <rect x="5" y="10" width="90" height="30" fill="#38BDF8" stroke="#0284C7" strokeWidth="2" />
+                  <rect x="5" y="10" width="90" height="30" fill="#BAE6FD" stroke="#0284C7" strokeWidth="2" />
                   <text x="50" y="28" fill="#000" fontSize="10" textAnchor="middle" fontWeight="bold">Proses</text>
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-primary block text-sm">Process (Kotak)</span>
-                <span className="text-xs text-muted">Menunjukkan kegiatan pengolahan data atau kalkulasi aritmatika.</span>
+                <span className="font-bold text-orange-600 block text-sm">Process (Kotak)</span>
+                <span className="text-xs text-stone-500">Menunjukkan kegiatan pengolahan data atau kalkulasi.</span>
               </div>
             </div>
 
-            <div className="border border-line rounded-2xl p-4 bg-cloud/30 flex items-center gap-4">
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50 flex items-center gap-4">
               <div className="w-24 shrink-0 text-center">
                 <svg width="80" height="40" viewBox="0 0 100 50">
-                  <polygon points="50,5 90,25 50,45 10,25" fill="#F43F5E" stroke="#BE123C" strokeWidth="2" />
-                  <text x="50" y="28" fill="#FFF" fontSize="9" textAnchor="middle" fontWeight="bold">Kondisi?</text>
+                  <polygon points="50,5 90,25 50,45 10,25" fill="#FECDD3" stroke="#BE123C" strokeWidth="2" />
+                  <text x="50" y="28" fill="#000" fontSize="9" textAnchor="middle" fontWeight="bold">Kondisi?</text>
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-primary block text-sm">Decision (Belah Ketupat)</span>
-                <span className="text-xs text-muted">Pengambilan keputusan bercabang berdasarkan kondisi (*Ya/Tidak*).</span>
+                <span className="font-bold text-orange-600 block text-sm">Decision (Belah Ketupat)</span>
+                <span className="text-xs text-stone-500">Pengambilan keputusan bercabang berdasarkan kondisi.</span>
               </div>
             </div>
 
-            <div className="border border-line rounded-2xl p-4 bg-cloud/30 flex items-center gap-4">
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50 flex items-center gap-4">
               <div className="w-24 shrink-0 text-center">
                 <svg width="80" height="40" viewBox="0 0 100 50">
-                  <polygon points="20,10 95,10 80,40 5,40" fill="#F59E0B" stroke="#B45309" strokeWidth="2" />
-                  <text x="50" y="28" fill="#FFF" fontSize="10" textAnchor="middle" fontWeight="bold">Input/Output</text>
+                  <polygon points="20,10 95,10 80,40 5,40" fill="#FEF08A" stroke="#CA8A04" strokeWidth="2" />
+                  <text x="50" y="28" fill="#000" fontSize="10" textAnchor="middle" fontWeight="bold">Input/Output</text>
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-primary block text-sm">Input / Output (Jajar Genjang)</span>
-                <span className="text-xs text-muted">Menerima masukan data dari user atau menampilkan hasil keluaran.</span>
+                <span className="font-bold text-orange-600 block text-sm">Input / Output (Jajar Genjang)</span>
+                <span className="text-xs text-stone-500">Menerima masukan data atau menampilkan hasil.</span>
               </div>
             </div>
           </div>
@@ -496,11 +548,11 @@ const lessonsData = [
         title: "1. Apa itu Variabel?",
         content: (
           <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-muted">
+            <p className="text-sm leading-relaxed text-stone-600">
               Variabel adalah wadah atau tempat di dalam memori komputer yang digunakan untuk menyimpan suatu nilai data. Nilai di dalam variabel dapat diubah sewaktu-waktu selama program berjalan.
             </p>
-            <div className="bg-cloud/60 p-4 rounded-2xl border border-line text-xs font-mono">
-              <span className="text-primary font-bold block mb-1">Contoh Penulisan (Deklarasi):</span>
+            <div className="bg-stone-100 p-4 rounded-2xl border border-stone-200 text-xs font-mono">
+              <span className="text-orange-600 font-bold block mb-1">Contoh Penulisan (Deklarasi):</span>
               <span>int umur = 18;</span><br />
               <span>string nama = "Budi";</span>
             </div>
@@ -518,21 +570,21 @@ const lessonsData = [
         title: "2. Macam-Macam Tipe Data",
         content: (
           <div className="grid gap-3 sm:grid-cols-2 text-sm">
-            <div className="border border-line rounded-2xl p-4 bg-cloud/40">
-              <strong className="text-primary block font-extrabold mb-1">int (Integer)</strong>
-              <p className="text-xs text-muted">Menyimpan angka bulat, contoh: <code className="bg-white px-1.5 py-0.5 rounded border border-line">10</code>, <code className="bg-white px-1.5 py-0.5 rounded border border-line">-5</code>, <code className="bg-white px-1.5 py-0.5 rounded border border-line">2026</code>.</p>
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
+              <strong className="text-orange-600 block font-extrabold mb-1">int (Integer)</strong>
+              <p className="text-xs text-stone-500">Menyimpan angka bulat, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">10</code>, <code className="bg-white px-1.5 py-0.5 rounded border">-5</code>.</p>
             </div>
-            <div className="border border-line rounded-2xl p-4 bg-cloud/40">
-              <strong className="text-primary block font-extrabold mb-1">string</strong>
-              <p className="text-xs text-muted">Menyimpan teks atau karakter, diapit tanda kutip, contoh: <code className="bg-white px-1.5 py-0.5 rounded border border-line">"Halo Dunia"</code>.</p>
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
+              <strong className="text-orange-600 block font-extrabold mb-1">string</strong>
+              <p className="text-xs text-stone-500">Menyimpan teks atau karakter, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">"Halo"</code>.</p>
             </div>
-            <div className="border border-line rounded-2xl p-4 bg-cloud/40">
-              <strong className="text-primary block font-extrabold mb-1">float / double</strong>
-              <p className="text-xs text-muted">Menyimpan angka desimal/pecahan, contoh: <code className="bg-white px-1.5 py-0.5 rounded border border-line">3.14</code>, <code className="bg-white px-1.5 py-0.5 rounded border border-line">98.5</code>.</p>
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
+              <strong className="text-orange-600 block font-extrabold mb-1">float / double</strong>
+              <p className="text-xs text-stone-500">Menyimpan angka desimal, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">3.14</code>.</p>
             </div>
-            <div className="border border-line rounded-2xl p-4 bg-cloud/40">
-              <strong className="text-primary block font-extrabold mb-1">boolean</strong>
-              <p className="text-xs text-muted">Menyimpan nilai kebenaran logika: <code className="bg-white px-1.5 py-0.5 rounded border border-line">true</code> atau <code className="bg-white px-1.5 py-0.5 rounded border border-line">false</code>.</p>
+            <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
+              <strong className="text-orange-600 block font-extrabold mb-1">boolean</strong>
+              <p className="text-xs text-stone-500">Menyimpan nilai kebenaran: <code className="bg-white px-1.5 py-0.5 rounded border">true</code> / <code className="bg-white px-1.5 py-0.5 rounded border">false</code>.</p>
             </div>
           </div>
         ),
@@ -540,7 +592,7 @@ const lessonsData = [
           q: "Manakah tipe data yang paling tepat untuk menyimpan status saklar lampu (Menyala / Mati)?",
           options: ["string", "int", "boolean", "float"],
           correct: 2,
-          explanation: "Tipe data boolean khusus digunakan untuk kondisi dua nilai saja (True/False atau Menyala/Mati)."
+          explanation: "Tipe data boolean khusus digunakan untuk kondisi dua nilai saja (True/False)."
         }
       }
     ]
@@ -555,32 +607,30 @@ const lessonsData = [
         id: "4.1",
         title: "1. Pengertian Logika Percabangan",
         content: (
-          <p className="text-sm leading-relaxed text-muted">
-            Percabangan memungkinkan komputer mengambil jalan eksekusi yang berbeda tergantung dari hasil evaluasi syarat (*True/Benar* atau *False/Salah*).
+          <p className="text-sm leading-relaxed text-stone-600">
+            Percabangan memungkinkan komputer mengambil jalan eksekusi yang berbeda tergantung dari hasil evaluasi syarat.
           </p>
         ),
         question: {
           q: "Kapan baris instruksi di dalam blok IF akan dijalankan oleh program?",
-          options: ["Saat kondisi bernilai False (Salah)", "Saat kondisi bernilai True (Benar)", "Setiap kali perulangan selesai", "Hanya saat program error"],
+          options: ["Saat kondisi bernilai False", "Saat kondisi bernilai True", "Setiap kali perulangan selesai", "Hanya saat program error"],
           correct: 1,
-          explanation: "Blok instruksi IF hanya dieksekusi jika evaluasi kondisi menghasilkan nilai True (Benar)."
+          explanation: "Blok instruksi IF hanya dieksekusi jika evaluasi kondisi menghasilkan nilai True."
         }
       },
       {
         id: "4.2",
         title: "2. Visualisasi Percabangan dalam Flowchart",
         content: (
-          <div className="rounded-3xl bg-ink p-6 text-white shadow-md flex justify-center">
+          <div className="rounded-3xl bg-stone-900 p-6 text-white shadow-md flex justify-center">
             <svg width="100%" height="200" viewBox="0 0 500 200" className="max-w-md">
               <polygon points="250,20 350,70 250,120 150,70" fill="#F43F5E" />
               <text x="250" y="75" fill="#FFF" textAnchor="middle" fontWeight="bold" fontSize="12">Nilai &gt;= 75 ?</text>
-
               <line x1="350" y1="70" x2="420" y2="70" stroke="#10B981" strokeWidth="3" />
               <text x="385" y="60" fill="#10B981" fontWeight="bold" fontSize="11">YA</text>
               <rect x="370" y="110" width="100" height="40" fill="#10B981" rx="8" />
               <text x="420" y="134" fill="#FFF" textAnchor="middle" fontSize="11" fontWeight="bold">Cetak LULUS</text>
               <line x1="420" y1="70" x2="420" y2="110" stroke="#10B981" strokeWidth="3" />
-
               <line x1="150" y1="70" x2="80" y2="70" stroke="#EF4444" strokeWidth="3" />
               <text x="105" y="60" fill="#EF4444" fontWeight="bold" fontSize="11">TIDAK</text>
               <rect x="30" y="110" width="100" height="40" fill="#EF4444" rx="8" />
@@ -593,7 +643,7 @@ const lessonsData = [
           q: "Berapa banyak pilihan jalan cabang keluaran minimal yang berasal dari simbol Decision?",
           options: ["1 jalan", "2 jalan (Ya & Tidak)", "3 jalan", "4 jalan"],
           correct: 1,
-          explanation: "Simbol Decision bercabang minimal 2 arah (Kondisi Terpenuhi / Ya dan Kondisi Tidak Terpenuhi / Tidak)."
+          explanation: "Simbol Decision bercabang minimal 2 arah (Ya & Tidak)."
         }
       }
     ]
@@ -608,32 +658,30 @@ const lessonsData = [
         id: "5.1",
         title: "1. Mengapa Perulangan Dibutuhkan?",
         content: (
-          <p className="text-sm leading-relaxed text-muted">
-            Perulangan digunakan untuk menjalankan baris instruksi yang sama berulang kali secara efisien tanpa harus menulis ulang baris kodenya.
+          <p className="text-sm leading-relaxed text-stone-600">
+            Perulangan digunakan untuk menjalankan baris instruksi yang sama berulang kali secara efisien.
           </p>
         ),
         question: {
           q: "Apa keuntungan utama memakai looping untuk mencetak kalimat 'Halo' 100 kali?",
-          options: ["Ukuran layar bertambah besar", "Cukup menulis 1 baris perintah perulangan tanpa perlu menulis 100 kali manual", "Kecepatan internet meningkat", "Menghemat penggunaan RAM server"],
+          options: ["Ukuran layar bertambah besar", "Cukup menulis 1 baris perintah perulangan", "Kecepatan internet meningkat", "Menghemat RAM server"],
           correct: 1,
-          explanation: "Looping membuat penulisan instruksi yang berulang menjadi sangat ringkas dan efisien."
+          explanation: "Looping membuat penulisan instruksi berulang menjadi sangat ringkas."
         }
       },
       {
         id: "5.2",
         title: "2. Struktur Siklus Looping",
         content: (
-          <div className="rounded-3xl bg-cloud/70 p-6 border border-line flex flex-col items-center">
-            <span className="text-xs font-bold text-primary mb-3">ILUSTRASI SIKLUS LOOPING</span>
+          <div className="rounded-3xl bg-stone-100 p-6 border border-stone-200 flex flex-col items-center">
+            <span className="text-xs font-bold text-orange-600 mb-3">ILUSTRASI SIKLUS LOOPING</span>
             <svg width="280" height="150" viewBox="0 0 280 150">
               <rect x="90" y="10" width="100" height="40" fill="#3B82F6" rx="10" />
               <text x="140" y="34" fill="#FFF" textAnchor="middle" fontSize="11" fontWeight="bold">Hitung +1</text>
-
               <polygon points="140,70 190,100 140,130 90,100" fill="#F59E0B" />
               <text x="140" y="104" fill="#FFF" textAnchor="middle" fontSize="9" fontWeight="bold">Hitung &lt; 10?</text>
-
               <path d="M 90 100 C 30 100, 30 30, 90 30" fill="none" stroke="#3B82F6" strokeWidth="3" />
-              <text x="50" y="70" fill="#3B82F6" fontSize="10" fontWeight="bold">YA (Ulangi)</text>
+              <text x="50" y="70" fill="#3B82F6" fontSize="10" fontWeight="bold">YA</text>
             </svg>
           </div>
         ),
@@ -641,7 +689,7 @@ const lessonsData = [
           q: "Komponen apa yang berfungsi untuk memperbarui penambah nilai putaran pada perulangan?",
           options: ["Inisialisasi", "Kondisi Henti", "Increment / Decrement", "Terminator"],
           correct: 2,
-          explanation: "Increment (penambahan) atau Decrement (pengurangan) bertugas mengubah nilai variabel pencatat perulangan."
+          explanation: "Increment/Decrement bertugas mengubah nilai variabel pencatat perulangan."
         }
       }
     ]
@@ -657,21 +705,20 @@ const lessonsData = [
         title: "1. Konsep Dasar Array",
         content: (
           <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-muted">
-              Array (larik) adalah struktur data yang mampu menyimpan banyak nilai sekaligus dalam satu nama variabel tunggal. Setiap elemen di dalam array diakses menggunakan nomor urut yang disebut <strong>Indeks</strong> (biasanya dimulai dari angka <code className="bg-cloud px-1 py-0.5 rounded font-bold">0</code>).
+            <p className="text-sm leading-relaxed text-stone-600">
+              Array (larik) adalah struktur data yang mampu menyimpan banyak nilai sekaligus dalam satu nama variabel tunggal dengan nomor urut indeks mulai dari <code className="bg-stone-100 px-1 rounded font-bold">0</code>.
             </p>
-            <div className="bg-cloud/60 p-4 rounded-2xl border border-line text-xs font-mono">
-              <span className="text-primary font-bold block mb-1">Contoh Deklarasi Array Buah:</span>
-              <span>string[] buah = ["Apel", "Jeruk", "Mangga"];</span><br />
-              <span className="text-muted block mt-1">// buah[0] adalah "Apel", buah[1] adalah "Jeruk"</span>
+            <div className="bg-stone-100 p-4 rounded-2xl border border-stone-200 text-xs font-mono">
+              <span className="text-orange-600 font-bold block mb-1">Contoh Array:</span>
+              <span>string[] buah = ["Apel", "Jeruk", "Mangga"];</span>
             </div>
           </div>
         ),
         question: {
-          q: "Apa perbedaan utama antara variabel biasa dan variabel array?",
-          options: ["Variabel array hanya bisa dipakai di flowchart", "Variabel biasa dapat menyimpan jutaan data sekaligus", "Variabel array dapat menampung kumpulan banyak nilai dalam satu nama wadah", "Variabel biasa tidak punya tipe data"],
+          q: "Apa perbedaan antara variabel biasa dan array?",
+          options: ["Array hanya di flowchart", "Variabel biasa menyimpan jutaan data", "Array menampung banyak kumpulan nilai dalam satu wadah", "Variabel biasa tidak punya tipe data"],
           correct: 2,
-          explanation: "Variabel biasa hanya menyimpan 1 nilai tunggal, sedangkan variabel array menyimpan banyak sekumpulan nilai."
+          explanation: "Array menyimpan banyak nilai sekaligus."
         }
       },
       {
@@ -681,32 +728,29 @@ const lessonsData = [
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-cloud text-ink">
-                  <th className="border border-line p-2.5">No Indeks</th>
-                  <th className="border border-line p-2.5">0</th>
-                  <th className="border border-line p-2.5">1</th>
-                  <th className="border border-line p-2.5">2</th>
-                  <th className="border border-line p-2.5">3</th>
+                <tr className="bg-stone-100 text-stone-800">
+                  <th className="border border-stone-200 p-2.5">Indeks</th>
+                  <th className="border border-stone-200 p-2.5">0</th>
+                  <th className="border border-stone-200 p-2.5">1</th>
+                  <th className="border border-stone-200 p-2.5">2</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-line p-2.5 font-bold bg-cloud/50">Nilai Data</td>
-                  <td className="border border-line p-2.5 font-mono text-primary font-bold">80</td>
-                  <td className="border border-line p-2.5 font-mono text-primary font-bold">95</td>
-                  <td className="border border-line p-2.5 font-mono text-primary font-bold">70</td>
-                  <td className="border border-line p-2.5 font-mono text-primary font-bold">85</td>
+                  <td className="border border-stone-200 p-2.5 font-bold bg-stone-50">Nilai</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">80</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">95</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">70</td>
                 </tr>
               </tbody>
             </table>
-            <p className="text-xs text-muted mt-3">Jika ingin mengambil nilai 95, kita mengaksesnya melalui perintah <code className="bg-cloud px-1 py-0.5 rounded font-bold">data[1]</code>.</p>
           </div>
         ),
         question: {
-          q: "Jika terdapat array `angka = [10, 20, 30, 40]`, berapa nilai dari `angka[2]`?",
-          options: ["10", "20", "30", "40"],
-          correct: 2,
-          explanation: "Karna indeks dimulai dari 0: angka[0]=10, angka[1]=20, dan angka[2]=30."
+          q: "Jika terdapat array `angka = [10, 20, 30]`, berapa nilai dari `angka[1]`?",
+          options: ["10", "20", "30", "0"],
+          correct: 1,
+          explanation: "Indeks 1 bernilai 20."
         }
       }
     ]
@@ -719,15 +763,15 @@ function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { 
   return (
     <AppShell active="materi" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8">
-        <button onClick={() => setScreen("dashboard")} className="mb-6 flex items-center gap-2 text-sm font-bold text-muted hover:text-ink"><Icon name="arrow" /> Kembali ke beranda</button>
-        <section className="grid overflow-hidden rounded-[2rem] bg-ink text-white shadow-panel lg:grid-cols-[1.3fr_0.7fr]">
+        <button onClick={() => setScreen("dashboard")} className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"><Icon name="arrow" /> Kembali ke beranda</button>
+        <section className="grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl lg:grid-cols-[1.3fr_0.7fr]">
           <div className="p-7 sm:p-10">
-            <div className="text-xs font-extrabold tracking-widest text-lime">MODUL PEMBELAJARAN (+50 XP/Modul)</div>
+            <div className="text-xs font-extrabold tracking-widest text-orange-400">MODUL PEMBELAJARAN (+50 XP/Modul)</div>
             <div className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">Fundamental Algoritma & Flowchart</div>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65">Selesaikan bacaan modul untuk mendapatkan XP dan membuka materi berikutnya.</p>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-400">Selesaikan bacaan modul untuk mendapatkan XP dan membuka materi berikutnya.</p>
             <div className="mt-7 max-w-xl"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} dari 6 materi dipelajari</span><span>{percent}%</span></div><ProgressBar value={percent} dark /></div>
           </div>
-          <div className="flex items-center justify-center bg-primary/15 p-8"><div className="relative grid size-44 place-items-center rounded-full border border-white/10"><div className="grid size-20 place-items-center rounded-3xl bg-lime text-ink shadow-button"><Icon name="book" size={36} /></div></div></div>
+          <div className="flex items-center justify-center bg-orange-500/20 p-8"><div className="relative grid size-44 place-items-center rounded-full border border-white/10"><div className="grid size-20 place-items-center rounded-3xl bg-orange-500 text-white shadow-lg"><Icon name="book" size={36} /></div></div></div>
         </section>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_20rem]">
@@ -738,30 +782,30 @@ function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { 
               const isUnlocked = index <= completedLessons;
 
               return (
-                <article key={item.n} className={`flex flex-col gap-5 rounded-3xl border bg-white p-6 sm:flex-row sm:items-center ${isActive ? "border-primary shadow-card ring-2 ring-primary/10" : "border-line"}`}>
-                  <div className={`grid size-14 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold ${isDone ? "bg-mint text-success" : isActive ? "bg-primary text-white" : "bg-cloud text-muted"}`}>
+                <article key={item.n} className={`flex flex-col gap-5 rounded-3xl border bg-white p-6 sm:flex-row sm:items-center ${isActive ? "border-orange-500 shadow-md ring-2 ring-orange-500/10" : "border-stone-200"}`}>
+                  <div className={`grid size-14 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold ${isDone ? "bg-emerald-100 text-emerald-600" : isActive ? "bg-orange-500 text-white" : "bg-stone-100 text-stone-400"}`}>
                     {isDone ? <Icon name="check" /> : isUnlocked ? item.n : <Icon name="lock" />}
                   </div>
                   <div className="flex-1">
-                    <div className="font-display text-lg font-extrabold text-ink">{item.title}</div>
-                    <p className="mt-1 text-sm text-muted">{item.detail}</p>
-                    <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-muted"><Icon name="clock" size={15} /> Estimasi {item.duration} • {item.subTopics.length} Sub-bab</div>
+                    <div className="font-display text-lg font-extrabold text-stone-900">{item.title}</div>
+                    <p className="mt-1 text-sm text-stone-500">{item.detail}</p>
+                    <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-stone-400"><Icon name="clock" size={15} /> Estimasi {item.duration} • {item.subTopics.length} Sub-bab</div>
                   </div>
                   {isUnlocked ? (
                     <Button onClick={() => { setSelectedLesson(index); setScreen("materi-detail"); }}>
                       Baca Materi <Icon name="chevron" size={18} />
                     </Button>
                   ) : (
-                    <span className="px-4 text-sm font-bold text-muted">Terkunci</span>
+                    <span className="px-4 text-sm font-bold text-stone-400">Terkunci</span>
                   )}
                 </article>
               );
             })}
           </section>
-          <aside className="h-fit rounded-3xl bg-white p-6 shadow-sm">
-            <div className="grid size-12 place-items-center rounded-2xl bg-sky text-ink"><Icon name="book" /></div>
-            <div className="mt-5 font-display text-lg font-extrabold text-ink">Status Pembelajaran</div>
-            <p className="mt-2 text-sm leading-relaxed text-muted">Selesaikan bacaan modul secara berurutan untuk membuka materi berikutnya.</p>
+          <aside className="h-fit rounded-3xl bg-white p-6 shadow-sm border border-stone-200">
+            <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600"><Icon name="book" /></div>
+            <div className="mt-5 font-display text-lg font-extrabold text-stone-900">Status Pembelajaran</div>
+            <p className="mt-2 text-sm leading-relaxed text-stone-500">Selesaikan bacaan modul secara berurutan untuk membuka materi berikutnya.</p>
             <div className="mt-5"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} / 6 Modul</span><span>{percent}%</span></div><ProgressBar value={percent} /></div>
           </aside>
         </div>
@@ -813,19 +857,18 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
   return (
     <AppShell active="materi" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-4xl px-5 pb-28 pt-8 lg:px-8">
-        <button onClick={() => setScreen("materi")} className="mb-6 flex items-center gap-2 text-sm font-bold text-muted hover:text-ink"><Icon name="arrow" /> Kembali ke daftar materi</button>
-        <div className="rounded-[2rem] border border-line bg-white p-7 shadow-sm">
-          <div className="flex items-center gap-3 text-xs font-extrabold text-primary mb-2">
-            <span className="rounded-lg bg-primary/10 px-3 py-1">MODUL {lesson.n} (+50 XP)</span>
+        <button onClick={() => setScreen("materi")} className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"><Icon name="arrow" /> Kembali ke daftar materi</button>
+        <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="flex items-center gap-3 text-xs font-extrabold text-orange-600 mb-2">
+            <span className="rounded-lg bg-orange-50 px-3 py-1">MODUL {lesson.n} (+50 XP)</span>
             <span><Icon name="clock" size={14} /> {lesson.duration}</span>
-            <span className="ml-auto rounded-lg bg-cloud px-3 py-1 text-ink font-bold">
+            <span className="ml-auto rounded-lg bg-stone-100 px-3 py-1 text-stone-800 font-bold">
               Soal Dijawab: {correctSubTopicsCount}/{totalSubTopics}
             </span>
           </div>
-          <h1 className="font-display text-3xl font-extrabold text-ink mb-6">{lesson.title}</h1>
+          <h1 className="font-display text-3xl font-extrabold text-stone-900 mb-6">{lesson.title}</h1>
 
-          {/* NAVIGASI TAB SUB-BAB */}
-          <div className="mb-8 flex flex-wrap gap-2 border-b border-line pb-4">
+          <div className="mb-8 flex flex-wrap gap-2 border-b border-stone-200 pb-4">
             {lesson.subTopics.map((sub, idx) => {
               const answered = submittedAnswers[idx];
               const selectedOpt = selectedAnswers[idx];
@@ -835,43 +878,41 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
                 <button
                   key={sub.id}
                   onClick={() => setActiveTab(idx)}
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${activeTab === idx ? "bg-primary text-white shadow-sm" : "bg-cloud text-muted hover:text-ink"}`}
+                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${activeTab === idx ? "bg-orange-500 text-white shadow-sm" : "bg-stone-100 text-stone-500 hover:text-stone-900"}`}
                 >
                   {sub.title}
-                  {isCorrect && <span className="text-[10px] text-success bg-mint px-1.5 py-0.5 rounded font-extrabold">✓</span>}
+                  {isCorrect && <span className="text-[10px] text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded font-extrabold">✓</span>}
                 </button>
               );
             })}
           </div>
 
-          {/* KONTEN SUB-BAB AKTIF */}
           <div className="mb-10 min-h-[160px]">
-            <h3 className="text-xl font-extrabold text-ink mb-3">{currentSub.title}</h3>
+            <h3 className="text-xl font-extrabold text-stone-900 mb-3">{currentSub.title}</h3>
             {currentSub.content}
           </div>
 
-          {/* KOTAK SOAL PEMAHAMAN INTERAKTIF DINAMIS */}
           {currentSubQuestion && (
-            <div className="mb-8 rounded-3xl border border-line bg-cloud/40 p-6">
-              <div className="flex items-center gap-2 text-xs font-extrabold text-primary mb-2">
+            <div className="mb-8 rounded-3xl border border-stone-200 bg-stone-50 p-6">
+              <div className="flex items-center gap-2 text-xs font-extrabold text-orange-600 mb-2">
                 <Icon name="spark" size={16} /> LATIHAN SOAL PEMAHAMAN ({currentSub.title})
               </div>
-              <div className="font-display font-extrabold text-ink text-base mb-4">{currentSubQuestion.q}</div>
+              <div className="font-display font-extrabold text-stone-900 text-base mb-4">{currentSubQuestion.q}</div>
               <div className="space-y-2 mb-4">
                 {currentSubQuestion.options.map((opt, oIdx) => {
                   const isSelected = currentSelectedOpt === oIdx;
-                  let btnStyle = "border-line bg-white hover:border-primary/50 text-ink";
+                  let btnStyle = "border-stone-200 bg-white hover:border-orange-500 text-stone-800";
 
                   if (isSubmitted) {
                     if (isCurrentSubCorrect && isSelected) {
-                      btnStyle = "border-success bg-mint/40 text-success font-extrabold";
+                      btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-700 font-extrabold";
                     } else if (!isCurrentSubCorrect && isSelected) {
-                      btnStyle = "border-danger bg-rose-50 text-danger font-extrabold";
+                      btnStyle = "border-rose-500 bg-rose-50 text-rose-700 font-extrabold";
                     } else {
-                      btnStyle = "border-line bg-white text-muted";
+                      btnStyle = "border-stone-200 bg-white text-stone-400";
                     }
                   } else if (isSelected) {
-                    btnStyle = "border-primary bg-primary/10 text-primary ring-2 ring-primary/20";
+                    btnStyle = "border-orange-500 bg-orange-50 text-orange-700 ring-2 ring-orange-500/20";
                   }
 
                   return (
@@ -893,7 +934,7 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
                   </Button>
                 </div>
               ) : (
-                <div className={`p-4 rounded-2xl text-xs font-medium ${isCurrentSubCorrect ? "bg-mint/30 text-success" : "bg-rose-50 text-rose-800 border border-rose-200"}`}>
+                <div className={`p-4 rounded-2xl text-xs font-medium ${isCurrentSubCorrect ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-rose-50 text-rose-800 border border-rose-200"}`}>
                   {isCurrentSubCorrect ? (
                     <>
                       <strong>Jawaban Tepat! 🎉</strong>
@@ -910,12 +951,11 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
             </div>
           )}
 
-          {/* AKSI PENYELESAIAN MATERI */}
-          <div className="pt-6 border-t border-line flex justify-between items-center">
+          <div className="pt-6 border-t border-stone-200 flex justify-between items-center">
             <Button variant="outline" onClick={() => setScreen("materi")}>Tutup</Button>
 
             {isAlreadyCompleted ? (
-              <Button variant="outline" className="border-success text-success hover:bg-mint/30" onClick={() => { onCompleteLesson(lessonIndex); setScreen("materi"); }}>
+              <Button variant="outline" className="border-emerald-500 text-emerald-600 hover:bg-emerald-50" onClick={() => { onCompleteLesson(lessonIndex); setScreen("materi"); }}>
                 <Icon name="check" size={18} /> Materi Sudah Selesai
               </Button>
             ) : (
@@ -950,33 +990,33 @@ function LatihanHub({ setScreen, userName }: { setScreen: (s: Screen) => void; u
     <AppShell active="latihan-hub" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-5xl px-5 pb-28 pt-8 lg:px-8">
         <div>
-          <div className="font-display text-3xl font-extrabold text-ink">Pusat Latihan Interaktif</div>
-          <p className="mt-2 text-muted">Pilih jenis latihan di bawah ini untuk menguji pemahaman logika dan algoritma Anda.</p>
+          <div className="font-display text-3xl font-extrabold text-stone-900">Pusat Latihan Interaktif</div>
+          <p className="mt-2 text-stone-500">Pilih jenis latihan di bawah ini untuk menguji pemahaman logika dan algoritma Anda.</p>
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <div className="rounded-[2rem] border border-line bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-panel transition">
+          <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
             <div>
-              <div className="grid size-14 place-items-center rounded-2xl bg-lime text-ink mb-5"><Icon name="spark" size={28} /></div>
-              <span className="text-xs font-bold text-primary tracking-widest">DIAGRAM FLOWCHART (4 TANTANGAN)</span>
-              <h2 className="font-display text-2xl font-extrabold text-ink mt-2">Susun Flowchart</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">Latih logika dengan menyusun simbol diagram alur secara runtut dan terhubung dengan garis panah.</p>
+              <div className="grid size-14 place-items-center rounded-2xl bg-orange-100 text-orange-600 mb-5"><Icon name="spark" size={28} /></div>
+              <span className="text-xs font-bold text-orange-600 tracking-widest">DIAGRAM FLOWCHART (4 TANTANGAN)</span>
+              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Susun Flowchart</h2>
+              <p className="mt-2 text-sm leading-relaxed text-stone-500">Latih logika dengan menyusun simbol diagram alur secara runtut dan terhubung dengan garis panah.</p>
             </div>
-            <div className="mt-8 pt-5 border-t border-line flex items-center justify-between">
-              <span className="text-xs font-bold text-primary">+150 XP</span>
+            <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
+              <span className="text-xs font-bold text-orange-600">+150 XP</span>
               <Button onClick={() => setScreen("challenge")}>Mulai Challenge <Icon name="chevron" /></Button>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-line bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-panel transition">
+          <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
             <div>
-              <div className="grid size-14 place-items-center rounded-2xl bg-sky text-ink mb-5"><Icon name="star" size={28} /></div>
-              <span className="text-xs font-bold text-primary tracking-widest">EVALUASI MATERI (6 KUIS)</span>
-              <h2 className="font-display text-2xl font-extrabold text-ink mt-2">Kuis Pilihan Ganda</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">Uji pengetahuan Anda melalui serangkaian pertanyaan kuis dari seluruh modul.</p>
+              <div className="grid size-14 place-items-center rounded-2xl bg-amber-100 text-amber-600 mb-5"><Icon name="star" size={28} /></div>
+              <span className="text-xs font-bold text-orange-600 tracking-widest">EVALUASI MATERI (6 KUIS)</span>
+              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Kuis Pilihan Ganda</h2>
+              <p className="mt-2 text-sm leading-relaxed text-stone-500">Uji pengetahuan Anda melalui serangkaian pertanyaan kuis dari seluruh modul.</p>
             </div>
-            <div className="mt-8 pt-5 border-t border-line flex items-center justify-between">
-              <span className="text-xs font-bold text-primary">+100 XP</span>
+            <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
+              <span className="text-xs font-bold text-orange-600">+100 XP</span>
               <Button onClick={() => setScreen("quiz")}>Mulai Kuis <Icon name="chevron" /></Button>
             </div>
           </div>
@@ -986,7 +1026,6 @@ function LatihanHub({ setScreen, userName }: { setScreen: (s: Screen) => void; u
   );
 }
 
-// 4 SOAL TANTANGAN SUSUN FLOWCHART
 const flowchartChallenges = [
   {
     title: "Soal 1: Menentukan Bilangan Ganjil / Genap (Materi Percabangan)",
@@ -1018,7 +1057,6 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
   const [activeStage, setActiveStage] = useState(0);
   const currentChallenge = flowchartChallenges[activeStage];
   
-  // Menyimpan state blok susunan per stage agar bisa diingat saat kembali ke stage sebelumnya
   const [stagesBlocks, setStagesBlocks] = useState<Record<number, string[]>>({
     0: flowchartChallenges[0].shuffled,
     1: flowchartChallenges[1].shuffled,
@@ -1064,42 +1102,42 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
   };
 
   return (
-    <main className="min-h-screen bg-canvas pb-10">
-      <header className="border-b border-line bg-white">
+    <main className="min-h-screen bg-stone-50 pb-10">
+      <header className="border-b border-stone-200 bg-white">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-muted hover:text-ink"><Icon name="close" /> Keluar</button>
-          <div className="text-center"><div className="text-xs font-extrabold text-primary">TANTANGAN {activeStage + 1} dari {flowchartChallenges.length}</div><div className="mt-1 font-display font-extrabold text-ink">{currentChallenge.title}</div></div>
-          <div className="flex items-center gap-2 rounded-xl bg-primary/10 px-3 py-2 text-sm font-extrabold text-primary"><Icon name="spark" size={17} /> 150 XP</div>
+          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900"><Icon name="close" /> Keluar</button>
+          <div className="text-center"><div className="text-xs font-extrabold text-orange-600">TANTANGAN {activeStage + 1} dari {flowchartChallenges.length}</div><div className="mt-1 font-display font-extrabold text-stone-900">{currentChallenge.title}</div></div>
+          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600"><Icon name="spark" size={17} /> 150 XP</div>
         </div>
       </header>
       <main className="mx-auto max-w-4xl px-5 pt-8 lg:px-8">
-        <div className="mb-7 flex items-start gap-4 rounded-3xl bg-white p-5 shadow-sm">
-          <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky font-extrabold text-ink">?</div>
-          <div><div className="font-display text-lg font-extrabold text-ink">Susun Simbol Flowchart Berurutan</div><p className="mt-1 text-sm leading-relaxed text-muted">Klik kotak simbol pertama lalu klik simbol kedua untuk menukar posisinya hingga terhubung sempurna dengan garis panah ke bawah.</p></div>
+        <div className="mb-7 flex items-start gap-4 rounded-3xl bg-white p-5 shadow-sm border border-stone-200">
+          <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600 font-extrabold">?</div>
+          <div><div className="font-display text-lg font-extrabold text-stone-900">Susun Simbol Flowchart Berurutan</div><p className="mt-1 text-sm leading-relaxed text-stone-500">Klik kotak simbol pertama lalu klik simbol kedua untuk menukar posisinya hingga terhubung sempurna dengan garis panah ke bawah.</p></div>
         </div>
 
-        <div className="relative flex flex-col items-center rounded-[2rem] border border-line bg-white p-8 shadow-sm space-y-4">
+        <div className="relative flex flex-col items-center rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm space-y-4">
           {blocks.map((block, i) => {
             const shapeType = currentChallenge.shapes[i];
             let shapeStyle = "rounded-2xl px-6 py-4";
-            if (shapeType === "pill") shapeStyle = "rounded-full px-8 py-3 bg-lime/30 border-lime";
-            if (shapeType === "parallelogram") shapeStyle = "skew-x-[-10deg] rounded-xl px-8 py-3 bg-sky/20 border-sky";
-            if (shapeType === "diamond") shapeStyle = "rotate-0 rounded-xl px-8 py-4 bg-peach/30 border-peach text-center";
+            if (shapeType === "pill") shapeStyle = "rounded-full px-8 py-3 bg-orange-100 border-orange-300 text-orange-900";
+            if (shapeType === "parallelogram") shapeStyle = "skew-x-[-10deg] rounded-xl px-8 py-3 bg-amber-100 border-amber-300 text-amber-900";
+            if (shapeType === "diamond") shapeStyle = "rotate-0 rounded-xl px-8 py-4 bg-rose-100 border-rose-300 text-rose-900 text-center";
 
             return (
               <div key={`${block}-${i}`} className="flex flex-col items-center w-full">
                 <button 
                   onClick={() => choose(i)} 
-                  className={`w-full max-w-md border-2 font-bold text-sm text-ink transition shadow-sm flex items-center justify-between p-4 ${selected === i ? "border-primary bg-primary/10 ring-4 ring-primary/10" : "border-line bg-cloud/50 hover:border-primary/50"} ${shapeStyle}`}
+                  className={`w-full max-w-md border-2 font-bold text-sm transition shadow-sm flex items-center justify-between p-4 ${selected === i ? "border-orange-500 bg-orange-50 ring-4 ring-orange-500/10 text-orange-900" : "border-stone-200 bg-stone-50 hover:border-orange-300 text-stone-800"} ${shapeStyle}`}
                 >
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-extrabold text-muted shadow-sm">{i + 1}</span>
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-extrabold text-stone-500 shadow-sm">{i + 1}</span>
                   <span className="flex-1 text-center">{block}</span>
-                  <span className="text-[10px] uppercase font-bold text-muted bg-white/60 px-2 py-1 rounded">{shapeType}</span>
+                  <span className="text-[10px] uppercase font-bold text-stone-400 bg-white/60 px-2 py-1 rounded">{shapeType}</span>
                 </button>
                 {i < blocks.length - 1 && (
-                  <div className="flex flex-col items-center my-2 text-primary">
-                    <div className="h-6 w-0.5 bg-primary/50"></div>
-                    <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-primary"></div>
+                  <div className="flex flex-col items-center my-2 text-orange-500">
+                    <div className="h-6 w-0.5 bg-orange-400"></div>
+                    <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-orange-500"></div>
                   </div>
                 )}
               </div>
@@ -1124,7 +1162,6 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
   );
 }
 
-// 6 KUIS EVALUASI
 const quizQuestions = [
   {
     q: "Modul 1: Sifat dasar algoritma yang menuntut instruksi ditulis secara jelas dan tidak menimbulkan makna ganda (ambigu) dinamakan...",
@@ -1200,23 +1237,23 @@ function Quiz({ setScreen, onComplete }: { setScreen: (s: Screen) => void; onCom
   };
 
   return (
-    <main className="min-h-screen bg-canvas pb-10">
-      <header className="border-b border-line bg-white">
+    <main className="min-h-screen bg-stone-50 pb-10">
+      <header className="border-b border-stone-200 bg-white">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-muted hover:text-ink"><Icon name="close" /> Keluar</button>
-          <div className="text-center"><div className="text-xs font-extrabold text-primary">KUIS EVALUASI ({currentQuizIndex + 1}/{quizQuestions.length})</div><div className="mt-1 font-display font-extrabold text-ink">Evaluasi Pemahaman Pemrograman</div></div>
-          <div className="flex items-center gap-2 rounded-xl bg-primary/10 px-3 py-2 text-sm font-extrabold text-primary"><Icon name="spark" size={17} /> 100 XP</div>
+          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900"><Icon name="close" /> Keluar</button>
+          <div className="text-center"><div className="text-xs font-extrabold text-orange-600">KUIS EVALUASI ({currentQuizIndex + 1}/{quizQuestions.length})</div><div className="mt-1 font-display font-extrabold text-stone-900">Evaluasi Pemahaman Pemrograman</div></div>
+          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600"><Icon name="spark" size={17} /> 100 XP</div>
         </div>
       </header>
       <main className="mx-auto max-w-3xl px-5 pt-8 lg:px-8">
-        <div className="rounded-[2rem] border border-line bg-white p-7 shadow-sm">
-          <div className="font-display text-xl font-extrabold text-ink">{q.q}</div>
+        <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="font-display text-xl font-extrabold text-stone-900">{q.q}</div>
           <div className="mt-6 space-y-3">
             {q.options.map((opt, idx) => (
               <button 
                 key={opt} 
                 onClick={() => handleSelectOption(idx)} 
-                className={`w-full text-left p-4 rounded-2xl border transition font-bold text-sm ${currentSelectedOpt === idx ? "border-primary bg-primary/10 text-primary" : "border-line bg-cloud/40 text-ink hover:bg-cloud"}`}
+                className={`w-full text-left p-4 rounded-2xl border transition font-bold text-sm ${currentSelectedOpt === idx ? "border-orange-500 bg-orange-50 text-orange-900 ring-2 ring-orange-500/20" : "border-stone-200 bg-stone-50 text-stone-800 hover:bg-stone-100"}`}
               >
                 {opt}
               </button>
@@ -1242,13 +1279,13 @@ function Quiz({ setScreen, onComplete }: { setScreen: (s: Screen) => void; onCom
 
 function Score({ setScreen, userName, xp, score, hasNext }: { setScreen: (s: Screen) => void; userName: string; xp: number; score: number; hasNext: boolean }) {
   return (
-    <main className="min-h-screen bg-canvas p-5">
+    <main className="min-h-screen bg-stone-50 p-5">
       <div className="mx-auto max-w-4xl py-6 md:py-12">
-        <div className="text-center"><Logo /><div className="mx-auto mt-10 grid size-28 place-items-center rounded-full bg-lime shadow-celebrate"><Icon name="trophy" size={52} /></div><div className="mt-7 text-sm font-extrabold tracking-widest text-primary">LATIHAN SELESAI</div><div className="mt-2 font-display text-4xl font-extrabold tracking-tight text-ink">Luar biasa, {userName}!</div><p className="mx-auto mt-3 max-w-lg text-muted">Hasil latihan dan XP berhasil ditambahkan ke profil Anda.</p></div>
-        <section className="mt-9 grid overflow-hidden rounded-[2rem] bg-ink text-white shadow-panel sm:grid-cols-3">
-          <div className="p-7 text-center sm:border-r sm:border-white/10"><div className="text-xs font-bold text-white/50">NILAI</div><div className="mt-2 font-display text-4xl font-extrabold text-lime">{score}</div></div>
-          <div className="border-y border-white/10 p-7 text-center sm:border-x-0 sm:border-y-0 sm:border-r"><div className="text-xs font-bold text-white/50">TOTAL XP AKUMULASI</div><div className="mt-2 font-display text-4xl font-extrabold text-sky">+{xp}</div></div>
-          <div className="p-7 text-center"><div className="text-xs font-bold text-white/50">AKURASI</div><div className="mt-2 font-display text-4xl font-extrabold text-peach">{score}%</div></div>
+        <div className="text-center"><Logo /><div className="mx-auto mt-10 grid size-28 place-items-center rounded-full bg-orange-500 shadow-xl text-white"><Icon name="trophy" size={52} /></div><div className="mt-7 text-sm font-extrabold tracking-widest text-orange-600">LATIHAN SELESAI</div><div className="mt-2 font-display text-4xl font-extrabold tracking-tight text-stone-900">Luar biasa, {userName}!</div><p className="mx-auto mt-3 max-w-lg text-stone-500">Hasil latihan dan XP berhasil ditambahkan ke profil Anda.</p></div>
+        <section className="mt-9 grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl sm:grid-cols-3">
+          <div className="p-7 text-center sm:border-r sm:border-white/10"><div className="text-xs font-bold text-stone-400">NILAI</div><div className="mt-2 font-display text-4xl font-extrabold text-orange-400">{score}</div></div>
+          <div className="border-y border-white/10 p-7 text-center sm:border-x-0 sm:border-y-0 sm:border-r"><div className="text-xs font-bold text-stone-400">TOTAL XP AKUMULASI</div><div className="mt-2 font-display text-4xl font-extrabold text-amber-300">+{xp}</div></div>
+          <div className="p-7 text-center"><div className="text-xs font-bold text-stone-400">AKURASI</div><div className="mt-2 font-display text-4xl font-extrabold text-emerald-400">{score}%</div></div>
         </section>
         <div className="mt-7 grid gap-3 sm:grid-cols-3">
           <Button variant="outline" onClick={() => setScreen("dashboard")}>Ke Beranda</Button>
@@ -1276,11 +1313,11 @@ function Leaderboard({ setScreen, userName, xp, completedLessons, hasChallengeDo
   ].sort((a, b) => b.rankXp - a.rankXp);
 
   const achievements = [
-    { icon: "award" as IconName, title: "Flowchart Rookie", desc: "Berhasil menyelesaikan tantangan susun flowchart pertama.", color: "bg-lime", active: hasChallengeDone },
-    { icon: "star" as IconName, title: "Quiz Master", desc: "Berhasil menyelesaikan sesi kuis evaluasi.", color: "bg-sky", active: hasQuizDone },
-    { icon: "medal" as IconName, title: "Master Logika", desc: "Membaca dan menyelesaikan seluruh (6) modul materi pembelajaran.", color: "bg-lavender", active: completedLessons >= 6 },
-    { icon: "trophy" as IconName, title: "Perfect Score", desc: "Meraih nilai sempurna 100 pada latihan evaluasi.", color: "bg-peach", active: lastScore === 100 },
-    { icon: "target" as IconName, title: "Top Ten Leaderboard", desc: "Masuk dalam 10 besar papan peringkat mingguan.", color: "bg-peach", active: true },
+    { icon: "award" as IconName, title: "Flowchart Rookie", desc: "Berhasil menyelesaikan tantangan susun flowchart pertama.", color: "bg-orange-100 text-orange-600", active: hasChallengeDone },
+    { icon: "star" as IconName, title: "Quiz Master", desc: "Berhasil menyelesaikan sesi kuis evaluasi.", color: "bg-amber-100 text-amber-600", active: hasQuizDone },
+    { icon: "medal" as IconName, title: "Master Logika", desc: "Membaca dan menyelesaikan seluruh (6) modul materi pembelajaran.", color: "bg-emerald-100 text-emerald-600", active: completedLessons >= 6 },
+    { icon: "trophy" as IconName, title: "Perfect Score", desc: "Meraih nilai sempurna 100 pada latihan evaluasi.", color: "bg-sky-100 text-sky-600", active: lastScore === 100 },
+    { icon: "target" as IconName, title: "Top Ten Leaderboard", desc: "Masuk dalam 10 besar papan peringkat mingguan.", color: "bg-purple-100 text-purple-600", active: true },
   ];
 
   return (
@@ -1288,47 +1325,47 @@ function Leaderboard({ setScreen, userName, xp, completedLessons, hasChallengeDo
       <main className="mx-auto max-w-5xl px-5 pb-28 pt-8 lg:px-8">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <div className="font-display text-3xl font-extrabold text-ink">Pencapaian & Peringkat</div>
-            <p className="mt-2 text-muted">Bandingkan total XP dan koleksi badge hasil belajarmu.</p>
+            <div className="font-display text-3xl font-extrabold text-stone-900">Pencapaian & Peringkat</div>
+            <p className="mt-2 text-stone-500">Bandingkan total XP dan koleksi badge hasil belajarmu.</p>
           </div>
-          <div className="flex rounded-2xl bg-white p-1.5 shadow-sm">
-            <button onClick={() => setTab("rank")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "rank" ? "bg-ink text-white" : "text-muted"}`}>Leaderboard</button>
-            <button onClick={() => setTab("badge")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "badge" ? "bg-ink text-white" : "text-muted"}`}>Achievement</button>
+          <div className="flex rounded-2xl bg-white p-1.5 shadow-sm border border-stone-200">
+            <button onClick={() => setTab("rank")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "rank" ? "bg-stone-900 text-white" : "text-stone-500"}`}>Leaderboard</button>
+            <button onClick={() => setTab("badge")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "badge" ? "bg-stone-900 text-white" : "text-stone-500"}`}>Achievement</button>
           </div>
         </div>
 
         {tab === "rank" ? (
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
-            <section className="rounded-[2rem] bg-white p-5 shadow-sm sm:p-7">
-              <div className="mb-5 flex justify-between"><div className="font-display text-xl font-extrabold text-ink">Peringkat Mingguan</div><span className="rounded-full bg-mint px-3 py-1 text-xs font-bold text-success">Aktif</span></div>
+            <section className="rounded-[2rem] bg-white p-5 shadow-sm sm:p-7 border border-stone-200">
+              <div className="mb-5 flex justify-between"><div className="font-display text-xl font-extrabold text-stone-900">Peringkat Mingguan</div><span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">Aktif</span></div>
               <div className="space-y-2">
                 {baseRanking.map((item, idx) => {
                   const isUser = item.name === (userName || "Pengguna");
                   return (
-                    <div key={item.name} className={`flex items-center gap-4 rounded-2xl p-3.5 ${isUser ? "bg-primary text-white" : "bg-cloud/70"}`}>
-                      <span className={`w-7 text-center font-display font-extrabold ${idx === 0 ? "text-orange" : ""}`}>{idx + 1}</span>
-                      <span className={`grid size-10 place-items-center rounded-full text-xs font-extrabold ${isUser ? "bg-white text-primary" : "bg-sky text-ink"}`}>{item.initials}</span>
-                      <span className="flex-1 font-bold">{item.name}{isUser && <small className="ml-2 opacity-70">(Kamu)</small>}</span>
-                      <span className="font-extrabold">{item.rankXp.toLocaleString("id-ID")} <small className="opacity-60">XP</small></span>
+                    <div key={item.name} className={`flex items-center gap-4 rounded-2xl p-3.5 ${isUser ? "bg-orange-500 text-white shadow-sm" : "bg-stone-50"}`}>
+                      <span className={`w-7 text-center font-display font-extrabold ${idx === 0 ? "text-amber-300" : ""}`}>{idx + 1}</span>
+                      <span className={`grid size-10 place-items-center rounded-full text-xs font-extrabold ${isUser ? "bg-white text-orange-600" : "bg-orange-100 text-orange-700"}`}>{item.initials}</span>
+                      <span className="flex-1 font-bold">{item.name}{isUser && <small className="ml-2 opacity-80">(Kamu)</small>}</span>
+                      <span className="font-extrabold">{item.rankXp.toLocaleString("id-ID")} <small className="opacity-70">XP</small></span>
                     </div>
                   );
                 })}
               </div>
             </section>
-            <aside className="h-fit rounded-[2rem] bg-lime p-6 text-ink">
+            <aside className="h-fit rounded-[2rem] bg-orange-500 p-6 text-white shadow-lg">
               <Icon name="trophy" size={34} />
               <div className="mt-5 font-display text-xl font-extrabold">Terus Tingkatkan XP!</div>
-              <p className="mt-2 text-sm leading-relaxed text-ink/75">Selesaikan materi dan challenge untuk meroketkan posisimu.</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/90">Selesaikan materi dan challenge untuk meroketkan posisimu.</p>
             </aside>
           </div>
         ) : (
           <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {achievements.map((item) => (
-              <article key={item.title} className={`rounded-3xl border border-line bg-white p-6 transition ${item.active ? "shadow-sm border-primary/30" : "opacity-45 grayscale"}`}>
-                <div className={`grid size-14 place-items-center rounded-2xl text-ink ${item.color}`}><Icon name={item.icon} size={28} /></div>
-                <div className="mt-5 font-display text-lg font-extrabold text-ink">{item.title}</div>
-                <p className="mt-1 text-sm text-muted">{item.desc}</p>
-                <div className="mt-4 text-xs font-extrabold text-primary">{item.active ? "DIPEROLEH" : "TERKUNCI"}</div>
+              <article key={item.title} className={`rounded-3xl border border-stone-200 bg-white p-6 transition ${item.active ? "shadow-sm border-orange-500/30" : "opacity-45 grayscale"}`}>
+                <div className={`grid size-14 place-items-center rounded-2xl ${item.color}`}><Icon name={item.icon} size={28} /></div>
+                <div className="mt-5 font-display text-lg font-extrabold text-stone-900">{item.title}</div>
+                <p className="mt-1 text-sm text-stone-500">{item.desc}</p>
+                <div className="mt-4 text-xs font-extrabold text-orange-600">{item.active ? "DIPEROLEH" : "TERKUNCI"}</div>
               </article>
             ))}
           </section>
@@ -1342,9 +1379,9 @@ function ProgressPage({ setScreen, userName, xp, completedLessons, score }: { se
   return (
     <AppShell active="progress" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8">
-        <div><div className="font-display text-3xl font-extrabold text-ink">Progress Belajar</div><p className="mt-2 text-muted">Pantau perkembangan materi dan nilai belajarmu.</p></div>
+        <div><div className="font-display text-3xl font-extrabold text-stone-900">Progress Belajar</div><p className="mt-2 text-stone-500">Pantau perkembangan materi dan nilai belajarmu.</p></div>
         <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          {[[`${Math.round((completedLessons / 6) * 100)}%`, "Materi tuntas", "book", "bg-sky"], [String(score), "Nilai Terakhir", "star", "bg-lime"], [String(xp), "Total XP", "spark", "bg-peach"]].map(([value, label, icon, color]) => <div key={label} className="rounded-3xl bg-white p-5 shadow-sm"><div className={`grid size-10 place-items-center rounded-xl ${color}`}><Icon name={icon as IconName} /></div><div className="mt-5 font-display text-2xl font-extrabold text-ink">{value}</div><div className="mt-1 text-sm text-muted">{label}</div></div>)}
+          {[[`${Math.round((completedLessons / 6) * 100)}%`, "Materi tuntas", "book", "bg-orange-100 text-orange-600"], [String(score), "Nilai Terakhir", "star", "bg-amber-100 text-amber-600"], [String(xp), "Total XP", "spark", "bg-emerald-100 text-emerald-600"]].map(([value, label, icon, color]) => <div key={label} className="rounded-3xl bg-white p-5 shadow-sm border border-stone-200"><div className={`grid size-10 place-items-center rounded-xl ${color}`}><Icon name={icon as IconName} /></div><div className="mt-5 font-display text-2xl font-extrabold text-stone-900">{value}</div><div className="mt-1 text-sm text-stone-500">{label}</div></div>)}
         </section>
       </main>
     </AppShell>
@@ -1364,18 +1401,18 @@ function Profile({ setScreen, userName, onUpdateUsername, xp, completedLessons }
   return (
     <AppShell active="profile" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-4xl px-5 pb-28 pt-10">
-        <section className="overflow-hidden rounded-[2rem] bg-white shadow-panel">
-          <div className="h-36 bg-ink" />
+        <section className="overflow-hidden rounded-[2rem] bg-white shadow-xl border border-stone-200">
+          <div className="h-36 bg-orange-500" />
           <div className="px-6 pb-8 sm:px-9">
             <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end">
-              <div className="grid size-24 place-items-center rounded-3xl border-4 border-white bg-primary font-display text-2xl font-extrabold text-white">{getInitials(userName)}</div>
-              <div className="flex-1"><div className="font-display text-2xl font-extrabold text-ink">{userName}</div><p className="text-sm text-muted">@{userName.toLowerCase().replace(/\s+/g, "")} · Pemula</p></div>
+              <div className="grid size-24 place-items-center rounded-3xl border-4 border-white bg-stone-900 font-display text-2xl font-extrabold text-white">{getInitials(userName)}</div>
+              <div className="flex-1"><div className="font-display text-2xl font-extrabold text-stone-900">{userName}</div><p className="text-sm text-stone-500">@{userName.toLowerCase().replace(/\s+/g, "")} · Pemula</p></div>
               <Button variant="outline" onClick={editProfile}>Edit Profil</Button>
             </div>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl bg-cloud p-4"><strong className="block text-xl text-ink">{xp}</strong><span className="text-xs text-muted">Total XP</span></div>
-              <div className="rounded-2xl bg-cloud p-4"><strong className="block text-xl text-ink">{completedLessons}</strong><span className="text-xs text-muted">Materi tuntas</span></div>
-              <div className="rounded-2xl bg-cloud p-4"><strong className="block text-xl text-ink">{completedLessons >= 6 ? 2 : 1}</strong><span className="text-xs text-muted">Badge dimiliki</span></div>
+              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{xp}</strong><span className="text-xs text-stone-500">Total XP</span></div>
+              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{completedLessons}</strong><span className="text-xs text-stone-500">Materi tuntas</span></div>
+              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{completedLessons >= 6 ? 2 : 1}</strong><span className="text-xs text-stone-500">Badge dimiliki</span></div>
             </div>
           </div>
         </section>
