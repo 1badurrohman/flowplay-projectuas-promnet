@@ -135,7 +135,7 @@ function AuthLayout({ children, screen, setScreen }: { children: ReactNode; scre
             </div>
             
             <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-stone-900 md:text-5xl lg:text-6xl">
-              Logika jadi lebih mudah saat kamu <span className="text-orange-500 underline decoration-orange-300 decoration-wavy underline-offset-8">memainkannya.</span>
+              Logika jadi lebih mudah saat kamu <span className="text-orange-500 underline decoration-orange-300 decoration-wavy underline-offset-8">memvisualkannya.</span>
             </h1>
 
             {/* 4 KOTAK FITUR KECIL DI BAWAH */}
