@@ -4,9 +4,15 @@ import (
 	"net/http"
 
 	"flowplay/backend/config"
+<<<<<<< HEAD
 	"flowplay/backend/controllers"
 	"flowplay/backend/middlewares"
 	"flowplay/backend/structs"
+=======
+	"flowplay/backend/config/controllers"
+	"flowplay/backend/config/middlewares"
+	"flowplay/backend/config/structs"
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

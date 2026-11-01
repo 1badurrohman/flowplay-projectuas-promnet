@@ -5,7 +5,11 @@ import (
 	"log"
 
 	"flowplay/backend/config"
+<<<<<<< HEAD
 	"flowplay/backend/models"
+=======
+	"flowplay/backend/config/models"
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -16,11 +20,19 @@ var DB *gorm.DB
 func InitDB() {
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+<<<<<<< HEAD
 		config.GetEnv("DB_USER", "flowplay"),
 		config.GetEnv("DB_PASS", "flowplay"),
 		config.GetEnv("DB_HOST", "localhost"),
 		config.GetEnv("DB_PORT", "3306"),
 		config.GetEnv("DB_NAME", "flowplay"),
+=======
+		config.GetEnv("DB_USER", "root"),
+		config.GetEnv("DB_PASSWORD", ""), // Ubah jadi "DB_PASSWORD" dan default kosong ""
+		config.GetEnv("DB_HOST", "localhost"),
+		config.GetEnv("DB_PORT", "3306"),
+		config.GetEnv("DB_NAME", "flowplay_db"), // Sesuaikan dengan nama database di phpMyAdmin
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 	)
 	var err error
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})

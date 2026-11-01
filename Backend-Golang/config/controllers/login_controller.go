@@ -4,10 +4,17 @@ import (
 	"net/http"
 	"strings"
 
+<<<<<<< HEAD
 	"flowplay/backend/database"
 	"flowplay/backend/helpers"
 	"flowplay/backend/models"
 	"flowplay/backend/structs"
+=======
+	"flowplay/backend/config/database"
+	"flowplay/backend/config/helpers"
+	"flowplay/backend/config/models"
+	"flowplay/backend/config/structs"
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,8 +39,13 @@ func Login(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
+<<<<<<< HEAD
 		"token": token,
 		"user":  toUserResponse(user),
+=======
+		"token":    token,
+		"user":     toUserResponse(user),
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 		"progress": toProgressResponse(user.Progress),
 	})
 }

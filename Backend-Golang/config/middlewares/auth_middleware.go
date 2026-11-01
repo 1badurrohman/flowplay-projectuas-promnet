@@ -4,8 +4,13 @@ import (
 	"net/http"
 	"strings"
 
+<<<<<<< HEAD
 	"flowplay/backend/helpers"
 	"flowplay/backend/structs"
+=======
+	"flowplay/backend/config/helpers"
+	"flowplay/backend/config/structs"
+>>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
 	"github.com/gin-gonic/gin"
 )
