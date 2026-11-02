@@ -36,25 +36,36 @@ html {
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  color: var(--color-ink);
-  background: var(--color-canvas);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+  color: #272044;
+  background:
+    radial-gradient(ellipse at 8% 5%, rgba(120, 76, 255, .42), transparent 32%),
+    radial-gradient(ellipse at 92% 12%, rgba(0, 190, 255, .34), transparent 30%),
+    radial-gradient(ellipse at 50% 100%, rgba(196, 92, 255, .25), transparent 38%),
+    linear-gradient(135deg, #e5dcff 0%, #dce5ff 38%, #d7f2ff 72%, #e9ddff 100%);
+  background-attachment: fixed;
+}
+.galaxy-hero {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(69, 218, 255, .58), transparent 30%),
+    radial-gradient(circle at 12% 92%, rgba(171, 115, 255, .62), transparent 38%),
+    linear-gradient(125deg, #160b3d 0%, #49218f 34%, #3158b8 68%, #087f9f 100%);
 }
 
-button,
-input {
-  font: inherit;
-}
+[class~="bg-orange-500"] { background-color: #8065dc !important; }
+[class~="bg-orange-600"] { background-color: #684fc4 !important; }
+[class~="text-orange-500"], [class~="text-orange-600"], [class~="text-orange-400"] { color: #765bd0 !important; }
+[class~="bg-orange-50"], [class~="bg-orange-100"] { background-color: #f0ebff !important; }
+[class~="border-orange-500"] { border-color: #947ce5 !important; }
+[class~="hover:bg-orange-600"]:hover { background-color: #684fc4 !important; }
+[class~="hover:border-orange-500"]:hover { border-color: #947ce5 !important; }
+[class~="shadow-orange-500\\/25"] { --tw-shadow-color: rgba(128, 101, 220, .25) !important; }
+[class~="bg-stone-50"] { background-color: rgba(247, 245, 255, .88) !important; }
+[class~="bg-stone-900"] { background-color: #292344 !important; }
+[class~="text-stone-900"] { color: #272044 !important; }
+[class~="border-stone-200"], [class~="border-stone-100"] { border-color: #e7e0f7 !important; }
+[class~="bg-amber-100"] { background-color: #eee9ff !important; }
+[class~="text-amber-600"] { color: #8065dc !important; }
 
-button {
-  cursor: pointer;
-}
-
-::selection {
-  color: var(--color-white);
-  background: var(--color-primary);
-}
+/* Galaxy accents for the main application surfaces */
+.galaxy-panel { background: linear-gradient(135deg, rgba(44, 20, 105, .96), rgba(64, 74, 177, .94) 52%, rgba(0, 139, 174, .92)); color: #fff; }
+.galaxy-gradient-text { background: linear-gradient(90deg, #7048d8, #2879cf, #0798ad); -webkit-background-clip: text; background-clip: text; color: transparent; }

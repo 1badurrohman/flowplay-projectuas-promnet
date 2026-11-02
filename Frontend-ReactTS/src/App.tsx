@@ -1,3 +1,4 @@
+import { MateriCatalog, MateriReader } from "./components/MateriContent";
 import { useEffect, useState, type ReactNode } from "react";
 import { flowPlayApi, type UserProgress } from "./services/api";
 
@@ -37,103 +38,6 @@ type IconName =
 
 function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   const paths: Record<IconName, ReactNode> = {
-<<<<<<< HEAD
-    arrow: <path d="m15 18-6-6 6-6" />,
-    award: (
-      <>
-        <circle cx="12" cy="8" r="5" />
-        <path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9" />
-      </>
-    ),
-    book: (
-      <>
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
-      </>
-    ),
-    check: <path d="m5 12 4 4L19 6" />,
-    chevron: <path d="m9 18 6-6-6-6" />,
-    clock: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
-      </>
-    ),
-    close: <path d="m6 6 12 12M18 6 6 18" />,
-    home: (
-      <>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10M9 20v-6h6v6" />
-      </>
-    ),
-    lock: (
-      <>
-        <rect x="4" y="10" width="16" height="11" rx="2" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-      </>
-    ),
-    medal: (
-      <>
-        <circle cx="12" cy="15" r="6" />
-        <path d="M8 3h8l-2 7h-4L8 3Z" />
-        <path d="m12 12 1 2 2 .5-1.5 1.5.5 2-2-1-2 1 .5-2L9 14.5l2-.5 1-2Z" />
-      </>
-    ),
-    play: <path d="m9 7 8 5-8 5V7Z" />,
-    profile: (
-      <>
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21a8 8 0 0 1 16 0" />
-      </>
-    ),
-    spark: (
-      <>
-        <path d="m12 3 1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z" />
-        <path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z" />
-      </>
-    ),
-    star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />,
-    target: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <circle cx="12" cy="12" r="5" />
-        <circle cx="12" cy="12" r="1" />
-      </>
-    ),
-    trophy: (
-      <>
-        <path d="M8 4h8v5a4 4 0 0 1-8 0V4Z" />
-        <path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6" />
-      </>
-    ),
-    game: (
-      <>
-        <rect x="2" y="6" width="20" height="12" rx="2" />
-        <path d="M6 12h4m-2-2v4M15 11h.01M18 13h.01" />
-      </>
-    ),
-    flow: (
-      <>
-        <rect x="3" y="3" width="6" height="6" rx="1" />
-        <rect x="15" y="15" width="6" height="6" rx="1" />
-        <path d="M6 9v3a3 3 0 0 0 3 3h3" />
-      </>
-    ),
-  };
-
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-=======
     arrow: <><path d="m15 18-6-6 6-6" /></>,
     award: <><circle cx="12" cy="8" r="5" /><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9" /></>,
     book: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" /></>,
@@ -155,7 +59,6 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
       {paths[name]}
     </svg>
   );
@@ -164,105 +67,38 @@ function Icon({ name, size = 20 }: { name: IconName; size?: number }) {
 function Logo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid size-10 rotate-3 place-items-center rounded-xl bg-orange-500 text-white shadow-md">
+      <div className="grid size-10 rotate-3 place-items-center rounded-xl bg-purple-500 text-white shadow-md">
         <Icon name="play" size={22} />
       </div>
       <div className="font-display text-2xl font-extrabold tracking-tight text-stone-900">
-        Flow<span className="text-orange-500">Play</span>
+        Flow<span className="text-purple-500">Play</span>
       </div>
     </div>
   );
 }
 
-<<<<<<< HEAD
-function Button({
-  children,
-  onClick,
-  variant = "primary",
-  className = "",
-  type = "button",
-  disabled = false,
-}: {
-  children: ReactNode;
-  onClick?: () => void;
-  variant?: "primary" | "dark" | "light" | "outline" | "ghost";
-  className?: string;
-  type?: "button" | "submit";
-  disabled?: boolean;
-}) {
-=======
 function Button({ children, onClick, variant = "primary", className = "", type = "button", disabled = false }: { children: ReactNode; onClick?: () => void; variant?: "primary" | "dark" | "light" | "outline" | "ghost"; className?: string; type?: "button" | "submit"; disabled?: boolean }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const styles = {
-    primary: "bg-orange-500 text-white shadow-lg shadow-orange-500/25 hover:bg-orange-600",
+    primary: "bg-purple-500 text-white shadow-lg shadow-purple-500/25 hover:bg-purple-600",
     dark: "bg-stone-900 text-white shadow-md hover:bg-stone-800",
     light: "bg-white text-stone-900 hover:bg-stone-100",
-    outline: "border border-stone-200 bg-white text-stone-900 hover:border-orange-500 hover:text-orange-500",
+    outline: "border border-stone-200 bg-white text-stone-900 hover:border-purple-500 hover:text-purple-500",
     ghost: "bg-transparent text-stone-500 hover:bg-stone-100 hover:text-stone-900",
   };
-<<<<<<< HEAD
-
-  return (
-    <button
-      type={type}
-      disabled={disabled}
-      onClick={onClick}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-6 font-bold transition-all active:translate-y-0.5 ${
-        disabled ? "opacity-50 cursor-not-allowed bg-stone-200 text-stone-400" : styles[variant]
-      } ${className}`}
-    >
-=======
   return (
     <button type={type} disabled={disabled} onClick={onClick} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-6 font-bold transition-all active:translate-y-0.5 ${disabled ? "opacity-50 cursor-not-allowed bg-stone-200 text-stone-400" : styles[variant]} ${className}`}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
       {children}
     </button>
   );
 }
 
-<<<<<<< HEAD
-function Field({
-  label,
-  placeholder,
-  type = "text",
-  value,
-  onChange,
-  icon,
-}: {
-  label: string;
-  placeholder: string;
-  type?: string;
-  value?: string;
-  onChange?: (value: string) => void;
-  icon?: IconName;
-}) {
-=======
 function Field({ label, placeholder, type = "text", value, onChange, icon }: { label: string; placeholder: string; type?: string; value?: string; onChange?: (value: string) => void; icon?: IconName }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   return (
     <label className="block">
       <span className="mb-2 block text-sm font-bold text-stone-800">{label}</span>
       <div className="relative flex items-center">
-<<<<<<< HEAD
-        {icon && (
-          <span className="absolute left-4 text-stone-400">
-            <Icon name={icon} size={18} />
-          </span>
-        )}
-        <input
-          required
-          type={type}
-          value={value}
-          onChange={(event) => onChange?.(event.target.value)}
-          placeholder={placeholder}
-          className={`h-13 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm text-stone-900 outline-none transition focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 ${
-            icon ? "pl-11" : ""
-          }`}
-        />
-=======
         {icon && <span className="absolute left-4 text-stone-400"><Icon name={icon} size={18} /></span>}
-        <input required type={type} value={value} onChange={(event) => onChange?.(event.target.value)} placeholder={placeholder} className={`h-13 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm text-stone-900 outline-none transition focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10 ${icon ? "pl-11" : ""}`} />
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+        <input required type={type} value={value} onChange={(event) => onChange?.(event.target.value)} placeholder={placeholder} className={`h-13 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 text-sm text-stone-900 outline-none transition focus:border-purple-500 focus:bg-white focus:ring-4 focus:ring-purple-500/10 ${icon ? "pl-11" : ""}`} />
       </div>
     </label>
   );
@@ -273,86 +109,40 @@ function NotificationToast({ badgeName, onClose }: { badgeName: string | null; o
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex items-center gap-4 rounded-2xl bg-stone-900 p-4 text-white shadow-2xl animate-bounce">
-      <div className="grid size-12 place-items-center rounded-xl bg-orange-500 text-white font-extrabold">
+      <div className="grid size-12 place-items-center rounded-xl bg-purple-500 text-white font-extrabold">
         <Icon name="award" size={26} />
       </div>
       <div>
-        <div className="text-xs font-bold text-orange-400">BADGE BARU DIDAPATKAN!</div>
+        <div className="text-xs font-bold text-purple-400">BADGE BARU DIDAPATKAN!</div>
         <div className="font-display font-extrabold text-white text-base">{badgeName}</div>
       </div>
-<<<<<<< HEAD
-      <button onClick={onClose} className="ml-2 text-white/50 hover:text-white">
-        <Icon name="close" size={18} />
-      </button>
-=======
       <button onClick={onClose} className="ml-2 text-white/50 hover:text-white"><Icon name="close" size={18} /></button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
     </div>
   );
 }
 
 function AuthLayout({ children, screen, setScreen }: { children: ReactNode; screen: Screen; setScreen: (s: Screen) => void }) {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50/60 via-amber-50/30 to-stone-100 p-4 md:p-8 flex items-center justify-center">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50/60 via-amber-50/30 to-stone-100 p-4 md:p-8 flex items-center justify-center">
       <div className="mx-auto grid w-full max-w-7xl overflow-hidden rounded-[2.5rem] bg-white shadow-2xl border border-stone-100 lg:grid-cols-[1.1fr_0.9fr]">
         
-<<<<<<< HEAD
-        {/* SISI KIRI: HERO SECTION */}
-        <section className="relative flex flex-col justify-between p-8 md:p-14 bg-gradient-to-b from-transparent via-orange-50/20 to-stone-50/50">
-          <Logo />
-
-=======
         {/* SISI KIRI (HERO SECTION SESUAI REFERENSI TANPA TEKS TERSEBUT) */}
-        <section className="relative flex flex-col justify-between p-8 md:p-14 bg-gradient-to-b from-transparent via-orange-50/20 to-stone-50/50">
+        <section className="relative flex flex-col justify-between p-8 md:p-14 bg-gradient-to-b from-transparent via-purple-50/20 to-stone-50/50">
           <Logo />
           
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           <div className="my-auto py-8">
-            <div className="inline-flex items-center gap-2 rounded-full bg-orange-100/80 px-4 py-1.5 text-xs font-extrabold text-orange-600 mb-6 shadow-sm">
-              <Icon name="spark" size={15} /> Belajar Pemrograman Jadi Lebih Seru!
+            <div className="inline-flex items-center gap-2 rounded-full bg-purple-100/80 px-4 py-1.5 text-xs font-extrabold text-purple-600 mb-6 shadow-sm">
+              <Icon name="spark" size={15} /> let's learn and play together!
             </div>
-<<<<<<< HEAD
-
-            <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-stone-900 md:text-5xl lg:text-6xl">
-              Logika jadi lebih mudah saat kamu{" "}
-              <span className="text-orange-500 underline decoration-orange-300 decoration-wavy underline-offset-8">
-                memainkannya.
-              </span>
-            </h1>
-
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2">
-                  <Icon name="book" size={20} />
-                </div>
-                <span className="text-xs font-bold text-stone-800">Materi Terstruktur</span>
-              </div>
-              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-600 mb-2">
-                  <Icon name="flow" size={20} />
-                </div>
-                <span className="text-xs font-bold text-stone-800">Simulasi Alur</span>
-              </div>
-              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2">
-                  <Icon name="game" size={20} />
-                </div>
-                <span className="text-xs font-bold text-stone-800">Gamifikasi</span>
-              </div>
-              <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-600 mb-2">
-                  <Icon name="spark" size={20} />
-                </div>
-=======
             
             <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight text-stone-900 md:text-5xl lg:text-6xl">
-              Logika jadi lebih mudah saat kamu <span className="text-orange-500 underline decoration-orange-300 decoration-wavy underline-offset-8">memvisualkannya.</span>
+              Logika jadi lebih mudah saat kamu <span className="text-purple-500 underline decoration-purple-300 decoration-wavy underline-offset-8">memvisualkannya.</span>
             </h1>
 
             {/* 4 KOTAK FITUR KECIL DI BAWAH */}
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2"><Icon name="book" size={20} /></div>
+                <div className="grid size-10 place-items-center rounded-xl bg-purple-100 text-purple-600 mb-2"><Icon name="book" size={20} /></div>
                 <span className="text-xs font-bold text-stone-800">Materi Terstruktur</span>
               </div>
               <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
@@ -360,40 +150,28 @@ function AuthLayout({ children, screen, setScreen }: { children: ReactNode; scre
                 <span className="text-xs font-bold text-stone-800">Simulasi Alur</span>
               </div>
               <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
-                <div className="grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600 mb-2"><Icon name="game" size={20} /></div>
+                <div className="grid size-10 place-items-center rounded-xl bg-purple-100 text-purple-600 mb-2"><Icon name="game" size={20} /></div>
                 <span className="text-xs font-bold text-stone-800">Gamifikasi</span>
               </div>
               <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-100 flex flex-col items-center text-center">
                 <div className="grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-600 mb-2"><Icon name="spark" size={20} /></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                 <span className="text-xs font-bold text-stone-800">Poin XP</span>
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-3 text-xs font-bold text-stone-400 pt-6 border-t border-stone-100">
-            <span>Belajar</span> • <span>Berlatih</span> • <span className="text-orange-500">Naik Level 🚀</span>
+            <span>Belajar</span> • <span>Berlatih</span> • <span className="text-purple-500">Naik Level 🚀</span>
           </div>
         </section>
 
-<<<<<<< HEAD
-        {/* SISI KANAN: FORM CARD */}
-=======
         {/* SISI KANAN (FORM KARTU UTAMA) */}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
         <section className="flex items-center justify-center p-8 md:p-14 bg-white border-t lg:border-t-0 lg:border-l border-stone-100">
           <div className="w-full max-w-md">
             {children}
             <div className="mt-8 text-center text-sm text-stone-500">
               {screen === "register" ? "Sudah punya akun?" : "Belum punya akun?"}
-<<<<<<< HEAD
-              <button
-                className="ml-1 font-extrabold text-orange-500 hover:underline"
-                onClick={() => setScreen(screen === "register" ? "login" : "register")}
-              >
-=======
-              <button className="ml-1 font-extrabold text-orange-500 hover:underline" onClick={() => setScreen(screen === "register" ? "login" : "register")}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+              <button className="ml-1 font-extrabold text-purple-500 hover:underline" onClick={() => setScreen(screen === "register" ? "login" : "register")}>
                 {screen === "register" ? "Masuk di sini" : "Daftar sekarang"}
               </button>
             </div>
@@ -405,21 +183,7 @@ function AuthLayout({ children, screen, setScreen }: { children: ReactNode; scre
   );
 }
 
-<<<<<<< HEAD
-function Register({
-  setScreen,
-  userName,
-  setUserName,
-  onRegister,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  setUserName: (name: string) => void;
-  onRegister: (fullName: string, username: string, password: string) => Promise<void>;
-}) {
-=======
 function Register({ setScreen, userName, setUserName, onRegister }: { setScreen: (s: Screen) => void; userName: string; setUserName: (name: string) => void; onRegister: (fullName: string, username: string, password: string) => Promise<void> }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -447,34 +211,18 @@ function Register({ setScreen, userName, setUserName, onRegister }: { setScreen:
     <AuthLayout screen="register" setScreen={setScreen}>
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600">
+          <div className="grid size-12 place-items-center rounded-2xl bg-purple-100 text-purple-600">
             <Icon name="profile" size={24} />
           </div>
-<<<<<<< HEAD
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
-            Mulai petualanganmu
-          </h2>
-        </div>
-        <p className="text-sm leading-relaxed text-stone-500">
-          Buat akun untuk menyimpan progres dan pencapaian belajarmu.
-        </p>
-      </div>
-
-=======
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">Mulai petualanganmu</h2>
         </div>
         <p className="text-sm leading-relaxed text-stone-500">Buat akun untuk menyimpan progres dan pencapaian belajarmu.</p>
       </div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
       <form className="space-y-4" onSubmit={handleRegister}>
         <Field label="Nama lengkap" placeholder="Masukkan nama lengkap" value={fullName} onChange={setFullName} icon="profile" />
         <Field label="Email" placeholder="Masukkan alamat email" type="email" value={email} onChange={setEmail} icon="profile" />
         <Field label="Username" placeholder="Pilih username unik" value={userName} onChange={setUserName} icon="profile" />
         <Field label="Password" placeholder="Minimal 8 karakter" type="password" value={password} onChange={setPassword} icon="lock" />
-<<<<<<< HEAD
-
-=======
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
         <Button type="submit" disabled={submitting} className="mt-4 w-full">
           {submitting ? "Mendaftarkan..." : "Daftar Sekarang"} {!submitting && <Icon name="chevron" />}
         </Button>
@@ -483,21 +231,7 @@ function Register({ setScreen, userName, setUserName, onRegister }: { setScreen:
   );
 }
 
-<<<<<<< HEAD
-function Login({
-  setScreen,
-  userName,
-  setUserName,
-  onLogin,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  setUserName: (name: string) => void;
-  onLogin: (username: string, password: string) => Promise<void>;
-}) {
-=======
 function Login({ setScreen, userName, setUserName, onLogin }: { setScreen: (s: Screen) => void; userName: string; setUserName: (name: string) => void; onLogin: (username: string, password: string) => Promise<void> }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -518,43 +252,19 @@ function Login({ setScreen, userName, setUserName, onLogin }: { setScreen: (s: S
     <AuthLayout screen="login" setScreen={setScreen}>
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600">
+          <div className="grid size-12 place-items-center rounded-2xl bg-purple-100 text-purple-600">
             <Icon name="profile" size={24} />
           </div>
-<<<<<<< HEAD
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
-            Selamat datang kembali
-          </h2>
-        </div>
-        <p className="text-sm leading-relaxed text-stone-500">
-          Lanjutkan perjalanan belajarmu yang sempat tertunda.
-        </p>
-      </div>
-
-=======
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">Selamat datang kembali</h2>
         </div>
         <p className="text-sm leading-relaxed text-stone-500">Lanjutkan perjalanan belajarmu yang sempat tertunda.</p>
       </div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
       <form className="space-y-5" onSubmit={handleLogin}>
         <Field label="Username" placeholder="Masukkan username" value={userName} onChange={setUserName} icon="profile" />
         <div>
           <Field label="Password" placeholder="Masukkan password" type="password" value={password} onChange={setPassword} icon="lock" />
-<<<<<<< HEAD
-          <button
-            type="button"
-            onClick={() => window.alert("Tautan reset password telah dikirim.")}
-            className="mt-2 block w-full text-right text-xs font-bold text-orange-500 hover:underline"
-          >
-            Lupa password?
-          </button>
+          <button type="button" onClick={() => window.alert("Tautan reset password telah dikirim.")} className="mt-2 block w-full text-right text-xs font-bold text-purple-500 hover:underline">Lupa password?</button>
         </div>
-
-=======
-          <button type="button" onClick={() => window.alert("Tautan reset password telah dikirim.")} className="mt-2 block w-full text-right text-xs font-bold text-orange-500 hover:underline">Lupa password?</button>
-        </div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
         <Button type="submit" disabled={submitting} className="w-full">
           {submitting ? "Menghubungkan..." : "Masuk ke FlowPlay"} {!submitting && <Icon name="chevron" />}
         </Button>
@@ -584,58 +294,21 @@ function AppShell({ children, active, setScreen, userName }: { children: ReactNo
           <Logo />
           <nav className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
-<<<<<<< HEAD
-              <button
-                key={item.label}
-                onClick={() => setScreen(item.screen)}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${
-                  active === item.screen ? "bg-orange-50 text-orange-600 shadow-sm" : "text-stone-500 hover:text-stone-900"
-                }`}
-              >
-=======
-              <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${active === item.screen ? "bg-orange-50 text-orange-600 shadow-sm" : "text-stone-500 hover:text-stone-900"}`}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+              <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${active === item.screen ? "bg-purple-50 text-purple-600 shadow-sm" : "text-stone-500 hover:text-stone-900"}`}>
                 <Icon name={item.icon} size={18} /> {item.label}
               </button>
             ))}
           </nav>
           <div className="flex items-center gap-3">
-<<<<<<< HEAD
-            <button
-              aria-label="Buka profil"
-              onClick={() => setScreen("profile")}
-              className="grid size-10 place-items-center rounded-full bg-orange-500 text-xs font-extrabold text-white shadow-sm"
-            >
-              {getInitials(userName)}
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {children}
-
-      <nav className="fixed bottom-3 left-1/2 z-30 flex w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-around rounded-2xl border border-stone-200 bg-white/95 p-2 shadow-xl backdrop-blur md:hidden">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            onClick={() => setScreen(item.screen)}
-            className={`flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[10px] font-bold ${
-              active === item.screen ? "bg-orange-50 text-orange-600" : "text-stone-400"
-            }`}
-          >
-            <Icon name={item.icon} size={19} />
-            {item.label}
-=======
-            <button aria-label="Buka profil" onClick={() => setScreen("profile")} className="grid size-10 place-items-center rounded-full bg-orange-500 text-xs font-extrabold text-white shadow-sm">{getInitials(userName)}</button>
+            <button aria-label="Buka profil" onClick={() => setScreen("profile")} className="grid size-10 place-items-center rounded-full bg-purple-500 text-xs font-extrabold text-white shadow-sm">{getInitials(userName)}</button>
           </div>
         </div>
       </header>
       {children}
       <nav className="fixed bottom-3 left-1/2 z-30 flex w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-around rounded-2xl border border-stone-200 bg-white/95 p-2 shadow-xl backdrop-blur md:hidden">
         {navItems.map((item) => (
-          <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[10px] font-bold ${active === item.screen ? "bg-orange-50 text-orange-600" : "text-stone-400"}`}>
+          <button key={item.label} onClick={() => setScreen(item.screen)} className={`flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[10px] font-bold ${active === item.screen ? "bg-purple-50 text-purple-600" : "text-stone-400"}`}>
             <Icon name={item.icon} size={19} />{item.label}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           </button>
         ))}
       </nav>
@@ -644,29 +317,11 @@ function AppShell({ children, active, setScreen, userName }: { children: ReactNo
 }
 
 function ProgressBar({ value, dark = false }: { value: number; dark?: boolean }) {
-<<<<<<< HEAD
-  return (
-    <div className={`h-2.5 overflow-hidden rounded-full ${dark ? "bg-white/20" : "bg-stone-200"}`}>
-      <div className="h-full rounded-full bg-orange-500" style={{ width: `${value}%` }} />
-    </div>
-  );
-=======
-  return <div className={`h-2.5 overflow-hidden rounded-full ${dark ? "bg-white/20" : "bg-stone-200"}`}><div className="h-full rounded-full bg-orange-500" style={{ width: `${value}%` }} /></div>;
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+  return <div className={`h-2.5 overflow-hidden rounded-full ${dark ? "bg-white/20" : "bg-stone-200"}`}><div className="h-full rounded-full bg-purple-500" style={{ width: `${value}%` }} /></div>;
 }
 
 function Dashboard({ setScreen, userName, xp, completedLessons }: { setScreen: (s: Screen) => void; userName: string; xp: number; completedLessons: number }) {
-  const percent = (completedLessons / 6) * 100;
-<<<<<<< HEAD
-  const todayFormatted = new Date()
-    .toLocaleDateString("id-ID", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    })
-    .toUpperCase();
-=======
+  const percent = (completedLessons / 13) * 100;
 
   const todayFormatted = new Date().toLocaleDateString("id-ID", {
     weekday: "long",
@@ -674,106 +329,40 @@ function Dashboard({ setScreen, userName, xp, completedLessons }: { setScreen: (
     month: "long",
     year: "numeric"
   }).toUpperCase();
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
   return (
     <AppShell active="dashboard" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8 lg:pt-11">
         <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <div className="text-sm font-bold text-orange-500">{todayFormatted}</div>
-<<<<<<< HEAD
-            <div className="mt-2 font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">
-              Halo, {userName}!
-            </div>
-            <p className="mt-2 text-stone-500">Siap belajar konsep algoritma hari ini?</p>
-          </div>
-
-          <div className="flex gap-3">
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100">
-              <div className="text-xs font-bold text-stone-400">LEVEL</div>
-              <div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900">
-                <span className="grid size-6 place-items-center rounded-lg bg-orange-100 text-orange-600 text-xs">
-                  {completedLessons >= 3 ? 2 : 1}
-                </span>{" "}
-                Pemula
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100">
-              <div className="text-xs font-bold text-stone-400">TOTAL XP</div>
-              <div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900">
-                <Icon name="spark" size={17} />
-                <span className="text-orange-500">{xp}</span> XP
-              </div>
-            </div>
-=======
+            <div className="text-sm font-bold text-purple-500">{todayFormatted}</div>
             <div className="mt-2 font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">Halo, {userName}!</div>
             <p className="mt-2 text-stone-500">Siap belajar konsep algoritma hari ini?</p>
           </div>
           <div className="flex gap-3">
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">LEVEL</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><span className="grid size-6 place-items-center rounded-lg bg-orange-100 text-orange-600 text-xs">{completedLessons >= 3 ? 2 : 1}</span> Pemula</div></div>
-            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">TOTAL XP</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><Icon name="spark" size={17} /><span className="text-orange-500">{xp}</span> XP</div></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">LEVEL</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><span className="grid size-6 place-items-center rounded-lg bg-purple-100 text-purple-600 text-xs">{completedLessons >= 3 ? 2 : 1}</span> Pemula</div></div>
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm border border-stone-100"><div className="text-xs font-bold text-stone-400">TOTAL XP</div><div className="mt-1 flex items-center gap-2 font-extrabold text-stone-900"><Icon name="spark" size={17} /><span className="text-purple-500">{xp}</span> XP</div></div>
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.55fr_0.8fr]">
           <section className="relative overflow-hidden rounded-[2rem] bg-stone-900 p-7 text-white shadow-xl sm:p-9">
             <div className="relative max-w-lg">
-<<<<<<< HEAD
-              <span className="inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-extrabold text-white">
-                MODUL BACAAN
-              </span>
-              <div className="mt-5 font-display text-3xl font-extrabold leading-tight">
-                Pelajari Materi Algoritma
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-stone-400">
-                Pahami penjelasan terstruktur lengkap dengan ilustrasi diagram alur interaktif.
-              </p>
-              <div className="mt-7 max-w-sm">
-                <div className="mb-2 flex justify-between text-xs font-bold">
-                  <span>Progress Materi</span>
-                  <span>{percent}%</span>
-                </div>
-                <ProgressBar value={percent} dark />
-              </div>
-              <Button variant="light" className="mt-7" onClick={() => setScreen("materi")}>
-                <Icon name="book" size={18} /> Baca Materi
-              </Button>
-=======
-              <span className="inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-extrabold text-white">MODUL BACAAN</span>
+              <span className="inline-flex rounded-full bg-purple-500 px-3 py-1 text-xs font-extrabold text-white">MODUL BACAAN</span>
               <div className="mt-5 font-display text-3xl font-extrabold leading-tight">Pelajari Materi Algoritma</div>
               <p className="mt-3 text-sm leading-relaxed text-stone-400">Pahami penjelasan terstruktur lengkap dengan ilustrasi diagram alur interaktif.</p>
               <div className="mt-7 max-w-sm"><div className="mb-2 flex justify-between text-xs font-bold"><span>Progress Materi</span><span>{percent}%</span></div><ProgressBar value={percent} dark /></div>
               <Button variant="light" className="mt-7" onClick={() => setScreen("materi")}><Icon name="book" size={18} /> Baca Materi</Button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
             </div>
           </section>
 
-          <section className="rounded-[2rem] bg-orange-500 p-7 text-white shadow-xl flex flex-col justify-between">
+          <section className="rounded-[2rem] bg-purple-500 p-7 text-white shadow-xl flex flex-col justify-between">
             <div>
-<<<<<<< HEAD
-              <div className="flex items-start justify-between">
-                <div className="grid size-12 place-items-center rounded-2xl bg-white/15">
-                  <Icon name="trophy" size={26} />
-                </div>
-                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">+150 XP</span>
-              </div>
-              <div className="mt-8 font-display text-2xl font-extrabold">Pusat Latihan</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/90">
-                Uji kemampuan logikamu dengan menyusun flowchart atau menjawab kuis evaluasi.
-              </p>
-            </div>
-            <Button variant="light" className="mt-6 w-full" onClick={() => setScreen("latihan-hub")}>
-              Mulai Latihan <Icon name="chevron" />
-            </Button>
-=======
               <div className="flex items-start justify-between"><div className="grid size-12 place-items-center rounded-2xl bg-white/15"><Icon name="trophy" size={26} /></div><span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">+150 XP</span></div>
               <div className="mt-8 font-display text-2xl font-extrabold">Pusat Latihan</div>
               <p className="mt-2 text-sm leading-relaxed text-white/90">Uji kemampuan logikamu dengan menyusun flowchart atau menjawab kuis evaluasi.</p>
             </div>
             <Button variant="light" className="mt-6 w-full" onClick={() => setScreen("latihan-hub")}>Mulai Latihan <Icon name="chevron" /></Button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           </section>
         </div>
       </main>
@@ -796,8 +385,8 @@ const lessonsData = [
             <p className="text-sm leading-relaxed text-stone-600">
               Algoritma adalah deretan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk memecahkan suatu masalah atau menyelesaikan suatu tugas tertentu. Dalam dunia ilmu komputer, algoritma adalah cetak biru (*blueprint*) sebelum program komputer ditulis.
             </p>
-            <div className="bg-orange-50/60 p-4 rounded-2xl border border-orange-100 text-xs space-y-1">
-              <span className="font-extrabold text-orange-600 block">Analogi Sederhana:</span>
+            <div className="bg-purple-50/60 p-4 rounded-2xl border border-purple-100 text-xs space-y-1">
+              <span className="font-extrabold text-purple-600 block">Analogi Sederhana:</span>
               <p className="text-stone-600">Resep membuat mi instan adalah algoritma di dunia nyata. Jika langkah-langkahnya diacak, hasilnya tidak akan sempurna.</p>
             </div>
           </div>
@@ -813,8 +402,8 @@ const lessonsData = [
         id: "1.2",
         title: "2. Ciri-Ciri Algoritma yang Baik",
         content: (
-          <div className="bg-orange-50/60 p-5 rounded-2xl border border-orange-100 space-y-2 text-sm">
-            <strong className="text-orange-600 block font-extrabold">Ciri Utama Menurut Donald Knuth:</strong>
+          <div className="bg-purple-50/60 p-5 rounded-2xl border border-purple-100 space-y-2 text-sm">
+            <strong className="text-purple-600 block font-extrabold">Ciri Utama Menurut Donald Knuth:</strong>
             <ul className="list-disc list-inside text-stone-600 space-y-1">
               <li><strong>Finiteness (Keterbatasan):</strong> Harus berhenti setelah melakukan sejumlah langkah terbatas.</li>
               <li><strong>Definiteness (Kepastian):</strong> Setiap langkah harus didefinisikan secara jelas tanpa ambiguitas.</li>
@@ -895,7 +484,7 @@ const lessonsData = [
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-orange-600 block text-sm">Terminator (Kapsul/Oval)</span>
+                <span className="font-bold text-purple-600 block text-sm">Terminator (Kapsul/Oval)</span>
                 <span className="text-xs text-stone-500">Menandai awal atau akhir dari alur program.</span>
               </div>
             </div>
@@ -908,7 +497,7 @@ const lessonsData = [
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-orange-600 block text-sm">Process (Kotak)</span>
+                <span className="font-bold text-purple-600 block text-sm">Process (Kotak)</span>
                 <span className="text-xs text-stone-500">Menunjukkan kegiatan pengolahan data atau kalkulasi.</span>
               </div>
             </div>
@@ -921,7 +510,7 @@ const lessonsData = [
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-orange-600 block text-sm">Decision (Belah Ketupat)</span>
+                <span className="font-bold text-purple-600 block text-sm">Decision (Belah Ketupat)</span>
                 <span className="text-xs text-stone-500">Pengambilan keputusan bercabang berdasarkan kondisi.</span>
               </div>
             </div>
@@ -934,7 +523,7 @@ const lessonsData = [
                 </svg>
               </div>
               <div>
-                <span className="font-bold text-orange-600 block text-sm">Input / Output (Jajar Genjang)</span>
+                <span className="font-bold text-purple-600 block text-sm">Input / Output (Jajar Genjang)</span>
                 <span className="text-xs text-stone-500">Menerima masukan data atau menampilkan hasil.</span>
               </div>
             </div>
@@ -964,7 +553,7 @@ const lessonsData = [
               Variabel adalah wadah atau tempat di dalam memori komputer yang digunakan untuk menyimpan suatu nilai data. Nilai di dalam variabel dapat diubah sewaktu-waktu selama program berjalan.
             </p>
             <div className="bg-stone-100 p-4 rounded-2xl border border-stone-200 text-xs font-mono">
-              <span className="text-orange-600 font-bold block mb-1">Contoh Penulisan (Deklarasi):</span>
+              <span className="text-purple-600 font-bold block mb-1">Contoh Penulisan (Deklarasi):</span>
               <span>int umur = 18;</span><br />
               <span>string nama = "Budi";</span>
             </div>
@@ -983,19 +572,19 @@ const lessonsData = [
         content: (
           <div className="grid gap-3 sm:grid-cols-2 text-sm">
             <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
-              <strong className="text-orange-600 block font-extrabold mb-1">int (Integer)</strong>
+              <strong className="text-purple-600 block font-extrabold mb-1">int (Integer)</strong>
               <p className="text-xs text-stone-500">Menyimpan angka bulat, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">10</code>, <code className="bg-white px-1.5 py-0.5 rounded border">-5</code>.</p>
             </div>
             <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
-              <strong className="text-orange-600 block font-extrabold mb-1">string</strong>
+              <strong className="text-purple-600 block font-extrabold mb-1">string</strong>
               <p className="text-xs text-stone-500">Menyimpan teks atau karakter, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">"Halo"</code>.</p>
             </div>
             <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
-              <strong className="text-orange-600 block font-extrabold mb-1">float / double</strong>
+              <strong className="text-purple-600 block font-extrabold mb-1">float / double</strong>
               <p className="text-xs text-stone-500">Menyimpan angka desimal, contoh: <code className="bg-white px-1.5 py-0.5 rounded border">3.14</code>.</p>
             </div>
             <div className="border border-stone-200 rounded-2xl p-4 bg-stone-50">
-              <strong className="text-orange-600 block font-extrabold mb-1">boolean</strong>
+              <strong className="text-purple-600 block font-extrabold mb-1">boolean</strong>
               <p className="text-xs text-stone-500">Menyimpan nilai kebenaran: <code className="bg-white px-1.5 py-0.5 rounded border">true</code> / <code className="bg-white px-1.5 py-0.5 rounded border">false</code>.</p>
             </div>
           </div>
@@ -1086,7 +675,7 @@ const lessonsData = [
         title: "2. Struktur Siklus Looping",
         content: (
           <div className="rounded-3xl bg-stone-100 p-6 border border-stone-200 flex flex-col items-center">
-            <span className="text-xs font-bold text-orange-600 mb-3">ILUSTRASI SIKLUS LOOPING</span>
+            <span className="text-xs font-bold text-purple-600 mb-3">ILUSTRASI SIKLUS LOOPING</span>
             <svg width="280" height="150" viewBox="0 0 280 150">
               <rect x="90" y="10" width="100" height="40" fill="#3B82F6" rx="10" />
               <text x="140" y="34" fill="#FFF" textAnchor="middle" fontSize="11" fontWeight="bold">Hitung +1</text>
@@ -1121,7 +710,7 @@ const lessonsData = [
               Array (larik) adalah struktur data yang mampu menyimpan banyak nilai sekaligus dalam satu nama variabel tunggal dengan nomor urut indeks mulai dari <code className="bg-stone-100 px-1 rounded font-bold">0</code>.
             </p>
             <div className="bg-stone-100 p-4 rounded-2xl border border-stone-200 text-xs font-mono">
-              <span className="text-orange-600 font-bold block mb-1">Contoh Array:</span>
+              <span className="text-purple-600 font-bold block mb-1">Contoh Array:</span>
               <span>string[] buah = ["Apel", "Jeruk", "Mangga"];</span>
             </div>
           </div>
@@ -1150,9 +739,9 @@ const lessonsData = [
               <tbody>
                 <tr>
                   <td className="border border-stone-200 p-2.5 font-bold bg-stone-50">Nilai</td>
-                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">80</td>
-                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">95</td>
-                  <td className="border border-stone-200 p-2.5 font-mono text-orange-600 font-bold">70</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-purple-600 font-bold">80</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-purple-600 font-bold">95</td>
+                  <td className="border border-stone-200 p-2.5 font-mono text-purple-600 font-bold">70</td>
                 </tr>
               </tbody>
             </table>
@@ -1169,71 +758,21 @@ const lessonsData = [
   }
 ];
 
-<<<<<<< HEAD
-function Materi({
-  setScreen,
-  userName,
-  completedLessons,
-  setSelectedLesson,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  completedLessons: number;
-  setSelectedLesson: (idx: number) => void;
-}) {
-=======
 function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { setScreen: (s: Screen) => void; userName: string; completedLessons: number; setSelectedLesson: (idx: number) => void }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  const percent = (completedLessons / 6) * 100;
+  const percent = (completedLessons / 13) * 100;
 
   return (
     <AppShell active="materi" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8">
-<<<<<<< HEAD
-        <button
-          onClick={() => setScreen("dashboard")}
-          className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"
-        >
-          <Icon name="arrow" /> Kembali ke beranda
-        </button>
-
-        <section className="grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="p-7 sm:p-10">
-            <div className="text-xs font-extrabold tracking-widest text-orange-400">
-              MODUL PEMBELAJARAN (+50 XP/Modul)
-            </div>
-            <div className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">
-              Fundamental Algoritma & Flowchart
-            </div>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-400">
-              Selesaikan bacaan modul untuk mendapatkan XP dan membuka materi berikutnya.
-            </p>
-            <div className="mt-7 max-w-xl">
-              <div className="mb-2 flex justify-between text-xs font-bold">
-                <span>{completedLessons} dari 6 materi dipelajari</span>
-                <span>{percent}%</span>
-              </div>
-              <ProgressBar value={percent} dark />
-            </div>
-          </div>
-          <div className="flex items-center justify-center bg-orange-500/20 p-8">
-            <div className="relative grid size-44 place-items-center rounded-full border border-white/10">
-              <div className="grid size-20 place-items-center rounded-3xl bg-orange-500 text-white shadow-lg">
-                <Icon name="book" size={36} />
-              </div>
-            </div>
-          </div>
-=======
         <button onClick={() => setScreen("dashboard")} className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"><Icon name="arrow" /> Kembali ke beranda</button>
         <section className="grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl lg:grid-cols-[1.3fr_0.7fr]">
           <div className="p-7 sm:p-10">
-            <div className="text-xs font-extrabold tracking-widest text-orange-400">MODUL PEMBELAJARAN (+50 XP/Modul)</div>
+            <div className="text-xs font-extrabold tracking-widest text-purple-400">MODUL PEMBELAJARAN (+50 XP/Modul)</div>
             <div className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">Fundamental Algoritma & Flowchart</div>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-400">Selesaikan bacaan modul untuk mendapatkan XP dan membuka materi berikutnya.</p>
-            <div className="mt-7 max-w-xl"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} dari 6 materi dipelajari</span><span>{percent}%</span></div><ProgressBar value={percent} dark /></div>
+            <div className="mt-7 max-w-xl"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} dari 13 subbab dipelajari</span><span>{percent}%</span></div><ProgressBar value={percent} dark /></div>
           </div>
-          <div className="flex items-center justify-center bg-orange-500/20 p-8"><div className="relative grid size-44 place-items-center rounded-full border border-white/10"><div className="grid size-20 place-items-center rounded-3xl bg-orange-500 text-white shadow-lg"><Icon name="book" size={36} /></div></div></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+          <div className="flex items-center justify-center bg-purple-500/20 p-8"><div className="relative grid size-44 place-items-center rounded-full border border-white/10"><div className="grid size-20 place-items-center rounded-3xl bg-purple-500 text-white shadow-lg"><Icon name="book" size={36} /></div></div></div>
         </section>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_20rem]">
@@ -1244,49 +783,17 @@ function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { 
               const isUnlocked = index <= completedLessons;
 
               return (
-<<<<<<< HEAD
-                <article
-                  key={item.n}
-                  className={`flex flex-col gap-5 rounded-3xl border bg-white p-6 sm:flex-row sm:items-center ${
-                    isActive ? "border-orange-500 shadow-md ring-2 ring-orange-500/10" : "border-stone-200"
-                  }`}
-                >
-                  <div
-                    className={`grid size-14 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold ${
-                      isDone
-                        ? "bg-emerald-100 text-emerald-600"
-                        : isActive
-                        ? "bg-orange-500 text-white"
-                        : "bg-stone-100 text-stone-400"
-                    }`}
-                  >
-=======
-                <article key={item.n} className={`flex flex-col gap-5 rounded-3xl border bg-white p-6 sm:flex-row sm:items-center ${isActive ? "border-orange-500 shadow-md ring-2 ring-orange-500/10" : "border-stone-200"}`}>
-                  <div className={`grid size-14 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold ${isDone ? "bg-emerald-100 text-emerald-600" : isActive ? "bg-orange-500 text-white" : "bg-stone-100 text-stone-400"}`}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+                <article key={item.n} className={`flex flex-col gap-5 rounded-3xl border bg-white p-6 sm:flex-row sm:items-center ${isActive ? "border-purple-500 shadow-md ring-2 ring-purple-500/10" : "border-stone-200"}`}>
+                  <div className={`grid size-14 shrink-0 place-items-center rounded-2xl font-display text-lg font-extrabold ${isDone ? "bg-emerald-100 text-emerald-600" : isActive ? "bg-purple-500 text-white" : "bg-stone-100 text-stone-400"}`}>
                     {isDone ? <Icon name="check" /> : isUnlocked ? item.n : <Icon name="lock" />}
                   </div>
                   <div className="flex-1">
                     <div className="font-display text-lg font-extrabold text-stone-900">{item.title}</div>
                     <p className="mt-1 text-sm text-stone-500">{item.detail}</p>
-<<<<<<< HEAD
-                    <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-stone-400">
-                      <Icon name="clock" size={15} /> Estimasi {item.duration} • {item.subTopics.length} Sub-bab
-                    </div>
-                  </div>
-                  {isUnlocked ? (
-                    <Button
-                      onClick={() => {
-                        setSelectedLesson(index);
-                        setScreen("materi-detail");
-                      }}
-                    >
-=======
                     <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-stone-400"><Icon name="clock" size={15} /> Estimasi {item.duration} • {item.subTopics.length} Sub-bab</div>
                   </div>
                   {isUnlocked ? (
                     <Button onClick={() => { setSelectedLesson(index); setScreen("materi-detail"); }}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                       Baca Materi <Icon name="chevron" size={18} />
                     </Button>
                   ) : (
@@ -1296,30 +803,11 @@ function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { 
               );
             })}
           </section>
-<<<<<<< HEAD
-
           <aside className="h-fit rounded-3xl bg-white p-6 shadow-sm border border-stone-200">
-            <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600">
-              <Icon name="book" />
-            </div>
-            <div className="mt-5 font-display text-lg font-extrabold text-stone-900">Status Pembelajaran</div>
-            <p className="mt-2 text-sm leading-relaxed text-stone-500">
-              Selesaikan bacaan modul secara berurutan untuk membuka materi berikutnya.
-            </p>
-            <div className="mt-5">
-              <div className="mb-2 flex justify-between text-xs font-bold">
-                <span>{completedLessons} / 6 Modul</span>
-                <span>{percent}%</span>
-              </div>
-              <ProgressBar value={percent} />
-            </div>
-=======
-          <aside className="h-fit rounded-3xl bg-white p-6 shadow-sm border border-stone-200">
-            <div className="grid size-12 place-items-center rounded-2xl bg-orange-100 text-orange-600"><Icon name="book" /></div>
+            <div className="grid size-12 place-items-center rounded-2xl bg-purple-100 text-purple-600"><Icon name="book" /></div>
             <div className="mt-5 font-display text-lg font-extrabold text-stone-900">Status Pembelajaran</div>
             <p className="mt-2 text-sm leading-relaxed text-stone-500">Selesaikan bacaan modul secara berurutan untuk membuka materi berikutnya.</p>
-            <div className="mt-5"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} / 6 Modul</span><span>{percent}%</span></div><ProgressBar value={percent} /></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+            <div className="mt-5"><div className="mb-2 flex justify-between text-xs font-bold"><span>{completedLessons} / 13 Subbab</span><span>{percent}%</span></div><ProgressBar value={percent} /></div>
           </aside>
         </div>
       </main>
@@ -1327,23 +815,7 @@ function Materi({ setScreen, userName, completedLessons, setSelectedLesson }: { 
   );
 }
 
-<<<<<<< HEAD
-function MateriDetail({
-  setScreen,
-  userName,
-  lessonIndex,
-  completedLessons,
-  onCompleteLesson,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  lessonIndex: number;
-  completedLessons: number;
-  onCompleteLesson: (index: number) => void;
-}) {
-=======
 function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCompleteLesson }: { setScreen: (s: Screen) => void; userName: string; lessonIndex: number; completedLessons: number; onCompleteLesson: (index: number) => void }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const lesson = lessonsData[lessonIndex] || lessonsData[0];
   const isAlreadyCompleted = lessonIndex < completedLessons;
 
@@ -1353,18 +825,11 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
 
   const currentSub = lesson.subTopics[activeTab];
   const currentSubQuestion = currentSub.question;
-<<<<<<< HEAD
-  const currentSelectedOpt = selectedAnswers[activeTab];
-  const isSubmitted = submittedAnswers[activeTab] === true;
-  const isCurrentSubCorrect =
-    isSubmitted && currentSelectedOpt !== undefined && currentSubQuestion && currentSelectedOpt === currentSubQuestion.correct;
-=======
 
   const currentSelectedOpt = selectedAnswers[activeTab];
   const isSubmitted = submittedAnswers[activeTab] === true;
   
   const isCurrentSubCorrect = isSubmitted && currentSelectedOpt !== undefined && currentSubQuestion && currentSelectedOpt === currentSubQuestion.correct;
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
 
   const totalSubTopics = lesson.subTopics.length;
   const correctSubTopicsCount = lesson.subTopics.filter((sub, idx) => {
@@ -1393,35 +858,15 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
   return (
     <AppShell active="materi" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-4xl px-5 pb-28 pt-8 lg:px-8">
-<<<<<<< HEAD
-        <button
-          onClick={() => setScreen("materi")}
-          className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"
-        >
-          <Icon name="arrow" /> Kembali ke daftar materi
-        </button>
-
-        <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
-          <div className="flex items-center gap-3 text-xs font-extrabold text-orange-600 mb-2">
-            <span className="rounded-lg bg-orange-50 px-3 py-1">MODUL {lesson.n} (+50 XP)</span>
-            <span>
-              <Icon name="clock" size={14} /> {lesson.duration}
-            </span>
-=======
         <button onClick={() => setScreen("materi")} className="mb-6 flex items-center gap-2 text-sm font-bold text-stone-500 hover:text-stone-900"><Icon name="arrow" /> Kembali ke daftar materi</button>
         <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
-          <div className="flex items-center gap-3 text-xs font-extrabold text-orange-600 mb-2">
-            <span className="rounded-lg bg-orange-50 px-3 py-1">MODUL {lesson.n} (+50 XP)</span>
+          <div className="flex items-center gap-3 text-xs font-extrabold text-purple-600 mb-2">
+            <span className="rounded-lg bg-purple-50 px-3 py-1">MODUL {lesson.n} (+50 XP)</span>
             <span><Icon name="clock" size={14} /> {lesson.duration}</span>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
             <span className="ml-auto rounded-lg bg-stone-100 px-3 py-1 text-stone-800 font-bold">
               Soal Dijawab: {correctSubTopicsCount}/{totalSubTopics}
             </span>
           </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           <h1 className="font-display text-3xl font-extrabold text-stone-900 mb-6">{lesson.title}</h1>
 
           <div className="mb-8 flex flex-wrap gap-2 border-b border-stone-200 pb-4">
@@ -1434,13 +879,7 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
                 <button
                   key={sub.id}
                   onClick={() => setActiveTab(idx)}
-<<<<<<< HEAD
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${
-                    activeTab === idx ? "bg-orange-500 text-white shadow-sm" : "bg-stone-100 text-stone-500 hover:text-stone-900"
-                  }`}
-=======
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${activeTab === idx ? "bg-orange-500 text-white shadow-sm" : "bg-stone-100 text-stone-500 hover:text-stone-900"}`}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+                  className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition ${activeTab === idx ? "bg-purple-500 text-white shadow-sm" : "bg-stone-100 text-stone-500 hover:text-stone-900"}`}
                 >
                   {sub.title}
                   {isCorrect && <span className="text-[10px] text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded font-extrabold">✓</span>}
@@ -1456,14 +895,14 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
 
           {currentSubQuestion && (
             <div className="mb-8 rounded-3xl border border-stone-200 bg-stone-50 p-6">
-              <div className="flex items-center gap-2 text-xs font-extrabold text-orange-600 mb-2">
+              <div className="flex items-center gap-2 text-xs font-extrabold text-purple-600 mb-2">
                 <Icon name="spark" size={16} /> LATIHAN SOAL PEMAHAMAN ({currentSub.title})
               </div>
               <div className="font-display font-extrabold text-stone-900 text-base mb-4">{currentSubQuestion.q}</div>
               <div className="space-y-2 mb-4">
                 {currentSubQuestion.options.map((opt, oIdx) => {
                   const isSelected = currentSelectedOpt === oIdx;
-                  let btnStyle = "border-stone-200 bg-white hover:border-orange-500 text-stone-800";
+                  let btnStyle = "border-stone-200 bg-white hover:border-purple-500 text-stone-800";
 
                   if (isSubmitted) {
                     if (isCurrentSubCorrect && isSelected) {
@@ -1474,7 +913,7 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
                       btnStyle = "border-stone-200 bg-white text-stone-400";
                     }
                   } else if (isSelected) {
-                    btnStyle = "border-orange-500 bg-orange-50 text-orange-700 ring-2 ring-orange-500/20";
+                    btnStyle = "border-purple-500 bg-purple-50 text-purple-700 ring-2 ring-purple-500/20";
                   }
 
                   return (
@@ -1496,17 +935,7 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
                   </Button>
                 </div>
               ) : (
-<<<<<<< HEAD
-                <div
-                  className={`p-4 rounded-2xl text-xs font-medium ${
-                    isCurrentSubCorrect
-                      ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                      : "bg-rose-50 text-rose-800 border border-rose-200"
-                  }`}
-                >
-=======
                 <div className={`p-4 rounded-2xl text-xs font-medium ${isCurrentSubCorrect ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-rose-50 text-rose-800 border border-rose-200"}`}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                   {isCurrentSubCorrect ? (
                     <>
                       <strong>Jawaban Tepat! 🎉</strong>
@@ -1524,45 +953,20 @@ function MateriDetail({ setScreen, userName, lessonIndex, completedLessons, onCo
           )}
 
           <div className="pt-6 border-t border-stone-200 flex justify-between items-center">
-<<<<<<< HEAD
-            <Button variant="outline" onClick={() => setScreen("materi")}>
-              Tutup
-            </Button>
-
-            {isAlreadyCompleted ? (
-              <Button
-                variant="outline"
-                className="border-emerald-500 text-emerald-600 hover:bg-emerald-50"
-                onClick={() => {
-                  onCompleteLesson(lessonIndex);
-                  setScreen("materi");
-                }}
-              >
-=======
             <Button variant="outline" onClick={() => setScreen("materi")}>Tutup</Button>
 
             {isAlreadyCompleted ? (
               <Button variant="outline" className="border-emerald-500 text-emerald-600 hover:bg-emerald-50" onClick={() => { onCompleteLesson(lessonIndex); setScreen("materi"); }}>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                 <Icon name="check" size={18} /> Materi Sudah Selesai
               </Button>
             ) : (
               <div className="flex flex-col items-end gap-1">
-<<<<<<< HEAD
-                <Button
-                  disabled={!allSubTopicsCorrect}
-                  onClick={() => {
-                    if (allSubTopicsCorrect) {
-                      onCompleteLesson(lessonIndex);
-                      setScreen("materi");
-=======
                 <Button 
                   disabled={!allSubTopicsCorrect} 
                   onClick={() => { 
                     if (allSubTopicsCorrect) {
                       onCompleteLesson(lessonIndex); 
                       setScreen("materi"); 
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                     }
                   }}
                 >
@@ -1594,61 +998,27 @@ function LatihanHub({ setScreen, userName }: { setScreen: (s: Screen) => void; u
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
             <div>
-<<<<<<< HEAD
-              <div className="grid size-14 place-items-center rounded-2xl bg-orange-100 text-orange-600 mb-5">
-                <Icon name="spark" size={28} />
-              </div>
-              <span className="text-xs font-bold text-orange-600 tracking-widest">DIAGRAM FLOWCHART (4 TANTANGAN)</span>
+              <div className="grid size-14 place-items-center rounded-2xl bg-purple-100 text-purple-600 mb-5"><Icon name="spark" size={28} /></div>
+              <span className="text-xs font-bold text-purple-600 tracking-widest">DIAGRAM FLOWCHART (7 TANTANGAN)</span>
               <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Susun Flowchart</h2>
-              <p className="mt-2 text-sm leading-relaxed text-stone-500">
-                Latih logika dengan menyusun simbol diagram alur secara runtut dan terhubung dengan garis panah.
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-stone-500">Kerjakan 7 studi kasus flowchart. Setiap tantangan mewakili satu subbab Flowchart dan menggunakan kasus yang berbeda dari latihan interaktif pada materi.</p>
             </div>
             <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-orange-600">+150 XP</span>
-              <Button onClick={() => setScreen("challenge")}>
-                Mulai Challenge <Icon name="chevron" />
-              </Button>
-=======
-              <div className="grid size-14 place-items-center rounded-2xl bg-orange-100 text-orange-600 mb-5"><Icon name="spark" size={28} /></div>
-              <span className="text-xs font-bold text-orange-600 tracking-widest">DIAGRAM FLOWCHART (4 TANTANGAN)</span>
-              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Susun Flowchart</h2>
-              <p className="mt-2 text-sm leading-relaxed text-stone-500">Latih logika dengan menyusun simbol diagram alur secara runtut dan terhubung dengan garis panah.</p>
-            </div>
-            <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-orange-600">+150 XP</span>
-              <Button onClick={() => setScreen("challenge")}>Mulai Challenge <Icon name="chevron" /></Button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+              <span className="text-xs font-bold text-purple-600">+150 XP</span>
+              <Button onClick={() => setScreen("challenge")}>Mulai Susun Flowchart <Icon name="chevron" /></Button>
             </div>
           </div>
 
           <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm flex flex-col justify-between hover:shadow-lg transition">
             <div>
-<<<<<<< HEAD
-              <div className="grid size-14 place-items-center rounded-2xl bg-amber-100 text-amber-600 mb-5">
-                <Icon name="star" size={28} />
-              </div>
-              <span className="text-xs font-bold text-orange-600 tracking-widest">EVALUASI MATERI (6 KUIS)</span>
-              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Kuis Pilihan Ganda</h2>
-              <p className="mt-2 text-sm leading-relaxed text-stone-500">
-                Uji pengetahuan Anda melalui serangkaian pertanyaan kuis dari seluruh modul.
-              </p>
-            </div>
-            <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-orange-600">+100 XP</span>
-              <Button onClick={() => setScreen("quiz")}>
-                Mulai Kuis <Icon name="chevron" />
-              </Button>
-=======
               <div className="grid size-14 place-items-center rounded-2xl bg-amber-100 text-amber-600 mb-5"><Icon name="star" size={28} /></div>
-              <span className="text-xs font-bold text-orange-600 tracking-widest">EVALUASI MATERI (6 KUIS)</span>
-              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Kuis Pilihan Ganda</h2>
-              <p className="mt-2 text-sm leading-relaxed text-stone-500">Uji pengetahuan Anda melalui serangkaian pertanyaan kuis dari seluruh modul.</p>
+              <span className="text-xs font-bold text-purple-600 tracking-widest">LATIHAN AKHIR (10 PG + 5 URAIAN)</span>
+              <h2 className="font-display text-2xl font-extrabold text-stone-900 mt-2">Kuis Evaluasi Akhir</h2>
+              <p className="mt-2 text-sm leading-relaxed text-stone-500">Kerjakan 10 soal pilihan ganda dan 5 soal uraian yang mencakup materi Algoritma dan Flowchart.</p>
             </div>
             <div className="mt-8 pt-5 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-orange-600">+100 XP</span>
-              <Button onClick={() => setScreen("quiz")}>Mulai Kuis <Icon name="chevron" /></Button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+              <span className="text-xs font-bold text-purple-600">+150 XP</span>
+              <Button onClick={() => setScreen("quiz")}>Mulai Evaluasi <Icon name="chevron" /></Button>
             </div>
           </div>
         </div>
@@ -1658,71 +1028,22 @@ function LatihanHub({ setScreen, userName }: { setScreen: (s: Screen) => void; u
 }
 
 const flowchartChallenges = [
-  {
-    title: "Soal 1: Menentukan Bilangan Ganjil / Genap (Materi Percabangan)",
-    correct: ["Mulai", "Masukkan sebuah bilangan", "Apakah bilangan habis dibagi 2?", "Tampilkan hasil", "Selesai"],
-    shuffled: ["Tampilkan hasil", "Masukkan sebuah bilangan", "Mulai", "Apakah bilangan habis dibagi 2?", "Selesai"],
-<<<<<<< HEAD
-    shapes: ["pill", "parallelogram", "diamond", "parallelogram", "pill"],
-=======
-    shapes: ["pill", "parallelogram", "diamond", "parallelogram", "pill"]
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    title: "Soal 2: Menentukan Kelulusan Nilai Ujian (Materi Percabangan)",
-    correct: ["Mulai", "Input nilai ujian", "Apakah nilai >= 75?", "Cetak 'Lulus'", "Selesai"],
-    shuffled: ["Apakah nilai >= 75?", "Mulai", "Input nilai ujian", "Selesai", "Cetak 'Lulus'"],
-<<<<<<< HEAD
-    shapes: ["pill", "parallelogram", "diamond", "rectangle", "pill"],
-=======
-    shapes: ["pill", "parallelogram", "diamond", "rectangle", "pill"]
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    title: "Soal 3: Perulangan Mendorong Mobil (Materi Looping)",
-    correct: ["Mulai", "Dorong mobil sejauh 1 meter", "Apakah mobil sudah menyala?", "Cetak 'Selesai Berhasil'", "Selesai"],
-    shuffled: ["Apakah mobil sudah menyala?", "Mulai", "Selesai", "Dorong mobil sejauh 1 meter", "Cetak 'Selesai Berhasil'"],
-<<<<<<< HEAD
-    shapes: ["pill", "rectangle", "diamond", "parallelogram", "pill"],
-=======
-    shapes: ["pill", "rectangle", "diamond", "parallelogram", "pill"]
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    title: "Soal 4: Mencetak Elemen Array Buah (Materi Array & Loop)",
-    correct: ["Mulai", "Set indeks i = 0", "Cetak buah[i]", "Tambahkan i + 1", "Selesai"],
-    shuffled: ["Tambahkan i + 1", "Mulai", "Cetak buah[i]", "Set indeks i = 0", "Selesai"],
-<<<<<<< HEAD
-    shapes: ["pill", "rectangle", "parallelogram", "rectangle", "pill"],
-  },
-];
-
-function Challenge({
-  setScreen,
-  onComplete,
-}: {
-  setScreen: (s: Screen) => void;
-  onComplete: (score: number, xp: number, hasNext: boolean, type: "challenge" | "quiz") => void;
-}) {
-  const [activeStage, setActiveStage] = useState(0);
-  const currentChallenge = flowchartChallenges[activeStage];
-
-=======
-    shapes: ["pill", "rectangle", "parallelogram", "rectangle", "pill"]
-  }
+  { title: "2.1 Konsep Flowchart — Menghitung Total Belanja", correct: ["Mulai", "Input harga barang dan jumlah", "Total = harga × jumlah", "Tampilkan total belanja", "Selesai"], shuffled: ["Tampilkan total belanja", "Input harga barang dan jumlah", "Mulai", "Selesai", "Total = harga × jumlah"], shapes: ["pill", "parallelogram", "rectangle", "parallelogram", "pill"] },
+  { title: "2.2 Simbol Flowchart — Mencatat Peminjaman Buku", correct: ["Mulai", "Input kode buku dan identitas peminjam", "Catat data peminjaman", "Tampilkan bukti peminjaman", "Selesai"], shuffled: ["Catat data peminjaman", "Mulai", "Tampilkan bukti peminjaman", "Input kode buku dan identitas peminjam", "Selesai"], shapes: ["pill", "parallelogram", "rectangle", "parallelogram", "pill"] },
+  { title: "2.3 Flowchart Percabangan — Menentukan Ongkir", correct: ["Mulai", "Input jarak pengiriman", "Apakah jarak ≤ 5 km?", "Jika Ya, ongkir = Rp5.000", "Jika Tidak, ongkir = Rp10.000", "Tampilkan ongkir", "Selesai"], shuffled: ["Tampilkan ongkir", "Jika Tidak, ongkir = Rp10.000", "Mulai", "Input jarak pengiriman", "Jika Ya, ongkir = Rp5.000", "Selesai", "Apakah jarak ≤ 5 km?"], shapes: ["pill", "parallelogram", "diamond", "rectangle", "rectangle", "parallelogram", "pill"] },
+  { title: "2.4 Flowchart Perulangan — Mengisi Botol Air", correct: ["Mulai dan tetapkan jumlah = 0", "Periksa apakah jumlah < 4", "Isi satu botol", "Tambah jumlah = jumlah + 1", "Kembali periksa kondisi", "Selesai saat jumlah = 4"], shuffled: ["Isi satu botol", "Selesai saat jumlah = 4", "Mulai dan tetapkan jumlah = 0", "Tambah jumlah = jumlah + 1", "Periksa apakah jumlah < 4", "Kembali periksa kondisi"], shapes: ["pill", "diamond", "rectangle", "rectangle", "rectangle", "pill"] },
+  { title: "2.5 Flowchart Array — Menghitung Stok Barang", correct: ["Mulai dan siapkan array stok", "Tetapkan i = 0 dan total = 0", "Periksa apakah i < jumlah barang", "Tambahkan stok[i] ke total", "Naikkan i = i + 1 dan ulangi", "Tampilkan total stok", "Selesai"], shuffled: ["Tampilkan total stok", "Tetapkan i = 0 dan total = 0", "Mulai dan siapkan array stok", "Naikkan i = i + 1 dan ulangi", "Selesai", "Tambahkan stok[i] ke total", "Periksa apakah i < jumlah barang"], shapes: ["pill", "rectangle", "diamond", "rectangle", "rectangle", "parallelogram", "pill"] },
+  { title: "2.6 Flowchart Searching — Mencari Nama pada Daftar Peserta", correct: ["Mulai dan input daftar nama serta target", "Tetapkan i = 0", "Periksa apakah i masih dalam batas daftar", "Bandingkan nama[i] dengan target", "Jika cocok, tampilkan nama ditemukan", "Jika tidak, naikkan i dan ulangi", "Jika data habis, tampilkan tidak ditemukan", "Selesai"], shuffled: ["Bandingkan nama[i] dengan target", "Mulai dan input daftar nama serta target", "Jika data habis, tampilkan tidak ditemukan", "Tetapkan i = 0", "Jika cocok, tampilkan nama ditemukan", "Periksa apakah i masih dalam batas daftar", "Selesai", "Jika tidak, naikkan i dan ulangi"], shapes: ["pill", "rectangle", "diamond", "diamond", "parallelogram", "rectangle", "parallelogram", "pill"] },
+  { title: "2.7 Flowchart Sorting — Mengurutkan Nomor Antrean", correct: ["Mulai dan input nomor antrean", "Bandingkan dua nomor yang bersebelahan", "Apakah urutannya dari kecil ke besar?", "Jika tidak, tukar posisi kedua nomor", "Lanjutkan ke pasangan berikutnya", "Ulangi sampai semua nomor terurut", "Tampilkan nomor antrean", "Selesai"], shuffled: ["Tampilkan nomor antrean", "Apakah urutannya dari kecil ke besar?", "Mulai dan input nomor antrean", "Lanjutkan ke pasangan berikutnya", "Jika tidak, tukar posisi kedua nomor", "Selesai", "Bandingkan dua nomor yang bersebelahan", "Ulangi sampai semua nomor terurut"], shapes: ["pill", "rectangle", "diamond", "rectangle", "rectangle", "diamond", "parallelogram", "pill"] }
 ];
 
 function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; onComplete: (score: number, xp: number, hasNext: boolean, type: "challenge" | "quiz") => void }) {
   const [activeStage, setActiveStage] = useState(0);
   const currentChallenge = flowchartChallenges[activeStage];
   
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  const [stagesBlocks, setStagesBlocks] = useState<Record<number, string[]>>({
-    0: flowchartChallenges[0].shuffled,
-    1: flowchartChallenges[1].shuffled,
-    2: flowchartChallenges[2].shuffled,
-    3: flowchartChallenges[3].shuffled,
-  });
+  const [stagesBlocks, setStagesBlocks] = useState<Record<number, string[]>>(() =>
+    Object.fromEntries(flowchartChallenges.map((item, index) => [index, [...item.shuffled]])) as Record<number, string[]>
+  );
 
   const blocks = stagesBlocks[activeStage];
   const [selected, setSelected] = useState<number | null>(null);
@@ -1744,11 +1065,10 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
 
     const hasMore = activeStage < flowchartChallenges.length - 1;
     if (hasMore) {
-      alert(`Hebat! Soal ${activeStage + 1} selesai (+150 XP). Lanjut ke soal berikutnya.`);
+      alert(`Hebat! Studi kasus ${activeStage + 1} selesai. Lanjut ke studi kasus berikutnya.`);
       setActiveStage(activeStage + 1);
-      onComplete(90, 150, true, "challenge");
     } else {
-      alert("Luar biasa! Semua tantangan flowchart berhasil diselesaikan.");
+      alert("Luar biasa! Semua tantangan flowchart berhasil diselesaikan. Kamu mendapatkan 150 XP.");
       onComplete(95, 150, false, "challenge");
       setScreen("score");
     }
@@ -1765,84 +1085,39 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
     <main className="min-h-screen bg-stone-50 pb-10">
       <header className="border-b border-stone-200 bg-white">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-<<<<<<< HEAD
-          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900">
-            <Icon name="close" /> Keluar
-          </button>
-          <div className="text-center">
-            <div className="text-xs font-extrabold text-orange-600">
-              TANTANGAN {activeStage + 1} dari {flowchartChallenges.length}
-            </div>
-            <div className="mt-1 font-display font-extrabold text-stone-900">{currentChallenge.title}</div>
-          </div>
-          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600">
-            <Icon name="spark" size={17} /> 150 XP
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-4xl px-5 pt-8 lg:px-8">
-        <div className="mb-7 flex items-start gap-4 rounded-3xl bg-white p-5 shadow-sm border border-stone-200">
-          <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600 font-extrabold">?</div>
-          <div>
-            <div className="font-display text-lg font-extrabold text-stone-900">Susun Simbol Flowchart Berurutan</div>
-            <p className="mt-1 text-sm leading-relaxed text-stone-500">
-              Klik kotak simbol pertama lalu klik simbol kedua untuk menukar posisinya hingga terhubung sempurna dengan garis panah ke bawah.
-            </p>
-          </div>
-=======
           <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900"><Icon name="close" /> Keluar</button>
-          <div className="text-center"><div className="text-xs font-extrabold text-orange-600">TANTANGAN {activeStage + 1} dari {flowchartChallenges.length}</div><div className="mt-1 font-display font-extrabold text-stone-900">{currentChallenge.title}</div></div>
-          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600"><Icon name="spark" size={17} /> 150 XP</div>
+          <div className="text-center"><div className="text-xs font-extrabold text-purple-600">STUDI KASUS {activeStage + 1} dari {flowchartChallenges.length}</div><div className="mt-1 font-display font-extrabold text-stone-900">{currentChallenge.title}</div></div>
+          <div className="flex items-center gap-2 rounded-xl bg-purple-50 px-3 py-2 text-sm font-extrabold text-purple-600"><Icon name="spark" size={17} /> 150 XP</div>
         </div>
       </header>
       <main className="mx-auto max-w-4xl px-5 pt-8 lg:px-8">
         <div className="mb-7 flex items-start gap-4 rounded-3xl bg-white p-5 shadow-sm border border-stone-200">
-          <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600 font-extrabold">?</div>
+          <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-purple-100 text-purple-600 font-extrabold">?</div>
           <div><div className="font-display text-lg font-extrabold text-stone-900">Susun Simbol Flowchart Berurutan</div><p className="mt-1 text-sm leading-relaxed text-stone-500">Klik kotak simbol pertama lalu klik simbol kedua untuk menukar posisinya hingga terhubung sempurna dengan garis panah ke bawah.</p></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
         </div>
 
         <div className="relative flex flex-col items-center rounded-[2rem] border border-stone-200 bg-white p-8 shadow-sm space-y-4">
           {blocks.map((block, i) => {
             const shapeType = currentChallenge.shapes[i];
             let shapeStyle = "rounded-2xl px-6 py-4";
-            if (shapeType === "pill") shapeStyle = "rounded-full px-8 py-3 bg-orange-100 border-orange-300 text-orange-900";
+            if (shapeType === "pill") shapeStyle = "rounded-full px-8 py-3 bg-purple-100 border-purple-300 text-purple-900";
             if (shapeType === "parallelogram") shapeStyle = "skew-x-[-10deg] rounded-xl px-8 py-3 bg-amber-100 border-amber-300 text-amber-900";
             if (shapeType === "diamond") shapeStyle = "rotate-0 rounded-xl px-8 py-4 bg-rose-100 border-rose-300 text-rose-900 text-center";
 
             return (
               <div key={`${block}-${i}`} className="flex flex-col items-center w-full">
-<<<<<<< HEAD
-                <button
-                  onClick={() => choose(i)}
-                  className={`w-full max-w-md border-2 font-bold text-sm transition shadow-sm flex items-center justify-between p-4 ${
-                    selected === i
-                      ? "border-orange-500 bg-orange-50 ring-4 ring-orange-500/10 text-orange-900"
-                      : "border-stone-200 bg-stone-50 hover:border-orange-300 text-stone-800"
-                  } ${shapeStyle}`}
-                >
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-extrabold text-stone-500 shadow-sm">
-                    {i + 1}
-                  </span>
-                  <span className="flex-1 text-center">{block}</span>
-                  <span className="text-[10px] uppercase font-bold text-stone-400 bg-white/60 px-2 py-1 rounded">{shapeType}</span>
-                </button>
-
-=======
                 <button 
                   onClick={() => choose(i)} 
-                  className={`w-full max-w-md border-2 font-bold text-sm transition shadow-sm flex items-center justify-between p-4 ${selected === i ? "border-orange-500 bg-orange-50 ring-4 ring-orange-500/10 text-orange-900" : "border-stone-200 bg-stone-50 hover:border-orange-300 text-stone-800"} ${shapeStyle}`}
+                  className={`w-full max-w-md border-2 font-bold text-sm transition shadow-sm flex items-center justify-between p-4 ${selected === i ? "border-purple-500 bg-purple-50 ring-4 ring-purple-500/10 text-purple-900" : "border-stone-200 bg-stone-50 hover:border-purple-300 text-stone-800"} ${shapeStyle}`}
                 >
                   <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-extrabold text-stone-500 shadow-sm">{i + 1}</span>
                   <span className="flex-1 text-center">{block}</span>
                   <span className="text-[10px] uppercase font-bold text-stone-400 bg-white/60 px-2 py-1 rounded">{shapeType}</span>
                 </button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                 {i < blocks.length - 1 && (
-                  <div className="flex flex-col items-center my-2 text-orange-500">
-                    <div className="h-6 w-0.5 bg-orange-400"></div>
-                    <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-orange-500"></div>
+                  <div className="flex flex-col items-center my-2 text-purple-500">
+                    <div className="h-6 w-0.5 bg-purple-400"></div>
+                    <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-purple-500"></div>
                   </div>
                 )}
               </div>
@@ -1868,185 +1143,64 @@ function Challenge({ setScreen, onComplete }: { setScreen: (s: Screen) => void; 
 }
 
 const quizQuestions = [
-  {
-    q: "Modul 1: Sifat dasar algoritma yang menuntut instruksi ditulis secara jelas dan tidak menimbulkan makna ganda (ambigu) dinamakan...",
-    options: ["Finiteness", "Definiteness", "Generality", "Variabilitas"],
-<<<<<<< HEAD
-    correct: 1,
-=======
-    correct: 1
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    q: "Modul 2: Simbol apakah yang digunakan untuk menyatakan awal (start) dan akhir (stop) pada diagram flowchart?",
-    options: ["Persegi panjang (Process)", "Kapsul / Oval (Terminator)", "Belah ketupat (Decision)", "Jajar genjang (Input/Output)"],
-<<<<<<< HEAD
-    correct: 1,
-=======
-    correct: 1
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    q: "Modul 3: Tipe data apakah yang digunakan untuk menyimpan nilai angka pecahan/desimal seperti 3.14?",
-    options: ["int", "string", "float / double", "boolean"],
-<<<<<<< HEAD
-    correct: 2,
-=======
-    correct: 2
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    q: "Modul 4: Simbol berbentuk belah ketupat (Decision) dalam flowchart biasanya digunakan untuk menyatakan...",
-    options: ["Proses perhitungan matematika", "Pengambilan keputusan bercabang berdasarkan kondisi", "Mencetak hasil ke layar monitor", "Penyimpanan data database"],
-<<<<<<< HEAD
-    correct: 1,
-=======
-    correct: 1
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    q: "Modul 5: Manakah dari pilihan berikut yang merupakan resiko utama jika struktur perulangan (looping) tidak memiliki kondisi henti?",
-    options: ["Program berhenti otomatis", "Error infinite loop", "Data berubah menjadi array", "Program berjalan lebih cepat"],
-<<<<<<< HEAD
-    correct: 1,
-=======
-    correct: 1
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-  },
-  {
-    q: "Modul 6: Jika diketahui sebuah array `int[] nilai = {80, 90, 100}`, berapakah nilai dari `nilai[0]`?",
-    options: ["80", "90", "100", "0"],
-<<<<<<< HEAD
-    correct: 0,
-  },
+  { q: "Apa yang dimaksud dengan algoritma?", options: ["Urutan langkah logis untuk menyelesaikan masalah", "Kumpulan perangkat keras", "Bahasa pemrograman tertentu", "Gambar tanpa urutan"], correct: 0 },
+  { q: "Sifat algoritma yang berarti setiap langkah tidak menimbulkan makna ganda adalah ...", options: ["Finiteness", "Definiteness", "Effectiveness", "Randomness"], correct: 1 },
+  { q: "Struktur if-else digunakan untuk ...", options: ["Mengulang instruksi", "Menyimpan banyak data", "Memilih tindakan berdasarkan kondisi benar atau salah", "Mengurutkan data"], correct: 2 },
+  { q: "Perulangan do-while memiliki ciri ...", options: ["Tidak pernah memeriksa kondisi", "Instruksi dijalankan minimal satu kali", "Hanya bisa berjalan dua kali", "Tidak memiliki kondisi"], correct: 1 },
+  { q: "Pada array [4, 7, 2, 9], jumlah seluruh elemennya adalah ...", options: ["18", "20", "22", "24"], correct: 2 },
+  { q: "Teknik pencarian yang memeriksa elemen satu per satu disebut ...", options: ["Binary Search", "Sequential Search", "Bubble Sort", "Selection Sort"], correct: 1 },
+  { q: "Binary Search dapat digunakan dengan baik jika data dalam keadaan ...", options: ["Terurut", "Kosong", "Acak tanpa aturan", "Berulang semua"], correct: 0 },
+  { q: "Pengurutan dari nilai terkecil ke terbesar disebut ...", options: ["Descending", "Searching", "Ascending", "Iteration"], correct: 2 },
+  { q: "Simbol terminator pada flowchart umumnya berbentuk ...", options: ["Belah ketupat", "Oval", "Jajar genjang", "Persegi panjang"], correct: 1 },
+  { q: "Simbol decision digunakan untuk menunjukkan ...", options: ["Awal dan akhir", "Input data", "Proses perhitungan", "Keputusan berdasarkan kondisi"], correct: 3 }
 ];
 
-function Quiz({
-  setScreen,
-  onComplete,
-}: {
-  setScreen: (s: Screen) => void;
-  onComplete: (score: number, xp: number, hasNext: boolean, type: "challenge" | "quiz") => void;
-}) {
-  const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
-  const [, setCorrectCount] = useState(0);
-=======
-    correct: 0
-  }
+const shortQuestions = [
+  { q: "Jelaskan tiga ciri algoritma yang baik!", answer: "Memiliki tujuan jelas, langkah tidak ambigu, serta memiliki akhir atau jumlah langkah yang berhingga." },
+  { q: "Apa perbedaan while dan do-while?", answer: "While memeriksa kondisi sebelum menjalankan instruksi, sedangkan do-while menjalankan instruksi terlebih dahulu sehingga minimal satu kali." },
+  { q: "Jelaskan perbedaan Sequential Search dan Binary Search!", answer: "Sequential Search memeriksa data satu per satu. Binary Search membagi ruang pencarian menjadi dua dan membutuhkan data terurut." },
+  { q: "Apa perbedaan ascending dan descending?", answer: "Ascending mengurutkan dari kecil ke besar, sedangkan descending dari besar ke kecil." },
+  { q: "Sebutkan fungsi simbol process dan decision pada flowchart!", answer: "Process berbentuk persegi panjang untuk menunjukkan proses/instruksi, sedangkan decision berbentuk belah ketupat untuk menunjukkan keputusan atau percabangan." }
 ];
 
 function Quiz({ setScreen, onComplete }: { setScreen: (s: Screen) => void; onComplete: (score: number, xp: number, hasNext: boolean, type: "challenge" | "quiz") => void }) {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
-  const [correctCount, setCorrectCount] = useState(0);
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-
+  const [shortAnswers, setShortAnswers] = useState<Record<number, string>>({});
+  const [submitted, setSubmitted] = useState(false);
   const q = quizQuestions[currentQuizIndex];
-  const currentSelectedOpt = userAnswers[currentQuizIndex] ?? null;
-
-  const handleSelectOption = (idx: number) => {
-    setUserAnswers((prev) => ({ ...prev, [currentQuizIndex]: idx }));
-  };
-
-  const handleNext = () => {
-    if (currentSelectedOpt === null) {
-      alert("Pilih salah satu jawaban terlebih dahulu!");
+  const correctCount = quizQuestions.filter((item, idx) => userAnswers[idx] === item.correct).length;
+  const handleFinish = () => {
+    if (Object.keys(userAnswers).length !== quizQuestions.length || shortQuestions.some((_, i) => !(shortAnswers[i] || "").trim())) {
+      alert("Jawab 10 pilihan ganda dan isi 5 pertanyaan uraian terlebih dahulu.");
       return;
     }
-
-    if (currentQuizIndex < quizQuestions.length - 1) {
-      setCurrentQuizIndex(currentQuizIndex + 1);
-    } else {
-      let finalCorrect = 0;
-      quizQuestions.forEach((item, idx) => {
-        if (userAnswers[idx] === item.correct) {
-          finalCorrect += 1;
-        }
-      });
-      setCorrectCount(finalCorrect);
-      const finalScore = Math.round((finalCorrect / quizQuestions.length) * 100);
-      alert(`Kuis Selesai! Nilai akhir kamu: ${finalScore}`);
-      onComplete(finalScore, 100, false, "quiz");
-      setScreen("score");
-    }
+    setSubmitted(true);
+    const finalScore = Math.round((correctCount / quizQuestions.length) * 100);
+    onComplete(finalScore, 150, false, "quiz");
   };
-
-  const handlePrev = () => {
-    if (currentQuizIndex > 0) {
-      setCurrentQuizIndex(currentQuizIndex - 1);
-    }
-  };
-
   return (
     <main className="min-h-screen bg-stone-50 pb-10">
       <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-<<<<<<< HEAD
-          <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900">
-            <Icon name="close" /> Keluar
-          </button>
-          <div className="text-center">
-            <div className="text-xs font-extrabold text-orange-600">
-              KUIS EVALUASI ({currentQuizIndex + 1}/{quizQuestions.length})
-            </div>
-            <div className="mt-1 font-display font-extrabold text-stone-900">Evaluasi Pemahaman Pemrograman</div>
-          </div>
-          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600">
-            <Icon name="spark" size={17} /> 100 XP
-          </div>
-        </div>
-      </header>
-
-=======
+        <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-3 px-5 py-3 lg:px-8">
           <button onClick={() => setScreen("latihan-hub")} className="flex items-center gap-2 font-bold text-stone-500 hover:text-stone-900"><Icon name="close" /> Keluar</button>
-          <div className="text-center"><div className="text-xs font-extrabold text-orange-600">KUIS EVALUASI ({currentQuizIndex + 1}/{quizQuestions.length})</div><div className="mt-1 font-display font-extrabold text-stone-900">Evaluasi Pemahaman Pemrograman</div></div>
-          <div className="flex items-center gap-2 rounded-xl bg-orange-50 px-3 py-2 text-sm font-extrabold text-orange-600"><Icon name="spark" size={17} /> 100 XP</div>
+          <div className="text-center"><div className="text-xs font-extrabold text-purple-600">KUIS EVALUASI AKHIR · {currentQuizIndex + 1}/10</div><div className="mt-1 font-display font-extrabold text-stone-900">Kuis Evaluasi Akhir · 10 PG + 5 Uraian</div></div>
+          <div className="rounded-xl bg-purple-50 px-3 py-2 text-sm font-extrabold text-purple-600">+150 XP</div>
         </div>
       </header>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-      <main className="mx-auto max-w-3xl px-5 pt-8 lg:px-8">
-        <div className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
+      <main className="mx-auto max-w-3xl space-y-6 px-5 pt-8 lg:px-8">
+        <section className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="mb-3 text-xs font-extrabold tracking-widest text-violet-600">PILIHAN GANDA</div>
           <div className="font-display text-xl font-extrabold text-stone-900">{q.q}</div>
-          <div className="mt-6 space-y-3">
-            {q.options.map((opt, idx) => (
-<<<<<<< HEAD
-              <button
-                key={opt}
-                onClick={() => handleSelectOption(idx)}
-                className={`w-full text-left p-4 rounded-2xl border transition font-bold text-sm ${
-                  currentSelectedOpt === idx
-                    ? "border-orange-500 bg-orange-50 text-orange-900 ring-2 ring-orange-500/20"
-                    : "border-stone-200 bg-stone-50 text-stone-800 hover:bg-stone-100"
-                }`}
-=======
-              <button 
-                key={opt} 
-                onClick={() => handleSelectOption(idx)} 
-                className={`w-full text-left p-4 rounded-2xl border transition font-bold text-sm ${currentSelectedOpt === idx ? "border-orange-500 bg-orange-50 text-orange-900 ring-2 ring-orange-500/20" : "border-stone-200 bg-stone-50 text-stone-800 hover:bg-stone-100"}`}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-              >
-                {opt}
-              </button>
-            ))}
-          </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-          <div className="mt-8 flex justify-between items-center">
-            {currentQuizIndex > 0 ? (
-              <Button variant="outline" onClick={handlePrev}>
-                <Icon name="arrow" size={16} /> Kembali
-              </Button>
-            ) : (
-              <div></div>
-            )}
-            <Button onClick={handleNext}>
-              {currentQuizIndex === quizQuestions.length - 1 ? "Selesai" : "Selanjutnya"} <Icon name="chevron" />
-            </Button>
-          </div>
-        </div>
+          <div className="mt-6 space-y-3">{q.options.map((opt, idx) => <button key={opt} disabled={submitted} onClick={() => setUserAnswers(prev => ({ ...prev, [currentQuizIndex]: idx }))} className={`w-full rounded-2xl border p-4 text-left text-sm font-bold transition ${userAnswers[currentQuizIndex] === idx ? "border-violet-500 bg-violet-50 text-violet-900 ring-2 ring-violet-200" : "border-stone-200 bg-stone-50 text-stone-800 hover:bg-violet-50"}`}>{String.fromCharCode(65 + idx)}. {opt}</button>)}</div>
+          <div className="mt-7 flex items-center justify-between"><Button variant="outline" disabled={currentQuizIndex === 0} onClick={() => setCurrentQuizIndex(i => Math.max(0, i - 1))}>Sebelumnya</Button><Button disabled={userAnswers[currentQuizIndex] === undefined || submitted} onClick={() => setCurrentQuizIndex(i => Math.min(quizQuestions.length - 1, i + 1))}>{currentQuizIndex === 9 ? "Selesai PG" : "Selanjutnya"} <Icon name="chevron" /></Button></div>
+          <div className="mt-4 h-2 overflow-hidden rounded-full bg-violet-100"><div className="h-full rounded-full bg-gradient-to-r from-violet-600 to-cyan-400" style={{ width: `${((currentQuizIndex + 1) / 10) * 100}%` }} /></div>
+        </section>
+        <section className="rounded-[2rem] border border-stone-200 bg-white p-7 shadow-sm">
+          <div className="text-xs font-extrabold tracking-widest text-violet-600">URAIAN · 5 SOAL</div><h2 className="mt-1 font-display text-xl font-extrabold text-stone-900">Jawab dengan bahasamu sendiri</h2>
+          <div className="mt-5 space-y-5">{shortQuestions.map((item, i) => <label key={i} className="block"><span className="text-sm font-bold text-stone-800">{i + 1}. {item.q}</span><textarea disabled={submitted} value={shortAnswers[i] || ""} onChange={e => setShortAnswers(prev => ({ ...prev, [i]: e.target.value }))} rows={3} className="mt-2 w-full rounded-xl border border-stone-200 bg-stone-50 p-3 text-sm outline-none focus:border-violet-400" placeholder="Tulis jawabanmu di sini..." />{submitted && <span className="mt-2 block rounded-lg bg-violet-50 p-3 text-xs leading-relaxed text-violet-800"><strong>Poin jawaban:</strong> {item.answer}</span>}</label>)}</div>
+          {!submitted ? <Button onClick={handleFinish} className="mt-6 w-full">Kumpulkan Kuis Evaluasi Akhir <Icon name="check" /></Button> : <div className="mt-6 rounded-2xl bg-violet-50 p-5"><div className="font-extrabold text-violet-900">Kuis evaluasi akhir selesai!</div><p className="mt-1 text-sm text-violet-800">Nilai pilihan ganda: {correctCount}/10 ({correctCount * 10}). Jawaban uraian ditampilkan bersama poin jawaban untuk kamu periksa kembali.</p><Button onClick={() => setScreen("score")} className="mt-4">Lihat hasil <Icon name="chevron" /></Button></div>}
+        </section>
       </main>
     </main>
   );
@@ -2056,51 +1210,9 @@ function Score({ setScreen, userName, xp, score, hasNext }: { setScreen: (s: Scr
   return (
     <main className="min-h-screen bg-stone-50 p-5">
       <div className="mx-auto max-w-4xl py-6 md:py-12">
-<<<<<<< HEAD
-        <div className="text-center">
-          <Logo />
-          <div className="mx-auto mt-10 grid size-28 place-items-center rounded-full bg-orange-500 shadow-xl text-white">
-            <Icon name="trophy" size={52} />
-          </div>
-          <div className="mt-7 text-sm font-extrabold tracking-widest text-orange-600">LATIHAN SELESAI</div>
-          <div className="mt-2 font-display text-4xl font-extrabold tracking-tight text-stone-900">Luar biasa, {userName}!</div>
-          <p className="mx-auto mt-3 max-w-lg text-stone-500">Hasil latihan dan XP berhasil ditambahkan ke profil Anda.</p>
-        </div>
-
+        <div className="text-center"><Logo /><div className="mx-auto mt-10 grid size-28 place-items-center rounded-full bg-purple-500 shadow-xl text-white"><Icon name="trophy" size={52} /></div><div className="mt-7 text-sm font-extrabold tracking-widest text-purple-600">LATIHAN SELESAI</div><div className="mt-2 font-display text-4xl font-extrabold tracking-tight text-stone-900">Luar biasa, {userName}!</div><p className="mx-auto mt-3 max-w-lg text-stone-500">Hasil latihan dan XP berhasil ditambahkan ke profil Anda.</p></div>
         <section className="mt-9 grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl sm:grid-cols-3">
-          <div className="p-7 text-center sm:border-r sm:border-white/10">
-            <div className="text-xs font-bold text-stone-400">NILAI</div>
-            <div className="mt-2 font-display text-4xl font-extrabold text-orange-400">{score}</div>
-          </div>
-          <div className="border-y border-white/10 p-7 text-center sm:border-x-0 sm:border-y-0 sm:border-r">
-            <div className="text-xs font-bold text-stone-400">TOTAL XP AKUMULASI</div>
-            <div className="mt-2 font-display text-4xl font-extrabold text-amber-300">+{xp}</div>
-          </div>
-          <div className="p-7 text-center">
-            <div className="text-xs font-bold text-stone-400">AKURASI</div>
-            <div className="mt-2 font-display text-4xl font-extrabold text-emerald-400">{score}%</div>
-          </div>
-        </section>
-
-        <div className="mt-7 grid gap-3 sm:grid-cols-3">
-          <Button variant="outline" onClick={() => setScreen("dashboard")}>
-            Ke Beranda
-          </Button>
-          <Button variant="outline" onClick={() => setScreen("leaderboard")}>
-            <Icon name="trophy" /> Peringkat
-          </Button>
-          {hasNext ? (
-            <Button onClick={() => setScreen("challenge")}>
-              Soal Berikutnya <Icon name="chevron" />
-            </Button>
-          ) : (
-            <Button onClick={() => setScreen("dashboard")}>
-              Kembali ke Beranda <Icon name="check" />
-            </Button>
-=======
-        <div className="text-center"><Logo /><div className="mx-auto mt-10 grid size-28 place-items-center rounded-full bg-orange-500 shadow-xl text-white"><Icon name="trophy" size={52} /></div><div className="mt-7 text-sm font-extrabold tracking-widest text-orange-600">LATIHAN SELESAI</div><div className="mt-2 font-display text-4xl font-extrabold tracking-tight text-stone-900">Luar biasa, {userName}!</div><p className="mx-auto mt-3 max-w-lg text-stone-500">Hasil latihan dan XP berhasil ditambahkan ke profil Anda.</p></div>
-        <section className="mt-9 grid overflow-hidden rounded-[2rem] bg-stone-900 text-white shadow-xl sm:grid-cols-3">
-          <div className="p-7 text-center sm:border-r sm:border-white/10"><div className="text-xs font-bold text-stone-400">NILAI</div><div className="mt-2 font-display text-4xl font-extrabold text-orange-400">{score}</div></div>
+          <div className="p-7 text-center sm:border-r sm:border-white/10"><div className="text-xs font-bold text-stone-400">NILAI</div><div className="mt-2 font-display text-4xl font-extrabold text-purple-400">{score}</div></div>
           <div className="border-y border-white/10 p-7 text-center sm:border-x-0 sm:border-y-0 sm:border-r"><div className="text-xs font-bold text-stone-400">TOTAL XP AKUMULASI</div><div className="mt-2 font-display text-4xl font-extrabold text-amber-300">+{xp}</div></div>
           <div className="p-7 text-center"><div className="text-xs font-bold text-stone-400">AKURASI</div><div className="mt-2 font-display text-4xl font-extrabold text-emerald-400">{score}%</div></div>
         </section>
@@ -2111,7 +1223,6 @@ function Score({ setScreen, userName, xp, score, hasNext }: { setScreen: (s: Scr
             <Button onClick={() => setScreen("challenge")}>Soal Berikutnya <Icon name="chevron" /></Button>
           ) : (
             <Button onClick={() => setScreen("dashboard")}>Kembali ke Beranda <Icon name="check" /></Button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           )}
         </div>
       </div>
@@ -2119,43 +1230,15 @@ function Score({ setScreen, userName, xp, score, hasNext }: { setScreen: (s: Scr
   );
 }
 
-<<<<<<< HEAD
-function Leaderboard({
-  setScreen,
-  userName,
-  xp,
-  completedLessons,
-  hasChallengeDone,
-  hasQuizDone,
-  lastScore,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  xp: number;
-  completedLessons: number;
-  hasChallengeDone: boolean;
-  hasQuizDone: boolean;
-  lastScore: number;
-}) {
-=======
 function Leaderboard({ setScreen, userName, xp, completedLessons, hasChallengeDone, hasQuizDone, lastScore }: { setScreen: (s: Screen) => void; userName: string; xp: number; completedLessons: number; hasChallengeDone: boolean; hasQuizDone: boolean; lastScore: number }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const [tab, setTab] = useState<"rank" | "badge">("rank");
 
-  const baseRanking = [
-    { pos: "1", name: "Nadia P.", initials: "NP", rankXp: 2840 },
-    { pos: "2", name: "Arka D.", initials: "AD", rankXp: 2650 },
-    { pos: "3", name: "Salsa M.", initials: "SM", rankXp: 2410 },
-    { pos: "4", name: "Bima K.", initials: "BK", rankXp: 1320 },
-    { pos: "5", name: userName || "Pengguna", initials: getInitials(userName), rankXp: xp },
-  ].sort((a, b) => b.rankXp - a.rankXp);
-
   const achievements = [
-    { icon: "award" as IconName, title: "Flowchart Rookie", desc: "Berhasil menyelesaikan tantangan susun flowchart pertama.", color: "bg-orange-100 text-orange-600", active: hasChallengeDone },
+    { icon: "award" as IconName, title: "Flowchart Rookie", desc: "Berhasil menyelesaikan tantangan susun flowchart pertama.", color: "bg-purple-100 text-purple-600", active: hasChallengeDone },
     { icon: "star" as IconName, title: "Quiz Master", desc: "Berhasil menyelesaikan sesi kuis evaluasi.", color: "bg-amber-100 text-amber-600", active: hasQuizDone },
-    { icon: "medal" as IconName, title: "Master Logika", desc: "Membaca dan menyelesaikan seluruh (6) modul materi pembelajaran.", color: "bg-emerald-100 text-emerald-600", active: completedLessons >= 6 },
+    { icon: "medal" as IconName, title: "Master Logika", desc: "Membaca dan menyelesaikan seluruh (13) subbab materi pembelajaran.", color: "bg-emerald-100 text-emerald-600", active: completedLessons >= 13 },
     { icon: "trophy" as IconName, title: "Perfect Score", desc: "Meraih nilai sempurna 100 pada latihan evaluasi.", color: "bg-sky-100 text-sky-600", active: lastScore === 100 },
-    { icon: "target" as IconName, title: "Top Ten Leaderboard", desc: "Masuk dalam 10 besar papan peringkat mingguan.", color: "bg-purple-100 text-purple-600", active: true },
+    { icon: "target" as IconName, title: "Top Ten Leaderboard", desc: "Badge akan tersedia setelah fitur peringkat terhubung dengan data pengguna.", color: "bg-purple-100 text-purple-600", active: false },
   ];
 
   return (
@@ -2167,78 +1250,35 @@ function Leaderboard({ setScreen, userName, xp, completedLessons, hasChallengeDo
             <p className="mt-2 text-stone-500">Bandingkan total XP dan koleksi badge hasil belajarmu.</p>
           </div>
           <div className="flex rounded-2xl bg-white p-1.5 shadow-sm border border-stone-200">
-<<<<<<< HEAD
-            <button onClick={() => setTab("rank")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "rank" ? "bg-stone-900 text-white" : "text-stone-500"}`}>
-              Leaderboard
-            </button>
-            <button onClick={() => setTab("badge")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "badge" ? "bg-stone-900 text-white" : "text-stone-500"}`}>
-              Achievement
-            </button>
-=======
             <button onClick={() => setTab("rank")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "rank" ? "bg-stone-900 text-white" : "text-stone-500"}`}>Leaderboard</button>
             <button onClick={() => setTab("badge")} className={`rounded-xl px-4 py-2 text-sm font-bold ${tab === "badge" ? "bg-stone-900 text-white" : "text-stone-500"}`}>Achievement</button>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
           </div>
         </div>
 
         {tab === "rank" ? (
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
             <section className="rounded-[2rem] bg-white p-5 shadow-sm sm:p-7 border border-stone-200">
-<<<<<<< HEAD
-              <div className="mb-5 flex justify-between">
-                <div className="font-display text-xl font-extrabold text-stone-900">Peringkat Mingguan</div>
-                <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">Aktif</span>
-              </div>
-=======
-              <div className="mb-5 flex justify-between"><div className="font-display text-xl font-extrabold text-stone-900">Peringkat Mingguan</div><span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">Aktif</span></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-              <div className="space-y-2">
-                {baseRanking.map((item, idx) => {
-                  const isUser = item.name === (userName || "Pengguna");
-                  return (
-                    <div key={item.name} className={`flex items-center gap-4 rounded-2xl p-3.5 ${isUser ? "bg-orange-500 text-white shadow-sm" : "bg-stone-50"}`}>
-                      <span className={`w-7 text-center font-display font-extrabold ${idx === 0 ? "text-amber-300" : ""}`}>{idx + 1}</span>
-<<<<<<< HEAD
-                      <span className={`grid size-10 place-items-center rounded-full text-xs font-extrabold ${isUser ? "bg-white text-orange-600" : "bg-orange-100 text-orange-700"}`}>
-                        {item.initials}
-                      </span>
-                      <span className="flex-1 font-bold">
-                        {item.name}
-                        {isUser && <small className="ml-2 opacity-80">(Kamu)</small>}
-                      </span>
-                      <span className="font-extrabold">
-                        {item.rankXp.toLocaleString("id-ID")} <small className="opacity-70">XP</small>
-                      </span>
-=======
-                      <span className={`grid size-10 place-items-center rounded-full text-xs font-extrabold ${isUser ? "bg-white text-orange-600" : "bg-orange-100 text-orange-700"}`}>{item.initials}</span>
-                      <span className="flex-1 font-bold">{item.name}{isUser && <small className="ml-2 opacity-80">(Kamu)</small>}</span>
-                      <span className="font-extrabold">{item.rankXp.toLocaleString("id-ID")} <small className="opacity-70">XP</small></span>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
-                    </div>
-                  );
-                })}
+              <div className="mb-5 flex justify-between"><div className="font-display text-xl font-extrabold text-stone-900">Peringkat Mingguan</div></div>
+              <div className="rounded-2xl border border-dashed border-violet-200 bg-violet-50/70 px-5 py-10 text-center">
+                <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-white text-violet-600"><Icon name="trophy" size={28} /></div>
+                <div className="mt-4 font-display text-lg font-extrabold text-slate-800">Belum ada data peringkat</div>
+                <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-500">Daftar peringkat akan ditampilkan setelah data pengguna tersedia di database. Untuk sementara, kamu tetap bisa melihat XP dan achievement pada profil.</p>
               </div>
             </section>
-            <aside className="h-fit rounded-[2rem] bg-orange-500 p-6 text-white shadow-lg">
+            <aside className="h-fit rounded-[2rem] bg-purple-500 p-6 text-white shadow-lg">
               <Icon name="trophy" size={34} />
-              <div className="mt-5 font-display text-xl font-extrabold">Terus Tingkatkan XP!</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/90">Selesaikan materi dan challenge untuk meroketkan posisimu.</p>
+              <div className="mt-5 font-display text-xl font-extrabold">Peringkat Belum Tersedia</div>
+              <p className="mt-2 text-sm leading-relaxed text-white/90">Selesaikan materi dan latihan untuk terus meningkatkan XP-mu.</p>
             </aside>
           </div>
         ) : (
           <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {achievements.map((item) => (
-              <article key={item.title} className={`rounded-3xl border border-stone-200 bg-white p-6 transition ${item.active ? "shadow-sm border-orange-500/30" : "opacity-45 grayscale"}`}>
-<<<<<<< HEAD
-                <div className={`grid size-14 place-items-center rounded-2xl ${item.color}`}>
-                  <Icon name={item.icon} size={28} />
-                </div>
-=======
+              <article key={item.title} className={`rounded-3xl border border-stone-200 bg-white p-6 transition ${item.active ? "shadow-sm border-purple-500/30" : "opacity-45 grayscale"}`}>
                 <div className={`grid size-14 place-items-center rounded-2xl ${item.color}`}><Icon name={item.icon} size={28} /></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
                 <div className="mt-5 font-display text-lg font-extrabold text-stone-900">{item.title}</div>
                 <p className="mt-1 text-sm text-stone-500">{item.desc}</p>
-                <div className="mt-4 text-xs font-extrabold text-orange-600">{item.active ? "DIPEROLEH" : "TERKUNCI"}</div>
+                <div className="mt-4 text-xs font-extrabold text-purple-600">{item.active ? "DIPEROLEH" : "TERKUNCI"}</div>
               </article>
             ))}
           </section>
@@ -2252,53 +1292,16 @@ function ProgressPage({ setScreen, userName, xp, completedLessons, score }: { se
   return (
     <AppShell active="progress" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8">
-<<<<<<< HEAD
-        <div>
-          <div className="font-display text-3xl font-extrabold text-stone-900">Progress Belajar</div>
-          <p className="mt-2 text-stone-500">Pantau perkembangan materi dan nilai belajarmu.</p>
-        </div>
-        <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          {[
-            [`${Math.round((completedLessons / 6) * 100)}%`, "Materi tuntas", "book", "bg-orange-100 text-orange-600"],
-            [String(score), "Nilai Terakhir", "star", "bg-amber-100 text-amber-600"],
-            [String(xp), "Total XP", "spark", "bg-emerald-100 text-emerald-600"],
-          ].map(([value, label, icon, color]) => (
-            <div key={label} className="rounded-3xl bg-white p-5 shadow-sm border border-stone-200">
-              <div className={`grid size-10 place-items-center rounded-xl ${color}`}>
-                <Icon name={icon as IconName} />
-              </div>
-              <div className="mt-5 font-display text-2xl font-extrabold text-stone-900">{value}</div>
-              <div className="mt-1 text-sm text-stone-500">{label}</div>
-            </div>
-          ))}
-=======
         <div><div className="font-display text-3xl font-extrabold text-stone-900">Progress Belajar</div><p className="mt-2 text-stone-500">Pantau perkembangan materi dan nilai belajarmu.</p></div>
         <section className="mt-8 grid gap-4 sm:grid-cols-3">
-          {[[`${Math.round((completedLessons / 6) * 100)}%`, "Materi tuntas", "book", "bg-orange-100 text-orange-600"], [String(score), "Nilai Terakhir", "star", "bg-amber-100 text-amber-600"], [String(xp), "Total XP", "spark", "bg-emerald-100 text-emerald-600"]].map(([value, label, icon, color]) => <div key={label} className="rounded-3xl bg-white p-5 shadow-sm border border-stone-200"><div className={`grid size-10 place-items-center rounded-xl ${color}`}><Icon name={icon as IconName} /></div><div className="mt-5 font-display text-2xl font-extrabold text-stone-900">{value}</div><div className="mt-1 text-sm text-stone-500">{label}</div></div>)}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+          {[[`${Math.round((completedLessons / 13) * 100)}%`, "Materi tuntas", "book", "bg-purple-100 text-purple-600"], [String(score), "Nilai Terakhir", "star", "bg-amber-100 text-amber-600"], [String(xp), "Total XP", "spark", "bg-emerald-100 text-emerald-600"]].map(([value, label, icon, color]) => <div key={label} className="rounded-3xl bg-white p-5 shadow-sm border border-stone-200"><div className={`grid size-10 place-items-center rounded-xl ${color}`}><Icon name={icon as IconName} /></div><div className="mt-5 font-display text-2xl font-extrabold text-stone-900">{value}</div><div className="mt-1 text-sm text-stone-500">{label}</div></div>)}
         </section>
       </main>
     </AppShell>
   );
 }
 
-<<<<<<< HEAD
-function Profile({
-  setScreen,
-  userName,
-  onUpdateUsername,
-  xp,
-  completedLessons,
-}: {
-  setScreen: (s: Screen) => void;
-  userName: string;
-  onUpdateUsername: (name: string) => Promise<void>;
-  xp: number;
-  completedLessons: number;
-}) {
-=======
 function Profile({ setScreen, userName, onUpdateUsername, xp, completedLessons }: { setScreen: (s: Screen) => void; userName: string; onUpdateUsername: (name: string) => Promise<void>; xp: number; completedLessons: number }) {
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   const editProfile = async () => {
     const nextName = window.prompt("Masukkan username baru:", userName)?.trim();
     if (!nextName || nextName === userName) return;
@@ -2308,43 +1311,13 @@ function Profile({ setScreen, userName, onUpdateUsername, xp, completedLessons }
       alert(error instanceof Error ? error.message : "Profil gagal diperbarui.");
     }
   };
-<<<<<<< HEAD
-
-=======
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
   return (
     <AppShell active="profile" setScreen={setScreen} userName={userName}>
       <main className="mx-auto max-w-4xl px-5 pb-28 pt-10">
         <section className="overflow-hidden rounded-[2rem] bg-white shadow-xl border border-stone-200">
-          <div className="h-36 bg-orange-500" />
+          <div className="h-36 bg-purple-500" />
           <div className="px-6 pb-8 sm:px-9">
             <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end">
-<<<<<<< HEAD
-              <div className="grid size-24 place-items-center rounded-3xl border-4 border-white bg-stone-900 font-display text-2xl font-extrabold text-white">
-                {getInitials(userName)}
-              </div>
-              <div className="flex-1">
-                <div className="font-display text-2xl font-extrabold text-stone-900">{userName}</div>
-                <p className="text-sm text-stone-500">@{userName.toLowerCase().replace(/\s+/g, "")} · Pemula</p>
-              </div>
-              <Button variant="outline" onClick={editProfile}>
-                Edit Profil
-              </Button>
-            </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200">
-                <strong className="block text-xl text-stone-900">{xp}</strong>
-                <span className="text-xs text-stone-500">Total XP</span>
-              </div>
-              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200">
-                <strong className="block text-xl text-stone-900">{completedLessons}</strong>
-                <span className="text-xs text-stone-500">Materi tuntas</span>
-              </div>
-              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200">
-                <strong className="block text-xl text-stone-900">{completedLessons >= 6 ? 2 : 1}</strong>
-                <span className="text-xs text-stone-500">Badge dimiliki</span>
-              </div>
-=======
               <div className="grid size-24 place-items-center rounded-3xl border-4 border-white bg-stone-900 font-display text-2xl font-extrabold text-white">{getInitials(userName)}</div>
               <div className="flex-1"><div className="font-display text-2xl font-extrabold text-stone-900">{userName}</div><p className="text-sm text-stone-500">@{userName.toLowerCase().replace(/\s+/g, "")} · Pemula</p></div>
               <Button variant="outline" onClick={editProfile}>Edit Profil</Button>
@@ -2352,8 +1325,7 @@ function Profile({ setScreen, userName, onUpdateUsername, xp, completedLessons }
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{xp}</strong><span className="text-xs text-stone-500">Total XP</span></div>
               <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{completedLessons}</strong><span className="text-xs text-stone-500">Materi tuntas</span></div>
-              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{completedLessons >= 6 ? 2 : 1}</strong><span className="text-xs text-stone-500">Badge dimiliki</span></div>
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+              <div className="rounded-2xl bg-stone-50 p-4 border border-stone-200"><strong className="block text-xl text-stone-900">{completedLessons >= 7 ? 2 : 1}</strong><span className="text-xs text-stone-500">Badge dimiliki</span></div>
             </div>
           </div>
         </section>
@@ -2368,6 +1340,7 @@ export default function App() {
   const [xp, setXp] = useState(0);
   const [score, setScore] = useState(0);
   const [completedLessons, setCompletedLessons] = useState(0);
+  const [completedTopicIds, setCompletedTopicIds] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem("flowplay_completed_topics") || "[]"); } catch { return []; } });
   const [selectedLesson, setSelectedLesson] = useState(0);
   const [hasNextQuestion, setHasNextQuestion] = useState(false);
 
@@ -2379,6 +1352,14 @@ export default function App() {
     setXp(progress.xp);
     setScore(progress.score);
     setCompletedLessons(progress.completedLessons);
+    try {
+      const savedTopics = JSON.parse(localStorage.getItem("flowplay_completed_topics") || "[]");
+      const orderedTopicIds = ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7"];
+      const restoredTopics = Array.isArray(savedTopics) && savedTopics.length > 0
+        ? savedTopics
+        : orderedTopicIds.slice(0, progress.completedLessons);
+      setCompletedTopicIds(restoredTopics);
+    } catch { setCompletedTopicIds([]); }
     setHasChallengeDone(progress.hasChallengeDone);
     setHasQuizDone(progress.hasQuizDone);
   };
@@ -2400,19 +1381,13 @@ export default function App() {
   };
 
   useEffect(() => {
+    localStorage.setItem("flowplay_completed_topics", JSON.stringify(completedTopicIds));
+    setCompletedLessons(completedTopicIds.length);
+  }, [completedTopicIds]);
+
+  useEffect(() => {
     if (!flowPlayApi.hasSession() || screen === "register" || screen === "login") return;
     const timer = window.setTimeout(() => {
-<<<<<<< HEAD
-      flowPlayApi
-        .updateProgress({
-          xp,
-          score,
-          completedLessons,
-          hasChallengeDone,
-          hasQuizDone,
-        })
-        .catch((error) => console.error("Gagal menyinkronkan progres:", error));
-=======
       flowPlayApi.updateProgress({
         xp,
         score,
@@ -2420,19 +1395,16 @@ export default function App() {
         hasChallengeDone,
         hasQuizDone,
       }).catch((error) => console.error("Gagal menyinkronkan progres:", error));
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
     }, 300);
     return () => window.clearTimeout(timer);
   }, [xp, score, completedLessons, hasChallengeDone, hasQuizDone, screen]);
 
-  const handleCompleteLesson = (completedIndex: number) => {
-    if (completedIndex === completedLessons) {
-      setCompletedLessons((prev) => {
-        const nextVal = Math.min(prev + 1, 6);
-        if (nextVal >= 6 && prev < 6) {
-          setBadgeToast("Master Logika");
-        }
-        return nextVal;
+  const handleCompleteLesson = (_completedIndex: number, topicId: string) => {
+    if (!completedTopicIds.includes(topicId)) {
+      setCompletedTopicIds((prev) => {
+        const next = [...prev, topicId];
+        if (next.length >= 13) setBadgeToast("Master Logika");
+        return next;
       });
       setXp((prev) => prev + 50);
     }
@@ -2466,39 +1438,13 @@ export default function App() {
       {screen === "register" && <Register setScreen={setScreen} userName={userName} setUserName={setUserName} onRegister={handleRegister} />}
       {screen === "login" && <Login setScreen={setScreen} userName={userName} setUserName={setUserName} onLogin={handleLogin} />}
       {screen === "dashboard" && <Dashboard setScreen={setScreen} userName={activeUser} xp={xp} completedLessons={completedLessons} />}
-      {screen === "materi" && <Materi setScreen={setScreen} userName={activeUser} completedLessons={completedLessons} setSelectedLesson={setSelectedLesson} />}
-<<<<<<< HEAD
-      {screen === "materi-detail" && (
-        <MateriDetail
-          setScreen={setScreen}
-          userName={activeUser}
-          lessonIndex={selectedLesson}
-          completedLessons={completedLessons}
-          onCompleteLesson={handleCompleteLesson}
-        />
-      )}
-=======
-      {screen === "materi-detail" && <MateriDetail setScreen={setScreen} userName={activeUser} lessonIndex={selectedLesson} completedLessons={completedLessons} onCompleteLesson={handleCompleteLesson} />}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
+      {screen === "materi" && <AppShell active="materi" setScreen={setScreen} userName={activeUser}><MateriCatalog completedTopicIds={completedTopicIds} onOpen={(index) => { setSelectedLesson(index); setScreen("materi-detail"); }} /></AppShell>}
+      {screen === "materi-detail" && <AppShell active="materi" setScreen={setScreen} userName={activeUser}><MateriReader key={selectedLesson} index={selectedLesson} completedTopicIds={completedTopicIds} onBack={() => setScreen("materi")} onComplete={handleCompleteLesson} /></AppShell>}
       {screen === "latihan-hub" && <LatihanHub setScreen={setScreen} userName={activeUser} />}
       {screen === "challenge" && <Challenge setScreen={setScreen} onComplete={handleChallengeComplete} />}
       {screen === "quiz" && <Quiz setScreen={setScreen} onComplete={handleChallengeComplete} />}
       {screen === "score" && <Score setScreen={setScreen} userName={activeUser} xp={xp} score={score} hasNext={hasNextQuestion} />}
-<<<<<<< HEAD
-      {screen === "leaderboard" && (
-        <Leaderboard
-          setScreen={setScreen}
-          userName={activeUser}
-          xp={xp}
-          completedLessons={completedLessons}
-          hasChallengeDone={hasChallengeDone}
-          hasQuizDone={hasQuizDone}
-          lastScore={score}
-        />
-      )}
-=======
       {screen === "leaderboard" && <Leaderboard setScreen={setScreen} userName={activeUser} xp={xp} completedLessons={completedLessons} hasChallengeDone={hasChallengeDone} hasQuizDone={hasQuizDone} lastScore={score} />}
->>>>>>> 302b7a7ea3f75565f0ccc5166657b6376b6ba78e
       {screen === "progress" && <ProgressPage setScreen={setScreen} userName={activeUser} xp={xp} completedLessons={completedLessons} score={score} />}
       {screen === "profile" && <Profile setScreen={setScreen} userName={activeUser} onUpdateUsername={handleUpdateUsername} xp={xp} completedLessons={completedLessons} />}
     </>
